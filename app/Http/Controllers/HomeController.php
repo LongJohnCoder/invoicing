@@ -52,7 +52,7 @@ class HomeController extends Controller
    				$price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
    			}
    			$InvoiceItem = new InvoiceItem;
-	   		$InvoiceItem->invoice_id = $user_id;
+	   		$InvoiceItem->invoice_id = $invoice_id;
 	   		$InvoiceItem->name = $request->Item[$i];
 	   		$InvoiceItem->qty =$request->Quantity[$i];
 	   		$InvoiceItem->price = $request->Price[$i];

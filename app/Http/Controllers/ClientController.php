@@ -23,7 +23,7 @@ class ClientController extends Controller
     public function invoice($id=null){
     	
     	$Invoice=Invoice::where('invoice_id', $id)->with('invoice_items','user_details')->first();
-    	dd($Invoice);
+    	//dd($Invoice);
     	return view('client.invoice',compact('Invoice'),array('title'=>'Invoice System || Invoice'));
     }
     public function payment(){
