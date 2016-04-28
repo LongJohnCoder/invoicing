@@ -14,6 +14,6 @@ class Invoice extends Model
         return $this->hasMany('App\Model\InvoiceItem', 'invoice_id','invoice_id');
         }
     public function user_details(){
-        return $this->hasOne('App\Model\User', 'user_id','id');
+        return $this->hasOne('App\Model\User', 'id','user_id');
     }
 }
