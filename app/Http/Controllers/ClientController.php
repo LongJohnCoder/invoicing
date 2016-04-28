@@ -21,7 +21,7 @@ class ClientController extends Controller
 {
     //
     public function invoice($id=null){
-    	
+    	$id=base64_decode($id);
     	$Invoice=Invoice::where('invoice_id', $id)->with('invoice_items','user_details')->first();
     	//dd($Invoice);
     	return view('client.invoice',compact('Invoice'),array('title'=>'Invoice System || Invoice'));
@@ -45,5 +45,8 @@ class ClientController extends Controller
 			$Invoice->payment_feedback=json_encode($charge);
 			$Invoice->save();
     	}
+    }
+    public function invoiveCreated($id=null){
+    	return view('home.invoice',compact('id'),array('title'=>'Invoice System || Saved Invoice'));
     }
 }

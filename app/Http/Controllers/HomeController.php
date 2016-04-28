@@ -66,6 +66,8 @@ class HomeController extends Controller
    		$invoice->tax_rate = $tax_rate;
    		$invoice->total = $price_ex_tax;
    		$invoice->memo = $memo;
-   		$invoice->save(); //stored in invoice table
+   		$invoice->save();
+
+      return redirect('/invoice-created/'.base64_encode($invoice_id));
    }
 }

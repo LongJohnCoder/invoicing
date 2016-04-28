@@ -42,18 +42,19 @@
                         data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
                         type :"post",
                         success: function( data ) {
-                            
+                        var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
+                        $(location).attr('href',urlnew);
                         }
               });
     }
   });
 
   $('#customButton').on('click', function(e) {
-    // Open Checkout with further options:
+    var tot=parseFloat($("#tot").val())*100;
     handler.open({
-      name: 'Stripe.com',
-      description: '2 widgets',
-      amount: '2000',
+      name: 'Tier5',
+      description: 'Invoice',
+      amount: tot,
       currency: 'USD'
     });
     e.preventDefault();

@@ -87,6 +87,14 @@
               <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                 {{$Invoice->memo}}
               </p>
+              @if($Invoice->payment_status==1)
+              <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                Payment Status: Paid
+              </p>
+              <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                Payment Date: {{date("M d Y",strtotime($Invoice->updated_at))}}
+              </p>
+              @endif
             </div><!-- /.col -->
             <div class="col-xs-6">
               <p class="lead">Amount Due {{date("m/d/Y",strtotime($Invoice->created_at))}}</p>

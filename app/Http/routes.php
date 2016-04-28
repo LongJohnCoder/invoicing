@@ -16,4 +16,4 @@ Route::post('/additems', 'HomeController@addItems');
 Route::get('client/invoice/{id}','ClientController@invoice');
 Route::post('/invoice-details' , ['uses' => 'HomeController@Invoice','as' => 'create-invoice']);
 Route::post('/create_payment','ClientController@payment');
-
+Route::get('invoice-created/{id}','ClientController@invoiveCreated');
