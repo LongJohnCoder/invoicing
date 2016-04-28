@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('client/invoice/{id}','ClientController@invoice');
