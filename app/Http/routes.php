@@ -14,3 +14,4 @@
 Route::get('/', 'HomeController@index');
 Route::post('/additems', 'HomeController@addItems');
 Route::get('client/invoice/{id}','ClientController@invoice');
+Route::post('/create_payment','ClientController@payment');

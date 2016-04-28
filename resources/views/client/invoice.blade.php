@@ -103,7 +103,9 @@
                   
                   <tr>
                     <th>Total:</th>
-                    <td>${{round($Invoice->total+($Invoice->tax_rate*($Invoice->total/100)),2)}}</td>
+                    <td>${{round($Invoice->total+($Invoice->tax_rate*($Invoice->total/100)),2)}}
+                    <input type="hidden" id="tot" value="{{round($Invoice->total+($Invoice->tax_rate*($Invoice->total/100)),2)}}">
+                    <input type="hidden" id="inv" value="{{base64_encode($Invoice->invoice_id)}}"></td>
                   </tr>
                 </table>
               </div>
@@ -116,6 +118,11 @@
               <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
               @if($Invoice->payment_status==0)
               <button id="customButton" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Make Payment</button>
+              
+
+
+
+
               @endif
               
             </div>
