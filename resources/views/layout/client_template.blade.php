@@ -30,7 +30,7 @@
  <script src="https://checkout.stripe.com/checkout.js"></script>
  <script>
   var handler = StripeCheckout.configure({
-    key: 'pk_test_su3QhS9Cs9lh2bNXQwES0vji',
+    key: 'pk_test_bwlT7RjDMbKUe0j08xzXX73o',
     image: "",
     locale: 'auto',
     token: function(token) {
