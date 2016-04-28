@@ -31,7 +31,7 @@
  <script>
   var handler = StripeCheckout.configure({
     key: 'pk_test_bwlT7RjDMbKUe0j08xzXX73o',
-    image: "",
+    image: '/img/documentation/checkout/marketplace.png',
     locale: 'auto',
     token: function(token) {
       // You can access the token ID with `token.id`.
