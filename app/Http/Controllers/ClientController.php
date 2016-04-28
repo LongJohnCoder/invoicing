@@ -29,7 +29,7 @@ class ClientController extends Controller
     public function payment(){
     	// echo gettype(Request::input('tot'));
     	$invouce_id=base64_decode(Request::input('inv'));
-    	$tottal_value=floatval(Request::input('tot'))*100;
+    	$tottal_value=floatval(Request::input('tot'));
     	
     	$stripe = Stripe::make('sk_test_hJDVAuZdTXlVbyBFY1U5TSSh');
     	$charge = $stripe->charges()->create([
