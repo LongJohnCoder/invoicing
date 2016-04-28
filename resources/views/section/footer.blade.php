@@ -4,9 +4,11 @@
         <script>
     	$(document).ready(function(){
     		$('#counter').val('0');
+    		$('#no_of_item').val('1');
     		$('#add_item').click(function(){
     			var i = parseInt($('#counter').val())+1;
     			$('#counter').val(i);
+    			$('#no_of_item').val(i+1);
     			console.log(i);
     			var baseUrl = "{{url('/')}}";
     			$.ajax({
