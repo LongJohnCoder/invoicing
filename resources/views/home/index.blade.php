@@ -46,16 +46,18 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Requirements</h3>
                 </div>
+                <input type="hidden" id="counter" name="counter" value="0">
+                 <!-- <input type="text" id="count" value="fdadfadfadf"/> -->
                 <div class="box-body">
-                  <div class="row">
+                  <div class="row first">
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" placeholder=".col-xs-3">
+                      <input type="text" class="form-control" placeholder="Item" id="Item_0">
                     </div>
                     <div class="col-xs-4">
-                      <input type="text" class="form-control" placeholder=".col-xs-4">
+                      <input type="text" class="form-control" placeholder="Quantity" id="Quantity_0">
                     </div>
                     <div class="col-xs-5">
-                      <input type="text" class="form-control" placeholder=".col-xs-5">
+                      <input type="text" class="form-control" placeholder="Price" id="Price_0">
                     </div>
                   </div>
                 </div><!-- /.box-body -->
@@ -82,7 +84,7 @@
                   </div>
                   </div>
                 <div class="box-footer">
-                    <button class="btn btn-block btn-success btn-flat">Add More Item</button>
+                    <button class="btn btn-block btn-success btn-flat" id="add_item">Add More Item</button>
                   </div>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
