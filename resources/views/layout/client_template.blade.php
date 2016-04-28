@@ -31,11 +31,20 @@
  <script>
   var handler = StripeCheckout.configure({
     key: 'pk_test_bwlT7RjDMbKUe0j08xzXX73o',
-    image: "",
+    image: '/img/documentation/checkout/marketplace.png',
     locale: 'auto',
     token: function(token) {
-      // You can access the token ID with `token.id`.
-      // Get the token ID to your server-side code for use.
+      console.log(token);
+      var tot=parseFloat($("#tot").val());
+      var inv=$("#inv").val();
+      $.ajax({
+                        url: "<?php echo url('/');?>/create_payment",
+                        data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
+                        type :"post",
+                        success: function( data ) {
+                            
+                        }
+              });
     }
   });
 
@@ -44,7 +53,8 @@
     handler.open({
       name: 'Stripe.com',
       description: '2 widgets',
-      amount: 2000
+      amount: '2000',
+      currency: 'USD'
     });
     e.preventDefault();
   });
