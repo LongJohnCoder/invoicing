@@ -80,7 +80,7 @@ class HomeController extends Controller
         function($message) use ($admin_users_email, $user_email,$user_name)
         {
         $message->from($admin_users_email);
-        $message->to($user_email, $user_name)->subject('Request From Dealers Direct');
+        $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
         });
 
       return redirect('/invoice-created/'.base64_encode($invoice_id));
