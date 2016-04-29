@@ -12,6 +12,8 @@ use App\Model\InvoiceItem;
 
 use App\Model\User;
 
+use Mail;
+
 class HomeController extends Controller
 {
     //
@@ -67,6 +69,19 @@ class HomeController extends Controller
    		$invoice->total = $price_ex_tax;
    		$invoice->memo = $memo;
    		$invoice->save();
+
+
+        $user_name = $name;
+        $user_email = $email;
+        $admin_users_email="hello@tier5.us";
+        $activateLink = url('/').'/client/invoice/'.base64_encode($invoice_id);
+
+        $sent = Mail::send('email.invoice_link', array('name'=>$user_name,'email'=>$user_email,'activate_link'=>$activateLink), 
+        function($message) use ($admin_users_email, $user_email,$user_name)
+        {
+        $message->from($admin_users_email);
+        $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
+        });
 
       return redirect('/invoice-created/'.base64_encode($invoice_id));
    }
