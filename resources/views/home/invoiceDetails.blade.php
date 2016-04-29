@@ -25,9 +25,7 @@
                       <th>Invoice #</th>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Items x Quantity</th>
-                      <th>Tax Rate(%)</th>
-                      <th>Price</th>
+                     
                       <th>Created At</th>
                       <th>Payment Status</th>
                       <th>Payment Date</th>
@@ -45,17 +43,7 @@
                             <td>
                             {{$user->user_details->email}}
                             </td>
-                            <td>
-                            @foreach($user->invoice_items as $items)
-                              <button class="btn btn-default" style="margin-bottom: 10px;">{{ $items->name }} x {{ $items->qty}}</button>
-                            @endforeach
-                            </td>
-                            <td>
-                            {{ $user->tax_rate }}
-                            </td>
-                            <td>
-                            {{ $user->total = $user->total+ ($user->total*($user->tax_rate/100)) }} 
-                            </td>
+                            
                             <td>
                             {{date(" F j,Y ", strtotime($user->created_at))}}
                             </td>
