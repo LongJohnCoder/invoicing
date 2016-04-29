@@ -70,4 +70,8 @@ class HomeController extends Controller
 
       return redirect('/invoice-created/'.base64_encode($invoice_id));
    }
+    public function allRecords(){
+      $user_details = Invoice::where('invoice_id', '!=',0)->with('invoice_items', 'user_details')->get();
+      return view('home.invoiceDetails',array('title'=>'Invoice System || Create Invoice'), compact('user_details'));
+   }
 }

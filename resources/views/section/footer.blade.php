@@ -5,6 +5,8 @@
     	$(document).ready(function(){
     		$('#counter').val('0');
     		$('#no_of_item').val('1');
+            $('#qty').val('0');
+            $('#total_price').val('0');
     		$('#add_item').click(function(){
     			var i = parseInt($('#counter').val())+1;
     			$('#counter').val(i);
