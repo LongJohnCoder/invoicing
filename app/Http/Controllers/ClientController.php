@@ -49,4 +49,16 @@ class ClientController extends Controller
     public function invoiveCreated($id=null){
     	return view('home.invoice',compact('id'),array('title'=>'Invoice System || Saved Invoice'));
     }
+    public function invoicePrint($id=null){
+    	$id=base64_decode($id);
+		if (strpos($id, 'DONE') !== false) {
+			$id=chop($id,"DONE");
+			$Invoice=Invoice::where('invoice_id', $id)->with('invoice_items','user_details')->first();
+    		//dd($Invoice);
+		}
+		else{
+			
+		}
+		return view('client.print',compact('Invoice'),array('title'=>'Invoice Print || Print'));
+    }
 }
