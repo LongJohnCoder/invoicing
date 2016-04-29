@@ -29,6 +29,8 @@
                 <th>Created At</th>
                 <th>Payment Status</th>
                 <th>Payment Date</th>
+                <th>Link</th>
+                <th>Invoice Details</th>
               </tr>
               @foreach($user_details as $user)
               <tr>
@@ -69,6 +71,8 @@
                     {{ date(" F j,Y ", strtotime($user->updated_at)) }}
                   @endif
                 </td>
+                <td>dfjdfdfjdf</td>
+                <td>.dfdkfd</td>
               </tr>
               @endforeach
             </table>

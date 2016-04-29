@@ -23,7 +23,24 @@
            		});
            		
             });
-
+            var value_read_only = new Array();
+            $(document).delegate('.click', 'keyup', function(){ 
+                var count = $('#counter').val();
+                for(var j=0; j<=count; j++)
+                {
+                    value_read_only= $('input[id="Quantity['+j+']"]').map(function(){
+                            return this.value;
+                        }).get();
+                    /*var total = 0;
+                    for(var k=0; k<=value_read_only[0].length; k++)
+                    {
+                        console.log('hi');
+                    } */
+                    
+                }
+                //console.log(total);
+                console.log(value_read_only);
+            });
     	});
 
     </script>

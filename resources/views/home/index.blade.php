@@ -54,7 +54,7 @@
                         <input type="text" class="form-control" placeholder="Item" id="Item[0]" name="Item[0]" required>
                       </div>
                       <div class="col-xs-4">
-                        <input type="number" class="form-control" placeholder="Quantity" id="Quantity[0]" name="Quantity[0]" required>
+                        <input type="number" class="form-control click" placeholder="Quantity" id="Quantity[0]" name="Quantity[0]" required>
                       </div>
                       <div class="col-xs-5">
                         <input type="text" class="form-control" placeholder="Price" id="Price[0]" name="Price[0]" required>
