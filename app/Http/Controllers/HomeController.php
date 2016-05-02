@@ -27,7 +27,6 @@ class HomeController extends Controller
       {
         return redirect()->route('admin-login');
       }      
-      //return redirect()->route('admin-login');
   }
   public function addItems(Request $request) {
       $i = $request->i;

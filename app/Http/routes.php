@@ -22,28 +22,19 @@ Route::get('/print/{id}','ClientController@invoicePrint');
 
 
 /*
-|------------------------------------
+|---------------------------------------------------------------------------------
 |Admin Routes
-|------------------------------------
+|---------------------------------------------------------------------------------
+|All the routes related to admin authentication.
 |
 */
-Route::get('/admin',[
-	'uses' => 'AdminController@getIndex',
-	'as' => 'admin-login']);
+Route::get('/admin',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
 
-Route::post('/signin',[
-	'uses' => 'AdminController@AdminLogin',
-	'as'=>'admin-dashboard'
-	]);
-Route::any('/dashboard', [
-	'uses' =>'HomeController@Dashboard',
-	'middleware' => 'auth',
-	'as'=>'dashboard'
-]);
-Route::get('/admin/logout', [
-	'uses' => 'AdminController@AdminLogout',
-	'as' => 'admin-logout'
-]);
+Route::post('/signin',['uses' => 'AdminController@AdminLogin','as'=>'admin-dashboard']);
+
+Route::any('/dashboard', ['uses' =>'HomeController@Dashboard','middleware' => 'auth','as'=>'dashboard']);
+
+Route::get('/admin/logout', ['uses' => 'AdminController@AdminLogout','as' => 'admin-logout']);
 
 
 
