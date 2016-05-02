@@ -30,6 +30,9 @@ Route::get('/print/{id}','ClientController@invoicePrint');
 */
 Route::get('/admin',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
 
+
+Route::any('/ajax/getweekgraph/', 'AjaxController@getWeekGraph');
+
 Route::post('/signin',['uses' => 'AdminController@AdminLogin','as'=>'admin-dashboard']);
 
 Route::any('/dashboard', ['uses' =>'HomeController@Dashboard','middleware' => 'auth','as'=>'dashboard']);
