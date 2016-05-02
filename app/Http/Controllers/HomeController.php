@@ -14,11 +14,19 @@ use App\Model\User;
 
 use Mail;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     //
   public function index(){
+    if (Auth::check()) {
       return view('home.index',array('title'=>'Invoice System || Create Invoice'));
+      }
+      else
+      {
+        return redirect()->route('admin-login');
+      }      
   }
   public function addItems(Request $request) {
       $i = $request->i;
