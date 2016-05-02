@@ -31,20 +31,19 @@ Route::get('/admin',[
 	'uses' => 'AdminController@getIndex',
 	'as' => 'admin-login']);
 
-Route::post('/dashboard',[
+Route::post('/signin',[
 	'uses' => 'AdminController@AdminLogin',
 	'as'=>'admin-dashboard'
 	]);
-Route::get('/dashboard', [
-	'uses' => 'AdminController@getDashboard',
+Route::any('/dashboard', [
+	'uses' =>'HomeController@Dashboard',
 	'middleware' => 'auth',
-	'as' => 'loggedin-user'
+	'as'=>'dashboard'
 ]);
 Route::get('/admin/logout', [
 	'uses' => 'AdminController@AdminLogout',
 	'as' => 'admin-logout'
 ]);
 
-Route::any('/dashboard', 'HomeController@Dashboard');
 
 

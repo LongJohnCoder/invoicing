@@ -14,6 +14,8 @@ use App\Model\User;
 
 use Mail;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     //

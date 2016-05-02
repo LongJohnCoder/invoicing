@@ -9,7 +9,7 @@ class AdminController extends Controller
 	public function getIndex()
 	{
 		if (Auth::check()) {
-			return redirect()->route('loggedin-user');
+			return redirect()->route('dashboard');
 		}
 		return view('admin.admin-login');
 	}
@@ -19,20 +19,16 @@ class AdminController extends Controller
 		$password = $request->password;
 		$token = $request->_token;
 		if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            return redirect()->route('loggedin-user');
+            return redirect()->route('dashboard');
         }
         else
         {
         	return redirect()->back()->with(['fail' => 'Error! Wrong email or password']);
         }
 	}
-	public function getDashboard()
-	{
-		return view('home.index', array('title' => 'admin'));
-	}
 	public function AdminLogout()
 	{
 		 Auth::logout();
-		 return redirect(\URL::previous());
+		 return redirect()->route('admin-login');
 	}
 }
