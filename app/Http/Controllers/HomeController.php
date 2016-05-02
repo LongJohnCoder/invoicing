@@ -20,7 +20,14 @@ class HomeController extends Controller
 {
     //
   public function index(){
+    if (Auth::check()) {
       return view('home.index',array('title'=>'Invoice System || Create Invoice'));
+      }
+      else
+      {
+        return redirect()->route('admin-login');
+      }      
+      //return redirect()->route('admin-login');
   }
   public function addItems(Request $request) {
       $i = $request->i;

@@ -21,9 +21,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          @if (Auth::check()) {
+          @if (Auth::check())
            <a href="{{ route('admin-logout') }}" class="btn btn-link" style="float: right; color: #fff;!important">Logout</a>
-           }
            @endif
         </nav>
       </header>
