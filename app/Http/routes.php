@@ -19,10 +19,29 @@ Route::post('/create_payment','ClientController@payment');
 Route::get('invoice-created/{id}','ClientController@invoiveCreated');
 Route::any('/all-invoices',['uses' => 'HomeController@allRecords','as' => 'all-invoices']);
 Route::get('/print/{id}','ClientController@invoicePrint');
-Route::get('/admin',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
-Route::post('/dashboard',['uses' => 'AdminController@AdminLogin','as'=>'admin-dashboard']);
-Route::get('/test', function()
-{
-    return view('admin.admin-login1', ['title' => 'admin']);
-});
+
+
+/*
+|------------------------------------
+|Admin Routes
+|------------------------------------
+|
+*/
+Route::get('/admin',[
+	'uses' => 'AdminController@getIndex',
+	'as' => 'admin-login']);
+
+Route::post('/dashboard',[
+	'uses' => 'AdminController@AdminLogin',
+	'as'=>'admin-dashboard'
+	]);
+Route::get('/dashboard', [
+	'uses' => 'AdminController@getDashboard',
+	'middleware' => 'auth',
+	'as' => 'loggedin-user'
+]);
+Route::get('/admin/logout', [
+	'uses' => 'AdminController@AdminLogout',
+	'as' => 'admin-logout'
+]);
 
