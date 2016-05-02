@@ -23,6 +23,55 @@
            		});
            		
             });
+
+
+            $('.qtycal').keyup(function(){
+                    var counter=parseInt($('#counter').val());
+                    var callprice=0;
+                    var callqty=0;
+                    for(i=0;i<=counter;i++){
+                        if(callqty==0){
+                            callqty=parseInt($('#Quantity_'+i).val());
+                        }
+                        else{
+                            callqty=callqty+parseInt($('#Quantity_'+i).val());
+                        }
+                        if(callprice==0){
+                            if($('#Price_'+i).val()==""){
+                             callprice=0;   
+                            }else{
+                              callprice=parseFloat($('#Price_'+i).val())*parseInt($('#Quantity_'+i).val());  
+                            }
+                            
+                        }
+                        else{
+                            if($('#Price_'+i).val()==""){
+                                callprice=callprice+0; 
+                            }else{
+                             callprice=callprice+(parseFloat($('#Price_'+i).val())*parseInt($('#Quantity_'+i).val()));   
+                            }
+                            
+                        }
+                    }
+
+                    $('#qty').val(callqty);
+                    $('#total_price').val(callprice);
+            })
+
+            $('.prical').keyup(function(){
+                var counter=parseInt($('#counter').val());
+                var callprice=0;
+                 for(i=0;i<=counter;i++){
+                    if(callprice==0){
+                        callprice=parseFloat($('#Price_'+i).val())*parseInt($('#Quantity_'+i).val());
+                    }
+                    else{
+                        callprice=callprice+(parseFloat($('#Price_'+i).val())*parseInt($('#Quantity_'+i).val()));
+                    }
+                }
+                $('#total_price').val(callprice);
+            })
+
     	});
 
     </script>
