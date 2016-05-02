@@ -27,5 +27,5 @@ Route::get('/test', function()
 });
 
 Route::any('/dashboard', 'HomeController@Dashboard');
-
+Route::any('/ajax/getweekgraph/', 'AjaxController@getWeekGraph');
 
