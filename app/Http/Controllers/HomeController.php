@@ -17,18 +17,14 @@ use Mail;
 class HomeController extends Controller
 {
     //
-    public function index(){
-    	return view('home.index',array('title'=>'Invoice System || Create Invoice'));
-    }
-
-   public function addItems(Request $request) {
-   	//$value = Request::all();
-   	//dd($request->i);
-   	$i = $request->i;
-    return view('home.newitem',array('title'=>'Invoice System || Create Invoice'), compact('i'));
-   }
-   public function Invoice(Request $request)
-   {
+  public function index(){
+      return view('home.index',array('title'=>'Invoice System || Create Invoice'));
+  }
+  public function addItems(Request $request) {
+      $i = $request->i;
+      return view('home.newitem',array('title'=>'Invoice System || Create Invoice'), compact('i'));
+  }
+  public function Invoice(Request $request){
    		$name = $request->name; //user name
    		$user_id = time().substr($name,0,5); //user id
    		$email = $request->email; //user email
@@ -84,9 +80,13 @@ class HomeController extends Controller
         });
 
       return redirect('/invoice-created/'.base64_encode($invoice_id));
-   }
-    public function allRecords(){
+  }
+  public function allRecords(){
       $user_details = Invoice::where('invoice_id', '!=',0)->with('invoice_items', 'user_details')->get();
       return view('home.invoiceDetails',array('title'=>'Invoice System || Create Invoice'), compact('user_details'));
-   }
+  }
+  public function Dashboard(){
+    $cax=[100, 25, 80, 81, 56, 55, 40];
+    return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
+  }
 }

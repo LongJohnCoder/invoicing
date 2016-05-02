@@ -27,7 +27,7 @@ $(function () {
         pointStrokeColor: "#c1c7d1",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgb(220,220,220)",
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: [100, 59, 80, 81, 56, 55, 40]
       },
       {
         label: "Digital Goods",
@@ -37,7 +37,17 @@ $(function () {
         pointStrokeColor: "rgba(60,141,188,1)",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(60,141,188,1)",
-        data: [28, 48, 40, 19, 86, 27, 90]
+        data: [28, 75, 40, 19, 86, 27, 90]
+      },
+      {
+        label: "Digital x",
+        fillColor: "rgba(95,141,166,0.9)",
+        strokeColor: "rgba(95,141,166,0.8)",
+        pointColor: "#3b8bba",
+        pointStrokeColor: "rgba(95,141,166,1)",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(95,141,166,1)",
+        data: [21, 98, 27, 79, 86, 24, 30]
       }
     ]
   };
@@ -84,6 +94,16 @@ $(function () {
   //Create the line chart
   salesChart.Line(salesChartData, salesChartOptions);
 
+        $.ajax({
+          url: "{{url('/')}}/ajax/getweekgraph",
+          data: {_token: '{!! csrf_token() !!}'},
+          type :"post",
+          success: function( data ) {
+            if(data){
+              
+            }
+          }
+        });
   //---------------------------
   //- END MONTHLY SALES CHART -
   //---------------------------
