@@ -45,3 +45,6 @@ Route::get('/admin/logout', [
 	'as' => 'admin-logout'
 ]);
 
+Route::any('/dashboard', 'HomeController@Dashboard');
+
+
