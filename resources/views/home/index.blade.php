@@ -51,13 +51,13 @@
                   <div class="box-body">
                     <div class="row first">
                       <div class="col-xs-3">
-                        <input type="text" class="form-control" placeholder="Item" id="Item[0]" name="Item[0]" required>
+                        <input type="text" class="form-control" placeholder="Item" id="Item_0" name="Item[0]" required>
                       </div>
                       <div class="col-xs-4">
-                        <input type="number" class="form-control click" placeholder="Quantity" id="Quantity[0]" name="Quantity[0]" required>
+                        <input type="number" class="form-control qtycal" placeholder="Quantity" id="Quantity_0" name="Quantity[0]" required>
                       </div>
                       <div class="col-xs-5">
-                        <input type="text" class="form-control" placeholder="Price" id="Price[0]" name="Price[0]" required>
+                        <input type="text" class="form-control prical" placeholder="Price" id="Price_0" name="Price[0]" required>
                       </div>
                     </div>
                   </div><!-- /.box-body -->
