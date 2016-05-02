@@ -17,8 +17,8 @@ class AdminController extends Controller
 	{
 		$email = $request->email;
 		$password = $request->password;
-		$token = $request->_token;
-		if (Auth::attempt(['email' => $email, 'password' => $password])) {
+		$remember = $request->remember_me;
+		if (Auth::attempt(['email' => $email, 'password' => $password],$remember)) {
             return redirect()->route('dashboard');
         }
         else
