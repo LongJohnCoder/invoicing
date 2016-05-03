@@ -126,9 +126,85 @@
             @if($Invoice->payment_status!=0)
               <a href="{{url('/').'/print/'.base64_encode($Invoice->invoice_id.'DONE')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
              @else 
-              <button id="customButton" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Make Payment</button>
+              <!-- <button id="customButton" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> 
+              Make Payment</button> -->
               
+              <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">
+              <i class="fa fa-credit-card"></i> 
+              Make Payment
+              </button>
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Modal Default</h4>
+                      </div>
+                      <div class="modal-body olddis">
+                        
 
+                      
+                      <div class="box box-success">
+                        <div class="box-header">
+                          <h3 class="box-title">Payment Details</h3>
+                        </div>
+                      <div class="box-body">
+                      <!-- Date dd/mm/yyyy -->
+                          <div class="form-group">
+                            <label>Card Name:</label>
+                            <div class="input-group">
+                            <div class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                            </div>
+                            <input type="text" data-mask="" id="cardname" class="form-control">
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                          <div class="form-group">
+                            <label>Card No:</label>
+                            <div class="input-group">
+                            <div class="input-group-addon">
+                            <i class="fa fa-credit-card"></i>
+                            </div>
+                            <input type="number" data-mask="" id="cardnumber"class="form-control">
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                          <div class="form-group">
+                            <label>CVV No:</label>
+                            <div class="input-group">
+                            <div class="input-group-addon">
+                            CVV
+                            </div>
+                            <input type="number" data-mask="" id="cardcvv" class="form-control">
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                          <div class="form-group">
+                            <label>Expiry Date:</label>
+                            <div class="input-group">
+                              <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </div>
+                                <input type="text" class="form-control" id="cardexpdate" data-inputmask="'alias': 'mm/yyyy'" data-mask>
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                      </div><!-- /.box-body -->
+                      
+                      </div>
+                      
+
+                      </div>
+                      <div class="modal-body newdis" style="display: none;">
+                        Payment In Progress .........
+                      </div>
+                      <div class="modal-body newdisnew" style="display: none;">
+                        Opps Please Try Again Later !!
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary paybut">PAY</button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+              </div>
 
 
 
@@ -147,5 +223,18 @@
     <!-- jQuery 2.1.4 -->
     
   </body>
-
+<style>
+      .example-modal .modal {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        left: auto;
+        display: block;
+        z-index: 1;
+      }
+      .example-modal .modal {
+        background: transparent !important;
+      }
+    </style>
 @stop

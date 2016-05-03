@@ -40,4 +40,5 @@ Route::any('/dashboard', ['uses' =>'HomeController@Dashboard','middleware' => 'a
 Route::get('/admin/logout', ['uses' => 'AdminController@AdminLogout','as' => 'admin-logout']);
 
 
-
+Route::any('/checkauthorise','PaymentController@checkauthor');
+Route::any('/aurthopaymen','PaymentController@AuthorizedPayment');
