@@ -33,6 +33,7 @@ class HomeController extends Controller
       return view('home.newitem',array('title'=>'Invoice System || Create Invoice'), compact('i'));
   }
   public function Invoice(Request $request){
+    //dd($request);
    		$name = $request->name; //user name
    		$user_id = time().substr($name,0,5); //user id
    		$email = $request->email; //user email
@@ -62,6 +63,15 @@ class HomeController extends Controller
 	   		$InvoiceItem->name = $request->Item[$i];
 	   		$InvoiceItem->qty =$request->Quantity[$i];
 	   		$InvoiceItem->price = $request->Price[$i];
+        if(isset($request->tax[$i])) {
+          $InvoiceItem->tax_status = 1;
+        }
+        else
+        {
+          $InvoiceItem->tax_status = 0;
+        }
+        $InvoiceItem->tax_rate = $tax_rate;
+        $InvoiceItem->price_in_tax = $price_ex_tax+($price_ex_tax*($tax_rate/100));
 	   		$InvoiceItem->save(); //stored in user table
    			
    		}

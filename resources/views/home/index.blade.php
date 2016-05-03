@@ -50,10 +50,13 @@
                    <!-- <input type="text" id="count" value="fdadfadfadf"/> -->
                   <div class="box-body">
                     <div class="row first">
+                    <div class="col-xs-1">
+                      <input type="checkbox" name="tax[0]"/>
+                    </div>
                       <div class="col-xs-3">
                         <input type="text" class="form-control" placeholder="Item" id="Item_0" name="Item[0]" required>
                       </div>
-                      <div class="col-xs-4">
+                      <div class="col-xs-3">
                         <input type="number" class="form-control qtycal" placeholder="Quantity" id="Quantity_0" name="Quantity[0]" required>
                       </div>
                       <div class="col-xs-5">

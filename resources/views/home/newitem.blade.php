@@ -1,8 +1,11 @@
 <br><br>
+<div class="col-xs-1">
+    <input type="checkbox" name="tax[{{$i}}]" />
+</div>
 <div class="col-xs-3">
 	<input type="text" class="form-control" placeholder="Item" id="Item[{{$i}}]" name="Item[{{$i}}]"/>
 </div>
-<div class="col-xs-4">
+<div class="col-xs-3">
 	<input type="number" class="form-control qtycal" placeholder="Quantity" id="Quantity_{{$i}}" name="Quantity[{{$i}}]" />
 </div>
 <div class="col-xs-5">
