@@ -26,43 +26,106 @@
     <![endif]-->
   </head>
  @yield('content')
- <script src="{{url('/')}}/public/plugins/jQuery/jQuery-2.1.4.min.js"></script>
- <script src="https://checkout.stripe.com/checkout.js"></script>
+ 
+
+<script src="{{url('/')}}/public/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="{{url('/')}}/public/bootstrap/js/bootstrap.min.js"></script>
+<!-- Select2 -->
+<script src="{{url('/')}}/public/plugins/select2/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="{{url('/')}}/public/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="{{url('/')}}/public/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="{{url('/')}}/public/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{{url('/')}}/public/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="{{url('/')}}/public/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="{{url('/')}}/public/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="{{url('/')}}/public/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{{url('/')}}/public/plugins/iCheck/icheck.min.js"></script>
+<!-- FastClick -->
+<script src="{{url('/')}}/public/plugins/fastclick/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script src="{{url('/')}}/public/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{url('/')}}/public/dist/js/demo.js"></script>
  <script>
-  var handler = StripeCheckout.configure({
-    key: 'pk_test_bwlT7RjDMbKUe0j08xzXX73o',
-    image: '/img/documentation/checkout/marketplace.png',
-    locale: 'auto',
-    token: function(token) {
-      console.log(token);
-      var tot=parseFloat($("#tot").val());
-      var inv=$("#inv").val();
-      $.ajax({
-                        url: "<?php echo url('/');?>/create_payment",
-                        data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
+      $(function () {
+       $("#datemask").inputmask("mm/yyyy", {"placeholder": "mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/yyyy", {"placeholder": "mm/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+        $(".paybut").on('click', function(e) {
+          var cardname=$("#cardname").val();
+          var cardnumber=$("#cardnumber").val();
+          var cardcvv=$("#cardcvv").val();
+          var cardexpdate=$("#cardexpdate").val();
+          var tot=$("#tot").val();
+          var inv=$("#inv").val();
+
+          $(".olddis").hide();
+          $(".newdis").show();
+          $.ajax({
+                        url: "<?php echo url('/');?>/aurthopaymen",
+                        data: {cardname:cardname,cardnumber:cardnumber,cardcvv:cardcvv,cardexpdate:cardexpdate,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
                         type :"post",
                         success: function( data ) {
-                        var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
-                        $(location).attr('href',urlnew);
+                          if(data=="1"){
+                            alert("Your Payment Process Is Success");
+                            var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
+                             $(location).attr('href',urlnew);
+                          }else{
+                            alert("Opps There Is Some Problem Please Try It Again");
+                            var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
+                             $(location).attr('href',urlnew);
+                          }
                         }
-              });
-    }
-  });
+                });
+        });
+      });
+ </script>
+ <script>
+  // var handler = StripeCheckout.configure({
+  //   key: 'pk_test_bwlT7RjDMbKUe0j08xzXX73o',
+  //   image: '/img/documentation/checkout/marketplace.png',
+  //   locale: 'auto',
+  //   token: function(token) {
+  //     console.log(token);
+  //     var tot=parseFloat($("#tot").val());
+  //     var inv=$("#inv").val();
+  //     $.ajax({
+  //                       url: "<?php echo url('/');?>/create_payment",
+  //                       data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
+  //                       type :"post",
+  //                       success: function( data ) {
+  //                       var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
+  //                       $(location).attr('href',urlnew);
+  //                       }
+  //             });
+  //   }
+  // });
 
-  $('#customButton').on('click', function(e) {
-    var tot=parseFloat($("#tot").val())*100;
-    handler.open({
-      name: 'Tier5',
-      description: 'Invoice',
-      amount: tot,
-      currency: 'USD'
-    });
-    e.preventDefault();
-  });
+  // $('#customButton').on('click', function(e) {
+  //   var tot=parseFloat($("#tot").val())*100;
+  //   handler.open({
+  //     name: 'Tier5',
+  //     description: 'Invoice',
+  //     amount: tot,
+  //     currency: 'USD'
+  //   });
+  //   e.preventDefault();
+  // });
 
-  // Close Checkout on page navigation:
-  $(window).on('popstate', function() {
-    handler.close();
-  });
+  // // Close Checkout on page navigation:
+  // $(window).on('popstate', function() {
+  //   handler.close();
+  // });
 </script>
 </html>
