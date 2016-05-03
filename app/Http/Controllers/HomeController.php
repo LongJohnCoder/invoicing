@@ -65,13 +65,15 @@ class HomeController extends Controller
 	   		$InvoiceItem->price = $request->Price[$i];
         if(isset($request->tax[$i])) {
           $InvoiceItem->tax_status = 1;
+          $InvoiceItem->tax_rate = $tax_rate;
+          $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]+($request->Quantity[$i] * $request->Price[$i] * ($tax_rate/100)));
         }
         else
         {
           $InvoiceItem->tax_status = 0;
+          $InvoiceItem->tax_rate = 0.00;
+          $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]);
         }
-        $InvoiceItem->tax_rate = $tax_rate;
-        $InvoiceItem->price_in_tax = $price_ex_tax+($price_ex_tax*($tax_rate/100));
 	   		$InvoiceItem->save(); //stored in user table
    			
    		}

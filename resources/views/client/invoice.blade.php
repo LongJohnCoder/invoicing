@@ -59,19 +59,19 @@
                   <tr>
                     <th>Qty</th>
                     <th>Product</th>
+                    <th>Tax(%)</th>
                     <th>Unit Price #</th>
                     <th>Subtotal</th>
                   </tr>
                 </thead>
                 <tbody>
                 @foreach($Invoice->invoice_items as $invoice)
-
                   <tr>
-                    
                     <td>{{round($invoice->qty,0)}}</td>
                     <td>{{$invoice->name}}</td>
+                    <td>{{ $invoice->tax_rate }}</td>
                     <td>{{$invoice->price}}</td>
-                    <td>{{$invoice->qty*$invoice->price}}</td>
+                    <td>{{$invoice->price_in_tax}}</td>
                   </tr>
                 @endforeach
                 </tbody>
@@ -105,7 +105,7 @@
                     <td>${{$Invoice->total}}</td>
                   </tr>
                   <tr>
-                    <th>Tax ({{$Invoice->tax_rate}}%)</th>
+                    <th>Tax(%)</th>
                     <td>${{round($Invoice->tax_rate*($Invoice->total/100),2)}}</td>
                   </tr>
                   
