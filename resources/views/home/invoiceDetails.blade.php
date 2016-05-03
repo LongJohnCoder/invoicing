@@ -24,8 +24,6 @@
                     <tr>
                       <th>Invoice #</th>
                       <th>Name</th>
-                      <th>Email</th>
-                     
                       <th>Created At</th>
                       <th>Payment Status</th>
                       <th>Payment Date</th>
@@ -40,10 +38,6 @@
                             <td>
                             {{$user->user_details->name}}
                             </td>
-                            <td>
-                            {{$user->user_details->email}}
-                            </td>
-                            
                             <td>
                             {{date(" F j,Y ", strtotime($user->created_at))}}
                             </td>
