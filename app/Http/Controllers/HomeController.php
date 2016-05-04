@@ -12,10 +12,17 @@ use App\Model\InvoiceItem;
 
 use App\Model\User;
 
+use App\Model\AdminDetail;
+
+use App\Admin;
+
 use Mail;
 
 use Illuminate\Support\Facades\Auth;
+
 use Session;
+use Image\Image\ImageInterface;
+use Imagine\Image\Box;
 class HomeController extends Controller
 {
     //
@@ -116,8 +123,52 @@ class HomeController extends Controller
     return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
   }
   public function getProfile(){
-    //echo $gets=Session::get('admin_id.id');
+    $gets=Session::get('admin_id.id');
     //print_r($gets->id);
-    return view('home.profile',array('title'=>'Invoice System || Profile'));
+    $Admin=AdminDetail::where('admin_id',$gets)->first();
+    $Admincount=AdminDetail::where('admin_id',$gets)->count();
+    return view('home.profile',array('title'=>'Invoice System || Profile'), compact('Admin','Admincount'));
+  }
+  public function updateProfile(Request $request){
+    //print_r($request->images);
+      if($request->id!=""){
+        if($request->images){
+          $imgval=$request->images;
+          $extension =$imgval->getClientOriginalExtension();
+          $destinationPath = 'public/admin/';   // upload path
+
+          //$extension =$imgval->getClientOriginalExtension(); // getting image extension
+          $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
+          $imgval->move($destinationPath, $fileName); // uploading file to given path
+        }
+        
+      
+      $AdminDetail = AdminDetail::where('id',$request->id)->first();
+      $AdminDetail->admin_id = Session::get('admin_id.id');
+      $AdminDetail->name = $request->name;
+      $AdminDetail->detail =$request->details;
+      if($request->images){
+        $AdminDetail->image =$fileName;
+      }
+      
+      $AdminDetail->save();
+      }else{
+        echo "yes";
+        $imgval=$request->images;
+      $extension =$imgval->getClientOriginalExtension();
+      $destinationPath = 'public/admin/';   // upload path
+
+      //$extension =$imgval->getClientOriginalExtension(); // getting image extension
+      $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
+      $imgval->move($destinationPath, $fileName); // uploading file to given path
+      $AdminDetail = new AdminDetail;
+      $AdminDetail->admin_id = Session::get('admin_id.id');
+      $AdminDetail->name = $request->name;
+      $AdminDetail->detail =$request->details;
+      $AdminDetail->image =$fileName;
+      $AdminDetail->save(); 
+      }
+      
+
   }
 }
