@@ -19,8 +19,6 @@ Route::post('/create_payment','ClientController@payment');
 Route::get('invoice-created/{id}','ClientController@invoiveCreated');
 Route::any('/all-invoices',['uses' => 'HomeController@allRecords','as' => 'all-invoices']);
 Route::get('/print/{id}','ClientController@invoicePrint');
-
-
 /*
 |---------------------------------------------------------------------------------
 |Admin Routes
