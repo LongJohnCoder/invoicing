@@ -94,7 +94,7 @@ $invouce_id=base64_decode(Request::input('inv'));
             $post_response = curl_exec($request); // execute curl post and store results in $post_response
             
             curl_close ($request); // close curl object
-            dd($post_response);
+            //dd($post_response);
             $response_array = explode($post_values["x_delim_char"],$post_response);
             if($response_array[0] != 1){
 
