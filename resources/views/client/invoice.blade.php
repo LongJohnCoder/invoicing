@@ -120,7 +120,7 @@
                   <tr>
                     <th>Total:</th>
                     <td>${{ $total }}
-                    <input type="hidden" id="tot" value="">
+                    <input type="hidden" id="tot" value="{{ $total }}">
                     <input type="hidden" id="inv" value="{{base64_encode($Invoice->invoice_id)}}"></td>
                   </tr>
                 </table>
