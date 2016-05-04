@@ -13,6 +13,7 @@ use App\Model\InvoiceItem;
 use App\Model\User;
 
 use Mail;
+use Session;
 
 class AjaxController extends Controller
 {
