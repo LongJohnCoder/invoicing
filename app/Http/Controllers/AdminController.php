@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Admin;
 use Illuminate\Support\Facades\Auth;
+use Session;
 class AdminController extends Controller
 {
 	public function getIndex()
@@ -16,6 +17,8 @@ class AdminController extends Controller
 	public function AdminLogin(Request $request)
 	{
 		$email = $request->email;
+		$details = Admin::where('email', '=', $email)->first(['id']); //fetching admin id
+		$request->session()->put('admin_id', $details); //putting id in session
 		$password = $request->password;
 		$remember = ($request->remember) == 'on'? true : false;
 		if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {

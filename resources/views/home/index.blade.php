@@ -6,7 +6,9 @@
         <section class="content-header">
           <h1>
             Create Invoice
-            
+            @if(Session::has('admin_id'))
+              {{ Session::get('admin_id') }}
+            @endif
           </h1>
           
         </section>
