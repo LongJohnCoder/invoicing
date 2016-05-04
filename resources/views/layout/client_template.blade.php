@@ -78,13 +78,15 @@
                         type :"post",
                         success: function( data ) {
                           if(data=="1"){
-                            alert("Your Payment Process Is Success");
                             var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
                              $(location).attr('href',urlnew);
                           }else{
-                            alert("Opps There Is Some Problem Please Try It Again");
                             var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
-                             $(location).attr('href',urlnew);
+                            $('.errorstatus').html(data);
+                            $('.errorstatus').show();
+                            $(".olddis").show();
+                            $(".newdis").hide();
+                          // $(location).attr('href',urlnew);
                           }
                         }
                 });

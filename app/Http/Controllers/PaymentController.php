@@ -98,7 +98,7 @@ $invouce_id=base64_decode(Request::input('inv'));
             $response_array = explode($post_values["x_delim_char"],$post_response);
             if($response_array[0] != 1){
 
-            	return $response_array[0];
+            	return $response_array[3];
             }else{
             $Invoice=Invoice::where('invoice_id', $invouce_id)->first();
 			$Invoice->payment_status=1;
