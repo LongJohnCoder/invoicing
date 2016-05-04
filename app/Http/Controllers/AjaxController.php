@@ -21,15 +21,16 @@ class AjaxController extends Controller
 
     	$sevendayearly=date("Y-m-d", strtotime('-7 days'));
     	$todaysdate=date("Y-m-d");
-    	$user_details = Invoice::where('created_at','>=',$sevendayearly)->where('created_at','<=',$todaysdate)->with('invoice_items', 'user_details')->orderBy('created_at', 'desc')->get();
+        $admin_id = Session::get('admin_id.id');
+    	$user_details = Invoice::where('created_at','>=',$sevendayearly)->where('created_at','<=',$todaysdate)->where('admin_id', $admin_id)->with('invoice_items', 'user_details')->orderBy('created_at', 'desc')->get();
     	//dd($user_details);
     	$inc='1 days';
     	$per=array();
     	for($i=0;$i<8;$i++){
     		//echo $i;
     		$ordate=date('Y-m-d', strtotime('+'.$i.' days', strtotime($sevendayearly)));
-    		$sum =Invoice::whereDate('created_at', '=', $ordate)->get();
-    		$sumc =Invoice::whereDate('created_at', '=', $ordate)->where('payment_status','=',1)->get();
+    		$sum =Invoice::where('admin_id', $admin_id)->whereDate('created_at', '=', $ordate)->get();
+    		$sumc =Invoice::where('admin_id', $admin_id)->whereDate('created_at', '=', $ordate)->where('payment_status','=',1)->get();
     		//dd($sum);
 			$per[$ordate]['tot']=0;
 			$per[$ordate]['ctot']=0;

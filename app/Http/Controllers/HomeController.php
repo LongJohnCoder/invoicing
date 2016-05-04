@@ -16,6 +16,8 @@ use Mail;
 
 use Illuminate\Support\Facades\Auth;
 
+use Session;
+
 class HomeController extends Controller
 {
     //
@@ -79,11 +81,13 @@ class HomeController extends Controller
    		}
 
    		$invoice = new Invoice;
+      $admin_id = Session::get('admin_id.id');
    		$invoice->user_id = $user_id_invoice;
    		$invoice->invoice_id = $invoice_id;
    		$invoice->tax_rate = $tax_rate;
    		$invoice->total = $price_ex_tax;
    		$invoice->memo = $memo;
+      $invoice->admin_id = $admin_id;
    		$invoice->save();
 
 
@@ -102,7 +106,11 @@ class HomeController extends Controller
       return redirect('/invoice-created/'.base64_encode($invoice_id));
   }
   public function allRecords(){
-      $user_details = Invoice::where('invoice_id', '!=',0)->with('invoice_items', 'user_details')->get();
+      $admin_id = Session::get('admin_id.id');
+      $user_details = Invoice::where('invoice_id', '!=',0)
+      ->where('admin_id', $admin_id)
+      ->with('invoice_items', 'user_details')
+      ->get();
       return view('home.invoiceDetails',array('title'=>'Invoice System || Create Invoice'), compact('user_details'));
   }
   public function Dashboard(){

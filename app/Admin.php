@@ -8,4 +8,8 @@ use Illuminate\Auth\Authenticatable;
 class Admin extends Model implements \Illuminate\Contracts\Auth\Authenticatable
 {
     use Authenticatable;
+    public function invoice()
+    {
+    	return $this->hasMany('App\Model\Invoice', 'id');
+    }
 }
