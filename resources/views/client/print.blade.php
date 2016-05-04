@@ -68,8 +68,8 @@
                 <tr>
                   <th>Qty</th>
                   <th>Product</th>
-                  
-                  <th>Description</th>
+                  <th>Tax(%)</th>
+                  <th>Unit Price #</th>
                   <th>Subtotal</th>
                 </tr>
               </thead>
@@ -77,11 +77,11 @@
                 @foreach($Invoice->invoice_items as $invoice)
 
                   <tr>
-                    
                     <td>{{round($invoice->qty,0)}}</td>
                     <td>{{$invoice->name}}</td>
+                    <td>{{ $invoice->tax_rate }}</td>
                     <td>{{$invoice->price}}</td>
-                    <td>{{$invoice->qty*$invoice->price}}</td>
+                    <td>{{$invoice->price_in_tax}}</td>
                   </tr>
                 @endforeach
               </tbody>
@@ -111,18 +111,24 @@
                 <table class="table">
                   <tr>
                     <th style="width:50%">Subtotal:</th>
-                    <td>${{$Invoice->total}}</td>
+                     {{ $subtotal='' }}
+                      {{ $total='' }}
+                      <div style="display: none;">
+                        @foreach($Invoice->invoice_items as $invoice)
+                        {{$subtotal+= $invoice->price*$invoice->qty}}
+                        {{ $total += $invoice->price_in_tax }}
+                        @endforeach
+                      </div>
+                    <td>${{ number_format($subtotal, 2) }}</td>
                   </tr>
                   <tr>
-                    <th>Tax ({{$Invoice->tax_rate}}%)</th>
-                    <td>${{round($Invoice->tax_rate*($Invoice->total/100),2)}}</td>
+                    <th>Tax(%)</th>
+                    <td>${{ number_format(($total - $subtotal),2) }}</td>
                   </tr>
                   
                   <tr>
                     <th>Total:</th>
-                    <td>${{round($Invoice->total+($Invoice->tax_rate*($Invoice->total/100)),2)}}
-                    <input type="hidden" id="tot" value="{{round($Invoice->total+($Invoice->tax_rate*($Invoice->total/100)),2)}}">
-                    <input type="hidden" id="inv" value="{{base64_encode($Invoice->invoice_id)}}"></td>
+                    <td>${{ number_format($total, 2) }}</td>
                   </tr>
                 </table>
               </div>

@@ -110,16 +110,16 @@
                       {{ $total += $invoice->price_in_tax }}
                       @endforeach
                     </div>
-                    <td>${{ $subtotal }}</td>
+                    <td>${{ number_format($subtotal, 2) }}</td>
                   </tr>
                   <tr>
                     <th>Tax(%)</th>
-                    <td>${{$total - $subtotal}}</td>
+                    <td>${{ number_format(($total - $subtotal),2) }}</td>
                   </tr>
                   
                   <tr>
                     <th>Total:</th>
-                    <td>${{ $total }}
+                    <td>${{ number_format($total, 2) }}
                     <input type="hidden" id="tot" value="{{ $total }}">
                     <input type="hidden" id="inv" value="{{base64_encode($Invoice->invoice_id)}}"></td>
                   </tr>
