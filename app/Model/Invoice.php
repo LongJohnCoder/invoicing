@@ -16,4 +16,8 @@ class Invoice extends Model
     public function user_details(){
         return $this->hasOne('App\Model\User', 'id','user_id');
     }
+    public function admin()
+    {
+        return $this->belongsTo('App\Admin', 'admin_id');
+    }
 }

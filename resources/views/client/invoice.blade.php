@@ -146,7 +146,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Modal Default</h4>
+                        <h4 class="modal-title">Payment Process</h4>
                       </div>
                       <div class="modal-body olddis">
                         
@@ -154,7 +154,8 @@
                       
                       <div class="box box-success">
                         <div class="box-header">
-                          <h3 class="box-title">Payment Details</h3>
+                          <h3 class="box-title">Payment Details</h3><br>
+                          <h2 class="box-title errorstatus" style="display: none; color: red;"></h2>
                         </div>
                       <div class="box-body">
                       <!-- Date dd/mm/yyyy -->

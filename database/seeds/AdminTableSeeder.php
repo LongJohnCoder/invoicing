@@ -16,7 +16,10 @@ class AdminTableSeeder extends Seeder
         $admin->password = bcrypt('123456');
         $admin->save();
 
-         $admin->email="mira@gmail.com";
+
+         
+        $admin->email="support@invoicingyou.com";
+
         $admin->password = bcrypt('123456');
         $admin->save();
     }
