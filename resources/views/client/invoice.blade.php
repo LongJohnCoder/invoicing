@@ -102,17 +102,25 @@
                 <table class="table">
                   <tr>
                     <th style="width:50%">Subtotal:</th>
-                    <td>${{$Invoice->total}}</td>
+                    {{ $subtotal='' }}
+                    {{ $total='' }}
+                    <div style="display: none;">
+                      @foreach($Invoice->invoice_items as $invoice)
+                      {{$subtotal+= $invoice->price*$invoice->qty}}
+                      {{ $total += $invoice->price_in_tax }}
+                      @endforeach
+                    </div>
+                    <td>${{ $subtotal }}</td>
                   </tr>
                   <tr>
                     <th>Tax(%)</th>
-                    <td>${{round($Invoice->tax_rate*($Invoice->total/100),2)}}</td>
+                    <td>${{$total - $subtotal}}</td>
                   </tr>
                   
                   <tr>
                     <th>Total:</th>
-                    <td>${{round($Invoice->total+($Invoice->tax_rate*($Invoice->total/100)),2)}}
-                    <input type="hidden" id="tot" value="{{round($Invoice->total+($Invoice->tax_rate*($Invoice->total/100)),2)}}">
+                    <td>${{ $total }}
+                    <input type="hidden" id="tot" value="">
                     <input type="hidden" id="inv" value="{{base64_encode($Invoice->invoice_id)}}"></td>
                   </tr>
                 </table>
