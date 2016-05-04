@@ -15,7 +15,7 @@ use App\Model\User;
 use Mail;
 
 use Illuminate\Support\Facades\Auth;
-
+use Session;
 class HomeController extends Controller
 {
     //
@@ -108,5 +108,10 @@ class HomeController extends Controller
   public function Dashboard(){
     $cax=[100, 25, 80, 81, 56, 55, 40];
     return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
+  }
+  public function getProfile(){
+    //echo $gets=Session::get('admin_id.id');
+    //print_r($gets->id);
+    return view('home.profile',array('title'=>'Invoice System || Profile'));
   }
 }

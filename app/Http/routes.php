@@ -42,3 +42,5 @@ Route::get('/admin/logout', ['uses' => 'AdminController@AdminLogout','as' => 'ad
 
 Route::any('/checkauthorise','PaymentController@checkauthor');
 Route::any('/aurthopaymen','PaymentController@AuthorizedPayment');
+
+Route::get('/profile',['uses' => 'HomeController@getProfile','as' => 'profile']);
