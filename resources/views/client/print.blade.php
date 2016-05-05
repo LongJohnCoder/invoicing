@@ -42,8 +42,8 @@
           <div class="col-sm-4 invoice-col">
             From
             <address>
-                <strong>Tier5</strong><br>
-                Email: work@tier5.us
+                <strong>{{$Invoice->admin_details->name}}</strong><br>
+                {{$Invoice->admin_details->detail}}
               </address>
           </div><!-- /.col -->
           <div class="col-sm-4 invoice-col">

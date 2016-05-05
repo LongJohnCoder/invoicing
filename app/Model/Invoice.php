@@ -20,4 +20,8 @@ class Invoice extends Model
     {
         return $this->belongsTo('App\Admin', 'admin_id');
     }
+    public function admin_details()
+    {
+        return $this->belongsTo('App\Model\AdminDetail', 'admin_id');
+    }
 }

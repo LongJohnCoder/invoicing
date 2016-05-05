@@ -11,5 +11,8 @@ class AdminDetail extends Model
 	protected $table = 'admin_details';
 	protected $guarded = array();
 	
-    
+    public function invoice()
+    {
+    	return $this->hasMany('App\Model\Invoice', 'admin_id');
+    }
 }
