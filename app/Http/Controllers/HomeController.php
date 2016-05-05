@@ -135,7 +135,7 @@ class HomeController extends Controller
         if($request->images){
           $imgval=$request->images;
           $extension =$imgval->getClientOriginalExtension();
-          $destinationPath = 'public/admin/';   // upload path
+          $destinationPath = 'public/admin_new/';   // upload path
 
           //$extension =$imgval->getClientOriginalExtension(); // getting image extension
           $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
@@ -156,7 +156,7 @@ class HomeController extends Controller
         echo "yes";
         $imgval=$request->images;
       $extension =$imgval->getClientOriginalExtension();
-      $destinationPath = 'public/admin/';   // upload path
+      $destinationPath = 'public/admin_new/';   // upload path
 
       //$extension =$imgval->getClientOriginalExtension(); // getting image extension
       $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
