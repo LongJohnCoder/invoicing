@@ -56,6 +56,8 @@
                       {!! Form::file('images', array('class'=>'add-image')) !!}
                        @if($Admincount!=0)
                        		@if($Admin->image!="")
+                          <!-- 2nd time putting the image in session just because quick view of image as soon as the page get updated-->
+                          {{ Session::put('image', $Admin->image) }}
                        		<img src="{{url('/')}}/public/admin_new/{{$Admin->image}}" style="background-color: currentColor;" >
                        		@else
                        		<img src="{{url('/')}}/public/imgx/logo.png" style="background-color: currentColor;" >
