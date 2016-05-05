@@ -1,25 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Model\Invoice;
-
 use App\Model\InvoiceItem;
-
 use App\Model\User;
-
 use App\Model\AdminDetail;
-
 use App\Admin;
-
 use Mail;
-
 use Illuminate\Support\Facades\Auth;
-
 use Session;
 use Image\Image\ImageInterface;
 use Imagine\Image\Box;
@@ -41,35 +30,35 @@ class HomeController extends Controller
   }
   public function Invoice(Request $request){
     //dd($request);
-   		$name = $request->name; //user name
-   		$user_id = time().substr($name,0,5); //user id
-   		$email = $request->email; //user email
-   		$memo = $request->memo; //user memo
-   		$user = new User;
-   		$user->user_id = $user_id;
-   		$user->name = $name;
-   		$user->email =$email;
-   		$user->memo = $memo;
-   		$user->save(); //stored in user table
-   		$invoice_id = date('ymd').rand('000','999');
-   		$user_id_invoice = $user->id; //last inserted id
-   		$tax_rate = $request->tax_rate;
-   		$count = $request->counter; //counter for loop
-   		$price_ex_tax = '';
-   		$items = '';
-   		for ($i=0; $i <= $count; $i++) { 
-   			if ($price_ex_tax == '') {
-   				$price_ex_tax = $request->Quantity[$i] * $request->Price[$i];
-   			}
-   			else
-   			{
-   				$price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
-   			}
-   			$InvoiceItem = new InvoiceItem;
-	   		$InvoiceItem->invoice_id = $invoice_id;
-	   		$InvoiceItem->name = $request->Item[$i];
-	   		$InvoiceItem->qty =$request->Quantity[$i];
-	   		$InvoiceItem->price = $request->Price[$i];
+      $name = $request->name; //user name
+      $user_id = time().substr($name,0,5); //user id
+      $email = $request->email; //user email
+      $memo = $request->memo; //user memo
+      $user = new User;
+      $user->user_id = $user_id;
+      $user->name = $name;
+      $user->email =$email;
+      $user->memo = $memo;
+      $user->save(); //stored in user table
+      $invoice_id = date('ymd').rand('000','999');
+      $user_id_invoice = $user->id; //last inserted id
+      $tax_rate = $request->tax_rate;
+      $count = $request->counter; //counter for loop
+      $price_ex_tax = '';
+      $items = '';
+      for ($i=0; $i <= $count; $i++) { 
+        if ($price_ex_tax == '') {
+          $price_ex_tax = $request->Quantity[$i] * $request->Price[$i];
+        }
+        else
+        {
+          $price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
+        }
+        $InvoiceItem = new InvoiceItem;
+        $InvoiceItem->invoice_id = $invoice_id;
+        $InvoiceItem->name = $request->Item[$i];
+        $InvoiceItem->qty =$request->Quantity[$i];
+        $InvoiceItem->price = $request->Price[$i];
         if(isset($request->tax[$i])) {
           $InvoiceItem->tax_status = 1;
           $InvoiceItem->tax_rate = $tax_rate;
@@ -81,33 +70,28 @@ class HomeController extends Controller
           $InvoiceItem->tax_rate = 0.00;
           $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]);
         }
-	   		$InvoiceItem->save(); //stored in user table
-   			
-   		}
-
-   		$invoice = new Invoice;
+        $InvoiceItem->save(); //stored in user table
+        
+      }
+      $invoice = new Invoice;
       $admin_id = Session::get('admin_id.id');
-   		$invoice->user_id = $user_id_invoice;
-   		$invoice->invoice_id = $invoice_id;
-   		$invoice->tax_rate = $tax_rate;
-   		$invoice->total = $price_ex_tax;
-   		$invoice->memo = $memo;
+      $invoice->user_id = $user_id_invoice;
+      $invoice->invoice_id = $invoice_id;
+      $invoice->tax_rate = $tax_rate;
+      $invoice->total = $price_ex_tax;
+      $invoice->memo = $memo;
       $invoice->admin_id = $admin_id;
-   		$invoice->save();
-
-
+      $invoice->save();
         $user_name = $name;
         $user_email = $email;
         $admin_users_email="hello@tier5.us";
         $activateLink = url('/').'/client/invoice/'.base64_encode($invoice_id);
-
         $sent = Mail::send('email.invoice_link', array('name'=>$user_name,'email'=>$user_email,'activate_link'=>$activateLink), 
         function($message) use ($admin_users_email, $user_email,$user_name)
         {
         $message->from($admin_users_email);
         $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
         });
-
       return redirect('/invoice-created/'.base64_encode($invoice_id));
   }
   public function allRecords(){
@@ -120,6 +104,9 @@ class HomeController extends Controller
   }
   public function Dashboard(){
     $cax=[100, 25, 80, 81, 56, 55, 40];
+    $admin_id = Session::get('admin_id.id');
+    $adminImage = AdminDetail::where('admin_id', '=', $admin_id)->first(['image']);
+    Session::put('image', $adminImage->image);
     return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
   }
   public function getProfile(){
@@ -127,10 +114,9 @@ class HomeController extends Controller
     //print_r($gets->id);
     $Admin=AdminDetail::where('admin_id',$gets)->first();
     $Admincount=AdminDetail::where('admin_id',$gets)->count();
-    return view('home.profile',array('title'=>'Invoice System || Profile'), compact('Admin','Admincount'));
+    return view('home.profile',array('title'=>'Invoice System || Profile'), compact('Admin','Admincount', 'image'));
   }
   public function updateProfile(Request $request){
-   
       if($request->images)
       {
         $imgval=$request->images;
@@ -151,22 +137,16 @@ class HomeController extends Controller
       $AdminDetail->detail =$request->details;
       $AdminDetail->image =$fileName;
       $AdminDetail->save();
-      if($AdminDetail->save()) {
-        $admin_id = Session::get('admin_id.id');
-        $admin_details = AdminDetail::where('admin_id', $admin_id)->first(['image']);
-        $image = $admin_details->image;
-        Session::put('image',$image);
-        $status_msg = 'Image successfully Saved!';
-        Session::put('status_msg',$status_msg );
-        Session::save();
+      if ($AdminDetail->save()) {
+        Session::put('confirmation', 'Successfully Updated!');
         return redirect()->route('profile');
       }
       else
       {
-        $status_msg = 'Error! In Saving Image';
-        Session::put('status_msg',$status_msg );
+        Session::put('confirmation', 'Error! updating Failed!');
         return redirect()->route('profile');
       }
+      
     
       /*if($request->id!=""){
         if($request->images){
@@ -187,14 +167,12 @@ class HomeController extends Controller
       }
       
       $AdminDetail->save();
-
       }else{
         //no image is there
         echo "yes";
         $imgval=$request->images;
         $extension =$imgval->getClientOriginalExtension();
         $destinationPath = 'public/admin_new/';   // upload path
-
         //$extension =$imgval->getClientOriginalExtension(); // getting image extension
         $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
         $imgval->move($destinationPath, $fileName); // uploading file to given path
@@ -206,6 +184,5 @@ class HomeController extends Controller
         $AdminDetail->save(); 
       }*/
       
-
   }
 }

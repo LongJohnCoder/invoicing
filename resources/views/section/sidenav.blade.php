@@ -11,6 +11,7 @@
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
+
             <li class="header">MAIN NAVIGATION</li>
             <li><a href="{{ url('/') }}/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li><a href="{{url('/')}}"><i class="fa fa-th"></i> <span>Create Invoice</span></a></li>

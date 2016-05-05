@@ -13,9 +13,9 @@
 
         <!-- Main content -->
         <section class="content">
-        @if(Session::has('status_msg'))
-            <div class="alert alert-success">{{ Session::get('status_msg') }}<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
-            {{ Session::forget('status_msg')}}
+        @if(Session::has('confirmation'))
+            <div class="alert alert-success">{{ Session::get('confirmation') }}<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+        {{ Session::forget('confirmation')}}
         @endif
           <div class="row">
             <!-- left column -->
@@ -23,7 +23,7 @@
               <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Profile Details</h3>
+                  <h3 class="box-title">Profile Details </h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 {{ Form::open(array('url' => 'profilr_update', 'files'=>true)) }}

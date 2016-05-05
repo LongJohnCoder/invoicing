@@ -32,6 +32,7 @@ class AdminController extends Controller
 	public function AdminLogout()
 	{
 		 Auth::logout();
+		 Session::forget('image');
 		 return redirect()->route('admin-login');
 	}
 }
