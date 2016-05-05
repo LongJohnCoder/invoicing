@@ -20,7 +20,9 @@
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
-                <img src="{{url('/')}}/public/imgx/logo.png">
+              @if(Session::has('image'))
+                <img src="{{url('/')}}/public/admin_new/{{Session::get('image')}}" class="" alt="User Image">
+              @endif
                 <small class="pull-right">Date: {{date("M d Y",strtotime($Invoice->created_at))}}</small>
               </h2>
             </div><!-- /.col -->
