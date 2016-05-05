@@ -13,6 +13,10 @@
 
         <!-- Main content -->
         <section class="content">
+        @if(Session::has('status_msg'))
+            <div class="alert alert-success">{{ Session::get('status_msg') }}<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+            {{ Session::forget('status_msg')}}
+        @endif
           <div class="row">
             <!-- left column -->
             <div class="col-md-12">
@@ -26,13 +30,13 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      	@if($Admincount!=0)
+                      @if($Admincount!=0)
                     	{{ Form::hidden('id',$Admin->id,['class' => 'form-control profile_control', 'required' => 'required']) }}
                     	@else
                     	{{ Form::hidden('id','',['class' => 'form-control profile_control', 'required' => 'required']) }}
                     	@endif
 
-                      	@if($Admincount!=0)
+                      @if($Admincount!=0)
                     	{{ Form::text('name',$Admin->name,['class' => 'form-control profile_control', 'required' => 'required']) }}
                     	@else
                     	{{ Form::text('name','',['class' => 'form-control profile_control', 'required' => 'required']) }}

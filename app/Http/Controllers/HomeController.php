@@ -130,14 +130,49 @@ class HomeController extends Controller
     return view('home.profile',array('title'=>'Invoice System || Profile'), compact('Admin','Admincount'));
   }
   public function updateProfile(Request $request){
-    //print_r($request->images);
-      if($request->id!=""){
+   
+      if($request->images)
+      {
+        $imgval=$request->images;
+        $extension =$imgval->getClientOriginalExtension();
+        $destinationPath = 'public/admin_new/';   // upload path
+        $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
+        $imgval->move($destinationPath, $fileName); // uploading file to given path 
+      }
+      else
+      {
+        $admin_id = Session::get('admin_id.id');
+        $file = AdminDetail::where('admin_id', $admin_id)->first(['image']);
+        $fileName = $file->image;
+      }
+      $AdminDetail = AdminDetail::where('id',$request->id)->first();
+      $AdminDetail->admin_id = Session::get('admin_id.id');
+      $AdminDetail->name = $request->name;
+      $AdminDetail->detail =$request->details;
+      $AdminDetail->image =$fileName;
+      $AdminDetail->save();
+      if($AdminDetail->save()) {
+        $admin_id = Session::get('admin_id.id');
+        $admin_details = AdminDetail::where('admin_id', $admin_id)->first(['image']);
+        $image = $admin_details->image;
+        Session::put('image',$image);
+        $status_msg = 'Image successfully Saved!';
+        Session::put('status_msg',$status_msg );
+        Session::save();
+        return redirect()->route('profile');
+      }
+      else
+      {
+        $status_msg = 'Error! In Saving Image';
+        Session::put('status_msg',$status_msg );
+        return redirect()->route('profile');
+      }
+    
+      /*if($request->id!=""){
         if($request->images){
           $imgval=$request->images;
           $extension =$imgval->getClientOriginalExtension();
           $destinationPath = 'public/admin_new/';   // upload path
-
-          //$extension =$imgval->getClientOriginalExtension(); // getting image extension
           $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
           $imgval->move($destinationPath, $fileName); // uploading file to given path
         }
@@ -152,22 +187,24 @@ class HomeController extends Controller
       }
       
       $AdminDetail->save();
+
       }else{
+        //no image is there
         echo "yes";
         $imgval=$request->images;
-      $extension =$imgval->getClientOriginalExtension();
-      $destinationPath = 'public/admin_new/';   // upload path
+        $extension =$imgval->getClientOriginalExtension();
+        $destinationPath = 'public/admin_new/';   // upload path
 
-      //$extension =$imgval->getClientOriginalExtension(); // getting image extension
-      $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
-      $imgval->move($destinationPath, $fileName); // uploading file to given path
-      $AdminDetail = new AdminDetail;
-      $AdminDetail->admin_id = Session::get('admin_id.id');
-      $AdminDetail->name = $request->name;
-      $AdminDetail->detail =$request->details;
-      $AdminDetail->image =$fileName;
-      $AdminDetail->save(); 
-      }
+        //$extension =$imgval->getClientOriginalExtension(); // getting image extension
+        $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
+        $imgval->move($destinationPath, $fileName); // uploading file to given path
+        $AdminDetail = new AdminDetail;
+        $AdminDetail->admin_id = Session::get('admin_id.id');
+        $AdminDetail->name = $request->name;
+        $AdminDetail->detail =$request->details;
+        $AdminDetail->image =$fileName;
+        $AdminDetail->save(); 
+      }*/
       
 
   }
