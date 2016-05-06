@@ -4,8 +4,10 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-            @if(Session::has('image'))
+            @if(Session::has('image') && Session::get('image')!= '')
               <img src="{{url('/')}}/public/admin_new/{{Session::get('image')}}" class="" alt="User Image">
+              @else
+              <img src="{{url('/')}}/public/imgx/logo.png" class="" alt="User Image">
             @endif
             </div>
           </div>

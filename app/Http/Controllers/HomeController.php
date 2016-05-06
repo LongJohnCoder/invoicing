@@ -106,7 +106,14 @@ class HomeController extends Controller
     $cax=[100, 25, 80, 81, 56, 55, 40];
     $admin_id = Session::get('admin_id.id');
     $adminImage = AdminDetail::where('admin_id', '=', $admin_id)->first(['image']);
-    Session::put('image', $adminImage->image);
+    $adminImagecount = AdminDetail::where('admin_id', '=', $admin_id)->count();
+    if ($adminImagecount == 0) {
+      Session::put('image', '');
+    }
+    else {
+      Session::put('image', $adminImage->image);
+    }
+    
     return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
   }
   public function getProfile(){
@@ -117,21 +124,40 @@ class HomeController extends Controller
     return view('home.profile',array('title'=>'Invoice System || Profile'), compact('Admin','Admincount', 'image'));
   }
   public function updateProfile(Request $request){
-      if($request->images)
-      {
-        $imgval=$request->images;
-        $extension =$imgval->getClientOriginalExtension();
-        $destinationPath = 'public/admin_new/';   // upload path
-        $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
-        $imgval->move($destinationPath, $fileName); // uploading file to given path 
+
+      
+      if($request->id!=""){
+        $AdminDetail = AdminDetail::where('id',$request->id)->first();
+          if($request->images)
+          {
+            $imgval=$request->images;
+            $extension =$imgval->getClientOriginalExtension();
+            $destinationPath = 'public/admin_new/';   // upload path
+            $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
+            $imgval->move($destinationPath, $fileName); // uploading file to given path 
+          }
+          else
+          {
+             
+            $fileName = $AdminDetail->image;
+          }
+      }else{
+
+        $AdminDetail = new AdminDetail;
+        if($request->images)
+          {
+            $imgval=$request->images;
+            $extension =$imgval->getClientOriginalExtension();
+            $destinationPath = 'public/admin_new/';   // upload path
+            $fileName = rand(111111111,999999999).'.'.$extension; // renameing image
+            $imgval->move($destinationPath, $fileName); // uploading file to given path 
+          }
+          else
+          {
+             
+            $fileName = '';
+          }
       }
-      else
-      {
-        $admin_id = Session::get('admin_id.id');
-        $file = AdminDetail::where('admin_id', $admin_id)->first(['image']);
-        $fileName = $file->image;
-      }
-      $AdminDetail = AdminDetail::where('id',$request->id)->first();
       $AdminDetail->admin_id = Session::get('admin_id.id');
       $AdminDetail->name = $request->name;
       $AdminDetail->detail =$request->details;
