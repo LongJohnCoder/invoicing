@@ -1,6 +1,6 @@
 <br><br>
 <div class="col-xs-1">
-    <input type="checkbox" name="tax[{{$i}}]" />
+    <input type="checkbox" name="tax[{{$i}}]" class="flat-red"/>
 </div>
 <div class="col-xs-3">
 	<input type="text" class="form-control" placeholder="Item" id="Item[{{$i}}]" name="Item[{{$i}}]"/>

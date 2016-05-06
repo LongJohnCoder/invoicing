@@ -12,7 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(AdminTableSeeder::class);
+         $this->call(Payment_typesTableSeeder::class);
          //$this->call(AdminTableSeeder::class);
-         //$this->call(AdminTableSeeder::class);
+         //Model::reguard();
     }
 }

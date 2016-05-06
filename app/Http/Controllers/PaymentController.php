@@ -1,14 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
-
-
 use App\Http\Requests;
 use App\Model\Invoice;                             /* Model name*/
 use App\Model\InvoiceItem;                         /* Model name*/
 use App\Model\User;                                /* Model name*/
-
 use Illuminate\Support\Facades\Request;
 use Input; /* For input */
 use Validator;
@@ -108,5 +103,16 @@ $invouce_id=base64_decode(Request::input('inv'));
             	return 1;
             }
         
+    }
+    public function getView()
+    {
+        $view_name = Request::input('view');
+        if ($view_name == 'stripe') {
+            return view('home.paymentviewstripe');
+        }
+        else
+        {
+            return view('home.paymentviewauthorize');
+        }
     }
 }
