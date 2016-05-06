@@ -136,8 +136,8 @@
             @if($Invoice->payment_status!=0)
               <a href="{{url('/').'/print/'.base64_encode($Invoice->invoice_id.'DONE')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
              @else 
-              <!-- <button id="customButton" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> 
-              Make Payment</button> -->
+              <button id="customButton" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> 
+              Make Payment</button>
               
               <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">
               <i class="fa fa-credit-card"></i> 
