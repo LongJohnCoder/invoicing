@@ -1,5 +1,6 @@
 <!-- jQuery 2.1.4 -->
     <script src="{{url('/')}}/public/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <!-- Bootstrap 3.3.5 -->
         <script>
     	$(document).ready(function(){

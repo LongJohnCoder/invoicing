@@ -44,6 +44,7 @@
                                 <h3 class="box-title">Basic info</h3>
                               </div><!-- /.box-header -->
                               <!-- form start -->
+                              <div class="se-pre-con"></div>
                               <div class="form-horizontal">
                                 <div class="box-body">
                                   <div class="form-group">
