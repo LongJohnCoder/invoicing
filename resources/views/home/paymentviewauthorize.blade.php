@@ -11,14 +11,14 @@
 }
 </style>
 <button type="button" onClick="window.location.reload()" class="btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button><br>
-<form action="#" method="POST" id="stripe_form">
+<form action="#" method="POST" id="authorize_form">
   <div class="form-group">
-    <label for="public_key">Public Key of Stripe</label>
-    <input type="text" class="form-control" id="public_key" placeholder="Enter Public Key" required>
+    <label for="login_id">Login ID</label>
+    <input type="text" class="form-control" id="login_id" placeholder="Enter login id of authorize.net" required>
   </div>
   <div class="form-group">
-    <label for="private_key">Private Key of Stripe</label>
-    <input type="text" class="form-control" id="private" placeholder="Enter Private Key" required>
+    <label for="t_key">Transaction key</label>
+    <input type="text" class="form-control" id="t_key" placeholder="Enter Private Key" required>
   </div>
   <div class="box-footer">
     <button type="submit" class="btn btn-primary">Submit</button>

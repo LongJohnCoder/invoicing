@@ -87,6 +87,16 @@
                     }
                 });
             })
+            $('#authorize').click(function(){
+                $.ajax({
+                    url: "./load-views",
+                    data: {_token: '{!! csrf_token() !!}', view: 'authorize'},
+                    type:"post",
+                    success: function(data) {
+                        $('#tab_2').html(data);
+                    }
+                });
+            });
         });
     </script>
     <script src="{{url('/')}}/public/bootstrap/js/bootstrap.min.js"></script>
