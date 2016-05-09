@@ -99,6 +99,51 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#update').click(function(){
+                if ($('#update').text() == 'Edit Keys') {
+                    $('#update').text('save');
+                    $value1 = $('#key_one').text();
+                    $value2 = $('#key_two').text();
+                    if ($value1 && $value2) 
+                    {
+                        $('#key_one').html('<input type="text" name="key_one_edit" id="key_one_edit" value="'+$value1+'">');
+                        $('#key_two').html('<input type="text" name="key_two_edit" id="key_two_edit" value="'+$value2+'">');
+                        
+                    }
+                }
+                else
+                {
+                    $value_updated1 = $('#key_one_edit').val();
+                    $value_updated2 = $('#key_two_edit').val();
+                    if ($.trim($value_updated1) && $.trim($value_updated2)){
+                        $.ajax({
+                            url: "./update-keys",
+                            data: {_token:'{!! csrf_token() !!}', key1: $value_updated1, key2: $value_updated2},
+                            type:"POST",
+                            success: function(data) {
+                                if(data == 1) {
+                                    location.reload();
+                                }
+                                else
+                                {
+                                    $('#error_edit').append('<div class="alert alert-danger">An Error occured please fill all the fields properly</div>');
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        $('#error_edit').append('<div class="alert alert-danger">An Error occured please fill all the fields properly</div>');
+                    }
+                    $('#key_one').html($value1);
+                    $('#key_two').html($value2);
+                    $('#update').text('Edit Keys');
+                }
+            });
+        });
+    </script>
     <script src="{{url('/')}}/public/bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="{{url('/')}}/public/plugins/fastclick/fastclick.min.js"></script>

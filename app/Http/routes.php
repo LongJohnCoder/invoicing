@@ -46,3 +46,4 @@ Route::post('/profilr_update',['uses' => 'HomeController@updateProfile','as' => 
 Route::any('/load-views',['uses' => 'PaymentController@getView','as' => 'getview']);
 Route::post('/payment-details', ['uses' => 'PaymentController@postPaymentDetails', 'as' => 'payment-details']);
 Route::post('/delete', ['uses' => 'PaymentController@DeleteAccount', 'as' => 'delete-account' ]);
+Route::post('/update-keys', ['uses' => 'PaymentController@UpdateKeys', 'as' => 'update-keys']);

@@ -175,4 +175,21 @@ $invouce_id=base64_decode(Request::input('inv'));
       }
 
     }
+    public function UpdateKeys() {
+       $admin_id = Session::get('admin_id.id');
+       $key1 = Request::input('key1');
+       $key2 = Request::input('key2');
+       $update_row = PaymentKeys::where('admin_id', '=', $admin_id)->first();
+       if ($update_row) {
+           $update_row->key_first = $key1;
+           $update_row->key_second = $key2;
+           if ($update_row->save()) {
+              echo 1;
+           }
+       }
+       else
+       {
+        echo 0;
+       }
+    }
 }

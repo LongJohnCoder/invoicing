@@ -160,9 +160,10 @@
                         <div class="tab-pane" id="tab_3">
                         @if($payment_ac_details)
                           <form action="{{route('delete-account')}}" method="post">
-                            <button type="submit" class="btn btn-danger"style="float:right;">Delete</button>
+                            <button type="submit" class="btn btn-danger"style="float:right; margin-left: 1%;">Delete</button>
                             <input type="hidden" name="_token" value="{{ Session::token() }}"></input>
                           </form>
+                          <button type="submit" id="update" name="update" class="btn btn-warning" style="float:right;">Edit Keys</button>
                         @endif
                         @if($payment_ac_details)
                           <label>Account Name: 
@@ -174,11 +175,13 @@
                               Sorry! Some Error occured
                             @endif
                           </label><br>
-                          <label>Key One: {{$payment_ac_details->PaymentKeys->key_first}} </label><br>
-                          <label>Key Two: {{$payment_ac_details->PaymentKeys->key_second}}</label>
+                          <label>{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ? 'Public Key' : 'Login ID'}}: <p id="key_one">{{$payment_ac_details->PaymentKeys->key_first}}</p> </label><br>
+                          <label>{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ?
+                          'Private Key' : 'Transaction key'}} <p id="key_two">{{$payment_ac_details->PaymentKeys->key_second}}</p></label>
                         @else
                         <label class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No records found please select a payment option! </label>
                         @endif
+                        <div id="error_edit"></div>
                         </div><!-- /.tab-pane -->
                       </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
