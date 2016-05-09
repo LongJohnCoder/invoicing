@@ -155,4 +155,24 @@ $invouce_id=base64_decode(Request::input('inv'));
             }
         }
     }
+    public function DeleteAccount() {
+       $admin_id = Session::get('admin_id.id');
+       $status = AdminPaymentMap::where('admin_id', '=', $admin_id)->delete();
+      if ($status) {
+          $delete_keys = PaymentKeys::where('admin_id', '=', $admin_id)->delete();
+          if ($delete_keys) {
+              Session::put('del_succ', 'Deleted.');
+              return redirect()->route('index');
+          }
+          else
+          {
+            Session::put('del_fail', 'failed to delete');
+            return redirect()->route('index');
+          }
+      } else {
+        Session::put('del_fail', 'failed to delete');
+        return redirect()->route('index');
+      }
+
+    }
 }

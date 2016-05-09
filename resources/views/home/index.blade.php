@@ -8,9 +8,17 @@
             Create Invoice
           </h1>
           @if(Session::has('conf_success'))
-            <div class="alert alert-success" align="center"><strong>Success!</strong> {{ Session::get('conf_success') }}</div>
+            <div class="alert alert-success" align="center"><strong>Success!</strong> {{ Session::get('conf_success') }}  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
           @endif
           {{ Session::forget('conf_success') }}
+          @if(Session::has('del_succ'))
+            <div class="alert alert-success" align="center"><strong>Successfully!</strong> {{ Session::get('del_succ') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+          @endif
+          {{ Session::forget('del_succ') }}
+          @if(Session::has('del_fail'))
+            <div class="alert alert-danger" align="center"><strong>Error!</strong> {{ Session::get('del_fail') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+          @endif
+          {{ Session::forget('del_fail') }}
         </section>
         <form action="{{ route('create-invoice') }}" method="POST">
         <!-- Main content -->
@@ -136,26 +144,40 @@
                             </div>
                           </div><!--/.col (right) -->
                           </div><!-- /.tab-pane -->
+
                         <div class="tab-pane" id="tab_2">
+                        @if($payment_ac_details == null)
                           <label><strong>Select Any of the Payment Option which You wana recieve ?  </strong></label><br>
                           <input type="radio" value="Stripe" id="stripe" />
                           <label for="stripe">Stripe</label><br>
                           <input type="radio" value="Authorize.net" id="authorize" />
                           <label for="authorize">Authorize.net</label>
+                        @else
+                          <label class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You Have Already choose your payment account to change delete that account and save a new one ! </label>
+                        @endif
                         </div><!-- /.tab-pane -->
+
                         <div class="tab-pane" id="tab_3">
+                        @if($payment_ac_details)
+                          <form action="{{route('delete-account')}}" method="post">
+                            <button type="submit" class="btn btn-danger"style="float:right;">Delete</button>
+                            <input type="hidden" name="_token" value="{{ Session::token() }}"></input>
+                          </form>
+                        @endif
                         @if($payment_ac_details)
                           <label>Account Name: 
                             @if($payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1)
                             stripe
-                            @else
+                            @elseif ($payment_ac_details->payment_type == 2 && $payment_ac_details->gateway_status == 1)
                               Authorize.net
+                            @else
+                              Sorry! Some Error occured
                             @endif
                           </label><br>
                           <label>Key One: {{$payment_ac_details->PaymentKeys->key_first}} </label><br>
                           <label>Key Two: {{$payment_ac_details->PaymentKeys->key_second}}</label>
                         @else
-                        <label>No records found please select a payment option</label>
+                        <label class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No records found please select a payment option! </label>
                         @endif
                         </div><!-- /.tab-pane -->
                       </div><!-- /.tab-content -->

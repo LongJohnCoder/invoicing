@@ -45,3 +45,4 @@ Route::get('/profile',['uses' => 'HomeController@getProfile','as' => 'profile'])
 Route::post('/profilr_update',['uses' => 'HomeController@updateProfile','as' => 'profile-update']);
 Route::any('/load-views',['uses' => 'PaymentController@getView','as' => 'getview']);
 Route::post('/payment-details', ['uses' => 'PaymentController@postPaymentDetails', 'as' => 'payment-details']);
+Route::post('/delete', ['uses' => 'PaymentController@DeleteAccount', 'as' => 'delete-account' ]);
