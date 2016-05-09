@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', ['uses' => 'HomeController@index', 'as' => 'index']);
 Route::post('/additems', 'HomeController@addItems');
 Route::get('client/invoice/{id}','ClientController@invoice');
 Route::post('/invoice-details' , ['uses' => 'HomeController@Invoice','as' => 'create-invoice']);
@@ -44,3 +44,4 @@ Route::any('/aurthopaymen','PaymentController@AuthorizedPayment');
 Route::get('/profile',['uses' => 'HomeController@getProfile','as' => 'profile']);
 Route::post('/profilr_update',['uses' => 'HomeController@updateProfile','as' => 'profile-update']);
 Route::any('/load-views',['uses' => 'PaymentController@getView','as' => 'getview']);
+Route::post('/payment-details', ['uses' => 'PaymentController@postPaymentDetails', 'as' => 'payment-details']);

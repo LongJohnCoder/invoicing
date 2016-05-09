@@ -12,6 +12,9 @@ use DB;
 use Mail;
 use Hash;
 use Stripe;
+use App\Model\AdminPaymentMap;
+use App\Model\PaymentKeys;
+use App\Model\PaymentTypes;
 
 class PaymentController extends Controller
 {
@@ -113,6 +116,43 @@ $invouce_id=base64_decode(Request::input('inv'));
         else
         {
             return view('home.paymentviewauthorize');
+        }
+    }
+    public function postPaymentDetails()
+    {
+        $admin =Session::get('admin_id');
+        if (Request::input('stripe') == 1) {
+            $payment_keys = new PaymentKeys();
+            $payment_keys->admin_id = $admin->id;
+            $payment_keys->payment_id = 1;
+            $payment_keys->key_first = Request::input('public_key');
+            $payment_keys->key_second = Request::input('private_key');
+            if ($payment_keys->save()) {
+                $admin_payment_map = new AdminPaymentMap();
+                $admin_payment_map->admin_id = $admin->id;
+                $admin_payment_map->payment_type = 1;
+                $admin_payment_map->gateway_status =1;
+                $admin_payment_map->save();
+                Session::put('conf_success', 'changes Saved');
+                return redirect()->route('index');
+            }
+        }
+        else
+        {
+            $payment_keys =new PaymentKeys();
+            $payment_keys->admin_id = $admin->id;
+            $payment_keys->payment_id = 2;
+            $payment_keys->key_first = Request::input('login_id');
+            $payment_keys->key_second = Request::input('t_key');
+            if ($payment_keys->save()) {
+                $admin_payment_map = new AdminPaymentMap();
+                $admin_payment_map->admin_id = $admin->id;
+                $admin_payment_map->payment_type = 2;
+                $admin_payment_map->gateway_status =1;
+                $admin_payment_map->save();
+                Session::put('conf_success', 'changes Saved');
+                return redirect()->route('index');
+            }
         }
     }
 }

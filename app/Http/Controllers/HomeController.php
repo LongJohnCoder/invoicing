@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use Image\Image\ImageInterface;
 use Imagine\Image\Box;
+use App\Model\AdminPaymentMap;
+use App\Model\PaymentKeys;
+use App\Model\PaymentTypes;
+
 class HomeController extends Controller
 {
-    //
   public function index(){
     if (Auth::check()) {
-      return view('home.index',array('title'=>'Invoice System || Create Invoice'));
+      $admin_id = Session::get('admin_id.id');
+      $payment_ac_details = AdminPaymentMap::where('admin_id', '=', $admin_id)->with('PaymentKeys')->first();
+      //dd($payment_ac_details->payment_type);
+      return view('home.index',array('title'=>'Invoice System || Create Invoice'), compact('payment_ac_details'));
       }
       else
       {

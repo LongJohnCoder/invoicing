@@ -7,7 +7,10 @@
           <h1>
             Create Invoice
           </h1>
-          
+          @if(Session::has('conf_success'))
+            <div class="alert alert-success" align="center"><strong>Success!</strong> {{ Session::get('conf_success') }}</div>
+          @endif
+          {{ Session::forget('conf_success') }}
         </section>
         <form action="{{ route('create-invoice') }}" method="POST">
         <!-- Main content -->
@@ -19,7 +22,7 @@
                       <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" data-toggle="tab">Create Invoice</a></li>
                         <li><a href="#tab_2" data-toggle="tab">Select Payment Account</a></li>
-                        <li><a href="#tab_3" data-toggle="tab">Tab 3</a></li>
+                        <li><a href="#tab_3" data-toggle="tab">Account Details</a></li>
                       </ul>
                       <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
@@ -141,7 +144,19 @@
                           <label for="authorize">Authorize.net</label>
                         </div><!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_3">
-                          Demo Will br used in future or will be deleted
+                        @if($payment_ac_details)
+                          <label>Account Name: 
+                            @if($payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1)
+                            stripe
+                            @else
+                              Authorize.net
+                            @endif
+                          </label><br>
+                          <label>Key One: {{$payment_ac_details->PaymentKeys->key_first}} </label><br>
+                          <label>Key Two: {{$payment_ac_details->PaymentKeys->key_second}}</label>
+                        @else
+                        <label>No records found please select a payment option</label>
+                        @endif
                         </div><!-- /.tab-pane -->
                       </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
