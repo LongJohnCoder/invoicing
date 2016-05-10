@@ -57,7 +57,7 @@ class PaymentController extends Controller
     }
     public function AuthorizedPayment(){
     	//dd(Request::input("cardexpdate"));
-$invouce_id=base64_decode(Request::input('inv'));
+        $invouce_id=base64_decode(Request::input('inv'));
     	$post_url = "https://test.authorize.net/gateway/transact.dll";
     	//$post_url = "https://secure.authorize.net/gateway/transact.dll";
 

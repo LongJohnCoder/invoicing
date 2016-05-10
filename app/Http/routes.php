@@ -26,7 +26,7 @@ Route::get('/print/{id}','ClientController@invoicePrint');
 |All the routes related to admin authentication.
 |
 */
-Route::get('/admin',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
+Route::get('/',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
 
 
 Route::any('/ajax/getweekgraph/', 'AjaxController@getWeekGraph');
