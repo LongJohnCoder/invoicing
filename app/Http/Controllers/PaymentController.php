@@ -56,6 +56,8 @@ class PaymentController extends Controller
             dd($post_response);
     }
     public function AuthorizedPayment(){
+        $admin_id = Session::get('admin_id.id');
+        $keys = PaymentKeys::where('admin_id', '=' , $admin_id)->first();
     	//dd(Request::input("cardexpdate"));
         $invouce_id=base64_decode(Request::input('inv'));
     	$post_url = "https://test.authorize.net/gateway/transact.dll";
@@ -64,8 +66,8 @@ class PaymentController extends Controller
             $post_values = array(
             
             // the API Login ID and Transaction Key must be replaced with valid values
-            "x_login"           => "3CGw9R6nR", //6Z7S5dmfD
-            "x_tran_key"        => "6g7N2436BY7njHsJ",//24M24CgbjgV25cAY
+            "x_login"           => $keys->key_first, //6Z7S5dmfD
+            "x_tran_key"        => $keys->key_second,//24M24CgbjgV25cAY
             "x_version"         => "3.1",
             "x_delim_data"      => "TRUE",
             "x_delim_char"      => "|",
