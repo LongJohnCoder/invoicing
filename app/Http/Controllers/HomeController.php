@@ -106,7 +106,6 @@ class HomeController extends Controller
       ->where('admin_id', $admin_id)
       ->with('invoice_items', 'user_details')
       ->get();
-      //dd($user_details);
       return view('home.invoiceDetails',array('title'=>'Invoice System || Create Invoice'), compact('user_details'));
   }
   public function Dashboard(){

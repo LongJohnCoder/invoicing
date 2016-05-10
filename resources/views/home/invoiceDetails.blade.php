@@ -27,6 +27,7 @@
                       <th>Created At</th>
                       <th>Payment Status</th>
                       <th>Payment Date</th>
+                      <th>Total Price</th>
                       <th>Link</th>
                       <th>Details</th>
                     </tr>
@@ -54,6 +55,15 @@
                             @else
                               {{ date(" F j,Y ", strtotime($user->updated_at)) }}
                             @endif
+                            </td>
+                            <td>
+                            <div style="display: none;">
+                              {{ $total_price = ''}}
+                              @foreach($user->invoice_items as $items)
+                                {{ $total_price += $items->price_in_tax }}
+                              @endforeach
+                            </div>
+                            {{number_format($total_price, 2)}}
                             </td>
                             <td>
                               <a href="{{url('/')}}/invoice-created/{{base64_encode($user->invoice_id)}}"><i class="fa fa-fw fa-link"></i></a>
