@@ -24,4 +24,8 @@ class Invoice extends Model
     {
         return $this->belongsTo('App\Model\AdminDetail', 'admin_id');
     }
+    public function admin_payment_maps()
+    {
+        return $this->belongsTo('App\Model\AdminPaymentMap', 'admin_id', 'admin_id');
+    }
 }

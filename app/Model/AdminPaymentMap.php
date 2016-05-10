@@ -10,4 +10,8 @@ class AdminPaymentMap extends Model
     {
     	return $this->hasOne('App\Model\PaymentKeys', 'admin_id', 'admin_id');
     }
+    public function invoice()
+    {
+    	return $this->hasMany('App\Model\Invoice', 'admin_id');
+    }
 }

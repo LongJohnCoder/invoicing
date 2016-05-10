@@ -27,20 +27,12 @@ Route::get('/print/{id}','ClientController@invoicePrint');
 |
 */
 Route::get('/',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
-
-
 Route::any('/ajax/getweekgraph/', 'AjaxController@getWeekGraph');
-
 Route::post('/signin',['uses' => 'AdminController@AdminLogin','as'=>'admin-dashboard']);
-
 Route::any('/dashboard', ['uses' =>'HomeController@Dashboard','middleware' => 'auth','as'=>'dashboard']);
-
 Route::get('/admin/logout', ['uses' => 'AdminController@AdminLogout','as' => 'admin-logout']);
-
-
 Route::any('/checkauthorise','PaymentController@checkauthor');
 Route::any('/aurthopaymen','PaymentController@AuthorizedPayment');
-
 Route::get('/profile',['uses' => 'HomeController@getProfile','as' => 'profile']);
 Route::post('/profilr_update',['uses' => 'HomeController@updateProfile','as' => 'profile-update']);
 Route::any('/load-views',['uses' => 'PaymentController@getView','as' => 'getview']);
