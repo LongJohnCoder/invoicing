@@ -1,6 +1,8 @@
 @extends('layout/client_template')
 @section('content')
-
+@if($Invoice == null)
+  <h1 align="center">Error(404). Oops! The Page You Have Requested Not found !</h1>
+@else
   <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper">
 
@@ -237,10 +239,9 @@
       
     </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.4 -->
-    
+    <!-- jQuery 2.1.4 -->  
   </body>
-<style>
+  <style>
       .example-modal .modal {
         position: relative;
         top: auto;
@@ -254,6 +255,7 @@
         background: transparent !important;
       }
     </style>
+@endif
 @stop
 
             
