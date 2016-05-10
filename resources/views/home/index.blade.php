@@ -176,9 +176,9 @@
                               Sorry! Some Error occured
                             @endif
                           </label><br>
-                          <label>{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ? 'Public Key' : 'Login ID'}}: <p id="key_one">{{$payment_ac_details->PaymentKeys->key_first}}</p> </label><br>
+                          <label>{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ? 'Private Key' : 'Login ID'}}: <p id="key_one">{{$payment_ac_details->PaymentKeys->key_first}}</p> </label><br>
                           <label>{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ?
-                          'Private Key' : 'Transaction key'}} <p id="key_two">{{$payment_ac_details->PaymentKeys->key_second}}</p></label>
+                          'Secret Key' : 'Transaction key'}} <p id="key_two">{{$payment_ac_details->PaymentKeys->key_second}}</p></label>
                         @else
                         <label class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No records found please select a payment option! </label>
                         @endif

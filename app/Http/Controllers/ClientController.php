@@ -17,6 +17,7 @@ use DB;
 use Mail;
 use Hash;
 use Stripe;
+use App\Model\PaymentKeys;
 class ClientController extends Controller
 {
     //
@@ -26,11 +27,13 @@ class ClientController extends Controller
     	return view('client.invoice',compact('Invoice'),array('title'=>'Invoice System || Invoice'));
     }
     public function payment(){
+        $admin_id = Session::get('admin_id.id');
+        $keys = PaymentKeys::where('admin_id', '=' , $admin_id)->first();
     	// echo gettype(Request::input('tot'));
     	$invouce_id=base64_decode(Request::input('inv'));
     	$tottal_value=floatval(Request::input('tot'));
     	
-    	$stripe = Stripe::make('sk_test_hJDVAuZdTXlVbyBFY1U5TSSh');
+    	$stripe = Stripe::make($keys->key_second);
     	$charge = $stripe->charges()->create([
 										'source' => Request::input('token.id'),
 										'currency' => 'USD',
