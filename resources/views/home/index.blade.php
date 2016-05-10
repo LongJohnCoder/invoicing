@@ -26,7 +26,7 @@
             <div class="row">
               <div class="col-md-6 tab-section">
                     <!-- Custom Tabs -->
-                    <div class="nav-tabs-custom">
+                    <div class="nav-tabs-custom col-xs-12">
                       <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" data-toggle="tab">Create Invoice</a></li>
                         <li><a href="#tab_2" data-toggle="tab">Select Payment Account</a></li>
@@ -34,8 +34,6 @@
                       </ul>
                       <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
-                          
-                        
                           <!-- right column -->
                           <div class="col-md-12">
                             <!-- Horizontal Form -->
@@ -145,17 +143,16 @@
                             </div>
                           </div><!--/.col (right) -->
                           </div><!-- /.tab-pane -->
-
                         <div class="tab-pane" id="tab_2">
-                        @if($payment_ac_details == null)
-                          <label><strong>Select Any of the Payment Option which You wana recieve ?  </strong></label><br>
-                          <input type="radio" value="Stripe" id="stripe" />
-                          <label for="stripe">Stripe</label><br>
-                          <input type="radio" value="Authorize.net" id="authorize" />
-                          <label for="authorize">Authorize.net</label>
-                        @else
-                          <label class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You Have Already choose your payment account to change delete that account and save a new one ! </label>
-                        @endif
+                            @if($payment_ac_details == null)
+                              <label><strong>Select Any of the Payment Option which You wana recieve ?  </strong></label><br>
+                              <input type="radio" value="Stripe" id="stripe" />
+                              <label for="stripe">Stripe</label><br>
+                              <input type="radio" value="Authorize.net" id="authorize" />
+                              <label for="authorize">Authorize.net</label>
+                            @else
+                              <label class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You Have Already choose your payment account to change delete that account and save a new one ! </label>
+                            @endif
                         </div><!-- /.tab-pane -->
 
                         <div class="tab-pane" id="tab_3">
@@ -186,7 +183,7 @@
                         </div><!-- /.tab-pane -->
                       </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
-                  </div><!-- /.col -->
+              </div><!-- /.col -->
             </div>   <!-- /.row -->
           </section><!-- /.content -->
         </form>
