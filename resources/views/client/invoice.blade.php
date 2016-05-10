@@ -1,5 +1,4 @@
-
- @extends('layout/client_template')
+@extends('layout/client_template')
 @section('content')
 
   <body class="hold-transition skin-blue layout-top-nav">
@@ -20,8 +19,10 @@
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
-              @if(Session::has('image'))
-                <img src="{{url('/')}}/public/admin_new/{{Session::get('image')}}" class="" alt="User Image">
+              @if($Invoice->admin_details != null)
+                <img src="{{url('/')}}/public/admin_new/{{ $Invoice->admin_details->image }}" class="" alt="User Image">
+              @else
+                <img src="{{url('/')}}/public/imgx/logo.png" class="" alt="User Image">
               @endif
                 <small class="pull-right">Date: {{date("M d Y",strtotime($Invoice->created_at))}}</small>
               </h2>
@@ -32,10 +33,14 @@
             <div class="col-sm-4 invoice-col">
               From
               <address>
-                <strong>{{$Invoice->admin_details->name}}</strong><br>
-                {{$Invoice->admin_details->detail}}
+                @if($Invoice->admin_details!= null)
+                  <strong>{{$Invoice->admin_details->name}}</strong><br>
+                  {{$Invoice->admin_details->detail}}
+                @else
+                  <div class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Please enter your details in profile section.</div>
+                @endif
               </address>
-            </div><!-- /.col -->
+              </div><!-- /.col -->
             <div class="col-sm-4 invoice-col">
               To
               <address>
@@ -129,20 +134,19 @@
               </div>
             </div><!-- /.col -->
           </div><!-- /.row -->
-
           <!-- this row will not appear when printing -->
           <div class="row no-print">
             <div class="col-xs-12">
             @if($Invoice->payment_status!=0)
               <a href="{{url('/').'/print/'.base64_encode($Invoice->invoice_id.'DONE')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-             @elseif($Invoice->admin_payment_maps->payment_type == 1 && $Invoice->admin_payment_maps->gateway_status == 1) 
-              <button id="customButton" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> 
-              Make Payment</button>
-
-              @elseif($Invoice->admin_payment_maps->payment_type == 2 && $Invoice->admin_payment_maps->gateway_status == 1) 
-              <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">
-              <i class="fa fa-credit-card"></i> 
-              Make Payment
+            @else
+               @if($Invoice->admin_payment_maps != null) 
+                @if($Invoice->admin_payment_maps->payment_type == 1 && $Invoice->admin_payment_maps->gateway_status == 1)
+                  <button id="customButton" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> 
+                  Make Payment</button>
+                @endif
+                @if($Invoice->admin_payment_maps->payment_type == 2 && $Invoice->admin_payment_maps->gateway_status == 1)
+                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-credit-card"></i> Make Payment
               </button>
               <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog">
@@ -217,11 +221,11 @@
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
               </div>
-
-              @else
-              <div class="alert alert-danger" style="float: right;">Fatal Error! contact developer of this site</div>
-
-              @endif
+                @endif
+                @else
+                  <div class="alert alert-warning" style="float: right;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Create a payment account for recieving payment</div>
+                @endif
+            @endif
 
               
             </div>
@@ -251,3 +255,5 @@
       }
     </style>
 @stop
+
+            
