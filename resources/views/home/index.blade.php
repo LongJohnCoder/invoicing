@@ -24,7 +24,7 @@
         <!-- Main content -->
           <section class="content">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 tab-section">
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                       <ul class="nav nav-tabs">
@@ -88,22 +88,22 @@
                               <div class="box-footer">
                                   <div class="row">
                                   <div class="col-xs-3">
-              						<div class="input-group">
-              							<span class="input-group-addon">No</span>
-              							<input class="form-control" type="text" placeholder="No Of Items" id="no_of_item" readonly>
-              						</div>
+                          <div class="input-group">
+                            <span class="input-group-addon">No</span>
+                            <input class="form-control" type="text" placeholder="No Of Items" id="no_of_item" readonly>
+                          </div>
                                   </div>
                                   <div class="col-xs-4">
                                     <div class="input-group">
-              							<span class="input-group-addon">Qty</span>
-              							<input class="form-control" type="text" placeholder="Total Quantity" id="qty" readonly>
-              						</div>
+                            <span class="input-group-addon">Qty</span>
+                            <input class="form-control" type="text" placeholder="Total Quantity" id="qty" readonly>
+                          </div>
                                   </div>
                                   <div class="col-xs-5">
                                     <div class="input-group">
-              							<span class="input-group-addon">$</span>
-              							<input class="form-control" type="text" placeholder="Total Price"id="total_price" readonly>
-              						</div>
+                            <span class="input-group-addon">$</span>
+                            <input class="form-control" type="text" placeholder="Total Price"id="total_price" readonly>
+                          </div>
                                   </div>
                                 </div>
                                 </div>
@@ -112,25 +112,25 @@
                                 </div>
                             </div><!-- /.box -->
                             <!-- general form elements disabled -->
-              	          <div class="box box-warning">
-              	            <div class="box-header with-border">
-              	              <h3 class="box-title">Others</h3>
-              	            </div><!-- /.box-header -->
-              	            <div class="box-body">
-              	              <form role="form">
-              	                <!-- text input -->
-              	                <div class="form-group">
-              	                  <label>Tax Rate (in %)</label>
-              	                  <input type="text" class="form-control" placeholder="Enter ..." name="tax_rate" required>
-              	                </div>
-              	                <div class="form-group">
-              	                  <label>Memo</label>
-              	                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="memo" required></textarea>
-              	                </div>
-              	              </form>
-              	            </div><!-- /.box-body -->
-              	          </div><!-- /.box -->
-              	          <div class="box box-success">
+                          <div class="box box-warning">
+                            <div class="box-header with-border">
+                              <h3 class="box-title">Others</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                              <form role="form">
+                                <!-- text input -->
+                                <div class="form-group">
+                                  <label>Tax Rate (in %)</label>
+                                  <input type="text" class="form-control" placeholder="Enter ..." name="tax_rate" required>
+                                </div>
+                                <div class="form-group">
+                                  <label>Memo</label>
+                                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="memo" required></textarea>
+                                </div>
+                              </form>
+                            </div><!-- /.box-body -->
+                          </div><!-- /.box -->
+                          <div class="box box-success">
                               
                               <div class="box-body pad table-responsive">
                                 
