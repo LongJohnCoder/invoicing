@@ -28,4 +28,8 @@ class Invoice extends Model
     {
         return $this->belongsTo('App\Model\AdminPaymentMap', 'admin_id', 'admin_id');
     }
+    public function payment_keys()
+    {
+        return $this->hasOne('App\Model\PaymentKeys', 'admin_id', 'admin_id');
+    }
 }

@@ -13,7 +13,7 @@
 <button type="button" onClick="window.location.reload()" class="btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button><br>
 <form action="{{ route('payment-details') }}" method="POST" id="stripe_form">
   <div class="form-group">
-    <label for="public_key">Private Key of Stripe</label>
+    <label for="public_key">Publishable Key of Stripe</label>
     <input type="text" class="form-control" id="public_key" placeholder="Enter Public Key" required name="public_key">
   </div>
   <div class="form-group">

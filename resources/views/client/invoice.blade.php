@@ -5,8 +5,6 @@
 @else
   <body class="hold-transition skin-blue layout-top-nav">
     <div class="wrapper">
-
-      
       <!-- Full Width Column -->
       <div class="content-wrapper">
         <div class="container">
@@ -39,7 +37,8 @@
                   <strong>{{$Invoice->admin_details->name}}</strong><br>
                   {{$Invoice->admin_details->detail}}
                 @else
-                  <div class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Please enter your details in profile section.</div>
+                  <strong>Tier5</strong><br>
+                  work@tier5.us
                 @endif
               </address>
               </div><!-- /.col -->

@@ -23,8 +23,8 @@ class ClientController extends Controller
     //
     public function invoice($id=null){
     	$id=base64_decode($id);
-    	$Invoice=Invoice::where('invoice_id', $id)->with('invoice_items','user_details', 'admin_payment_maps', 'admin_details')->first();
-        //dd($Invoice);
+    	$Invoice=Invoice::where('invoice_id', $id)->with('invoice_items','user_details', 'admin_payment_maps', 'admin_details', 'payment_keys')->first();
+        //dd($Invoice->admin_details->name);
     	return view('client.invoice',compact('Invoice'),array('title'=>'Invoice System || Invoice'));
     }
     public function payment(){
@@ -36,10 +36,10 @@ class ClientController extends Controller
     	
     	$stripe = Stripe::make($keys->key_second);
     	$charge = $stripe->charges()->create([
-										'source' => Request::input('token.id'),
-										'currency' => 'USD',
-										'amount'   => $tottal_value,
-										]);
+		'source' => Request::input('token.id'),
+		'currency' => 'USD',
+		'amount'   => $tottal_value,
+		]);
     	if($charge['status']=="succeeded"){
     		
 			$Invoice=Invoice::where('invoice_id', $invouce_id)->first();
