@@ -111,7 +111,6 @@
           data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
           type :"post",
           success: function( data ) {
-          $('#invoice_body').hide();
           $('#loader').show();
           var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
           $(location).attr('href',urlnew);

@@ -3,10 +3,6 @@
 @if($Invoice == null)
   <h1 align="center">Error(404). Oops! The Page You Have Requested Not found !</h1>
 @else
-  <div align="center" style="background: transparent; display: none;" id="loader">
-    <div align="center">please wait...</div>
-    <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
-</div>
   <body class="hold-transition skin-blue layout-top-nav" id="invoice_body">
     <div class="wrapper">
       <!-- Full Width Column -->
@@ -16,7 +12,6 @@
           <section class="content-header">
             
           </section>
-
           <!-- Main content -->
           <section class="invoice">
           <!-- title row -->
@@ -74,6 +69,10 @@
                     <th>Tax(%)</th>
                     <th>Unit Price #</th>
                     <th>Subtotal</th>
+                    <div align="center" style="background: transparent; display: none;" id="loader">
+                      <div align="center">please wait...</div>
+                      <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
+                    </div>
                   </tr>
                 </thead>
                 <tbody>
