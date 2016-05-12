@@ -162,9 +162,13 @@
                             <input type="hidden" name="_token" value="{{ Session::token() }}"></input>
                           </form>
                           <button type="submit" id="update" name="update" class="btn btn-warning" style="float:right;">Edit Keys</button>
+                          <div align="center" style="background: transparent; display: none;" id="loader">
+                            <div align="center">please wait...</div>
+                            <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
+                          </div>
                         @endif
                         @if($payment_ac_details)
-                          <label>Account Name: 
+                          <label id="ac_name">Account Name: 
                             @if($payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1)
                             stripe
                             @elseif ($payment_ac_details->payment_type == 2 && $payment_ac_details->gateway_status == 1)
@@ -173,8 +177,8 @@
                               Sorry! Some Error occured
                             @endif
                           </label><br>
-                          <label>{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ? 'Private Key' : 'Login ID'}}: <p id="key_one">{{$payment_ac_details->PaymentKeys->key_first}}</p> </label><br>
-                          <label>{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ?
+                          <label id="key_1">{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ? 'Private Key' : 'Login ID'}}: <p id="key_one">{{$payment_ac_details->PaymentKeys->key_first}}</p> </label><br>
+                          <label id="key_2">{{ $payment_ac_details->payment_type == 1 && $payment_ac_details->gateway_status == 1 ?
                           'Secret Key' : 'Transaction key'}} <p id="key_two">{{$payment_ac_details->PaymentKeys->key_second}}</p></label>
                         @else
                         <label class="alert alert-warning col-xs-12" style="text-align: center;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No records found please select a payment option! </label>

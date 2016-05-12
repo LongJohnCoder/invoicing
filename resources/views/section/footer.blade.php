@@ -125,6 +125,10 @@
                             type:"POST",
                             success: function(data) {
                                 if(data == 1) {
+                                    $('#ac_name').hide();
+                                    $('#key_1').hide();
+                                    $('#key_2').hide();
+                                    $('#loader').show();
                                     location.reload();
                                 }
                                 else
