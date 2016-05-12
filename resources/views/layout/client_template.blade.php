@@ -106,6 +106,7 @@
         console.log(token);
         var tot=parseFloat($("#tot").val());
         var inv=$("#inv").val();
+        $('#loader').show();
         $.ajax({
           url: "<?php echo url('/');?>/create_payment",
           data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
