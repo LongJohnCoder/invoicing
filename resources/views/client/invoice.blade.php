@@ -3,7 +3,11 @@
 @if($Invoice == null)
   <h1 align="center">Error(404). Oops! The Page You Have Requested Not found !</h1>
 @else
-  <body class="hold-transition skin-blue layout-top-nav">
+  <div align="center" style="background: transparent; display: none;" id="loader">
+    <div align="center">please wait...</div>
+    <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
+</div>
+  <body class="hold-transition skin-blue layout-top-nav" id="invoice_body">
     <div class="wrapper">
       <!-- Full Width Column -->
       <div class="content-wrapper">
@@ -124,7 +128,6 @@
                     <th>Tax(%)</th>
                     <td>${{ number_format(($total - $subtotal),2) }}</td>
                   </tr>
-                  
                   <tr>
                     <th>Total:</th>
                     <td>${{ number_format($total, 2) }}
