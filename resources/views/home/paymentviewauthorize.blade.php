@@ -10,7 +10,15 @@
   float: right;
 }
 </style>
-<button type="button" onClick="window.location.reload()" class="btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button><br>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#back_btn').click(function(){
+      $('#loader').show();
+      location.reload();
+    });
+  });
+</script>
+<button type="button" id="back_btn" class="btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button><br>
 <form action="{{ route('payment-details') }}" method="POST" id="authorize_form">
   <div class="form-group">
     <label for="login_id">Login ID</label>
@@ -26,3 +34,7 @@
     <input type="hidden" name="_token" value="{{ Session::token() }}">
   </div>
 </form>
+<div align="center" style="background: transparent; display: none;" id="loader">
+  <div align="center">please wait...</div>
+  <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
+</div>

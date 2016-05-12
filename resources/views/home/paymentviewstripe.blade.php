@@ -10,7 +10,15 @@
   float: right;
 }
 </style>
-<button type="button" onClick="window.location.reload()" class="btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button><br>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#back_btn').click(function(){
+      $('#myModal').modal('show');
+      location.reload();
+    });
+  });
+</script>
+<button type="button" id="back_btn" class="btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button><br>
 <form action="{{ route('payment-details') }}" method="POST" id="stripe_form">
   <div class="form-group">
     <label for="public_key">Publishable Key of Stripe</label>
@@ -26,3 +34,14 @@
     <input type="hidden" name="_token" value="{{ Session::token() }}">
   </div>
 </form>
+<!-- Modal for loader -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div align="center">please wait...</div>
+        <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
