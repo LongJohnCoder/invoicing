@@ -13,7 +13,8 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('#back_btn').click(function(){
-      $('#myModal').modal('show');
+      $('#stripe_form').hide();
+      $('#loader').show();
       location.reload();
     });
   });
@@ -34,14 +35,7 @@
     <input type="hidden" name="_token" value="{{ Session::token() }}">
   </div>
 </form>
-<!-- Modal for loader -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div align="center">please wait...</div>
-        <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
-      </div>
-    </div>
-  </div>
+<div align="center" style="background: transparent; display: none;" id="loader">
+  <div align="center">please wait...</div>
+  <div align="center"><img src="{{url('/')}}/public/imgx/loader.gif" id="loader"></div>
 </div>

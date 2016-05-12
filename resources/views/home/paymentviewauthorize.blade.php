@@ -13,6 +13,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('#back_btn').click(function(){
+      $('#authorize_form').hide();
       $('#loader').show();
       location.reload();
     });
