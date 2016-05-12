@@ -96,45 +96,48 @@
  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
  <script src="https://checkout.stripe.com/checkout.js"></script>
 
- @if($Invoice->payment_keys)
-  <script>
-    var handler = StripeCheckout.configure({
-      key: '{{ $Invoice->payment_keys->key_first }}',
-      image: '{{url("/")}}'+'/public/admin_new/{{ $Invoice->admin_details == null ? "112203937.png": $Invoice->admin_details->image }}',
-      locale: 'auto',
-      token: function(token) {
-        console.log(token);
-        var tot=parseFloat($("#tot").val());
-        var inv=$("#inv").val();
-        $('#loader').show();
-        $.ajax({
-          url: "<?php echo url('/');?>/create_payment",
-          data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
-          type :"post",
-          success: function( data ) {
+ @if($Invoice)
+  @if($Invoice->payment_keys)
+    <script>
+      var handler = StripeCheckout.configure({
+        key: '{{ $Invoice->payment_keys->key_first }}',
+        image: '{{url("/")}}'+'/public/admin_new/{{ $Invoice->admin_details == null ? "112203937.png": $Invoice->admin_details->image }}',
+        locale: 'auto',
+        token: function(token) {
+          console.log(token);
+          var tot=parseFloat($("#tot").val());
+          var inv=$("#inv").val();
           $('#loader').show();
-          var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
-          $(location).attr('href',urlnew);
-          }
-        });
-      }
-    });
-    $('#customButton').on('click', function(e) {
-      var tot=parseFloat($("#tot").val())*100;
-      handler.open({
-        name: '{{ $Invoice->admin_details == null ? "Tier5" : $Invoice->admin_details->name }}',
-        description: 'Invoice',
-        amount: tot,
-        currency: 'USD'
+          $.ajax({
+            url: "<?php echo url('/');?>/create_payment",
+            data: {token:token,tot:tot,inv:inv,_token: '{!! csrf_token() !!}'},
+            type :"post",
+            success: function( data ) {
+            $('#loader').show();
+            var urlnew="<?php echo url('/');?>/client/invoice/"+inv;
+            $(location).attr('href',urlnew);
+            }
+          });
+        }
       });
-      e.preventDefault();
-    });
+      $('#customButton').on('click', function(e) {
+        var tot=parseFloat($("#tot").val())*100;
+        handler.open({
+          name: '{{ $Invoice->admin_details == null ? "Tier5" : $Invoice->admin_details->name }}',
+          description: 'Invoice',
+          amount: tot,
+          currency: 'USD'
+        });
+        e.preventDefault();
+      });
 
-    // Close Checkout on page navigation:
-    $(window).on('popstate', function() {
-      handler.close();
-    });
-  </script>
+      // Close Checkout on page navigation:
+      $(window).on('popstate', function() {
+        handler.close();
+      });
+    </script>
+  @else
+  @endif
  @else
  @endif
 </html>
