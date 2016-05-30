@@ -26,7 +26,7 @@ Route::get('/print/{id}','ClientController@invoicePrint');
 |All the routes related to admin authentication.
 |
 */
-Route::get('/',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
+Route::get('/login',['uses' => 'AdminController@getIndex','as' => 'admin-login']);
 Route::any('/ajax/getweekgraph/', 'AjaxController@getWeekGraph');
 Route::post('/signin',['uses' => 'AdminController@AdminLogin','as'=>'admin-dashboard']);
 Route::any('/dashboard', ['uses' =>'HomeController@Dashboard','middleware' => 'auth','as'=>'dashboard']);
@@ -39,3 +39,7 @@ Route::any('/load-views',['uses' => 'PaymentController@getView','as' => 'getview
 Route::post('/payment-details', ['uses' => 'PaymentController@postPaymentDetails', 'as' => 'payment-details']);
 Route::post('/delete', ['uses' => 'PaymentController@DeleteAccount', 'as' => 'delete-account' ]);
 Route::post('/update-keys', ['uses' => 'PaymentController@UpdateKeys', 'as' => 'update-keys']);
+
+
+
+Route::get('/',['uses' => 'HomeController@getIndex', 'as' => 'front-page']);
