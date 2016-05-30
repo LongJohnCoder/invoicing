@@ -11,8 +11,9 @@
 							<li class="active">
 								<a href="{{ route('front-page') }}">Home</a>
 							</li>
-							<li><a href="#">About</a></li>
+							<li><a href="#" id="nav-abt">About</a></li>
 							<li><a href="https://tier5.us#contact" target="_blank">Contact</a></li>
+							<li><a href="{{ route('admin-login') }}">Sign in</a></li>
 						</ul>
 					</nav>
 				<!-- </div> -->

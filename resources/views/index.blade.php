@@ -10,7 +10,7 @@
 						<div class="fh5co-hero-intro">
 							<h1 class="to-animate hero-animate-1">A Custom Invoice Generator Platform For Your Clients. Simple - Smooth - Dynamic.</h1>
 							<h2 class="to-animate hero-animate-2">Created by <a href="https://www.tier5.us/" target="_blank">Tier5 LLC</a></h2>
-							<p class="to-animate hero-animate-3"><a href="#" class="btn btn-outline btn-md">Sign Up Now</a></p>
+							<p class="to-animate hero-animate-3"><a href="#" class="btn btn-outline btn-md" id="first_signUp">Sign Up Now</a></p>
 						</div>
 					</div>
 				</div>
@@ -18,7 +18,6 @@
 		</div>
 
 		<div id="fh5co-main">
-			
 			<div class="fh5co-cards">
 				<div class="container-fluid">
 					<div class="row animate-box">
@@ -26,70 +25,73 @@
 					</div>
 					<div class="container">
 						<div class='package'>
-    						<div class='name'>Limited</div>
-						    <div class='price'>€2</div>
-						    <div class='trial'>Available for a month</div>
+    						<div class='name'>Basic</div>
+						    <div class='price'>$0</div>
+						    <div class='trial'>Only 35 invoices</div>
     						<hr>
 						    <ul>
 						      <li>
-						        <strong>8</strong>
-						        team members
+						        <strong>35</strong>
+						        invoices
 						      </li>
 						      <li>
-						        <strong>6</strong>
-						        team playlists
+						        <strong>No</strong>
+						        Support
 						      </li>
 						      <li>
-						        <strong>Unlimited</strong>
-						        public playlists
+						        <strong>Default</strong>
+						        payment gateway
 						      </li>
 						    </ul>
+						    <a href="{{ route('register') }}">
+						    	<button type="submit" class="btn btn-default">Sign Up</button>
+						    </a>
   						</div>
   						<div class='package brilliant'>
-						    <div class='name'>Brilliant</div>
-						    <div class='price'>€5</div>
-						    <div class='trial'>Free 30 day trial</div>
+						    <div class='name'>Professional</div>
+						    <div class='price'>$10</div>
+						    <div class='trial'>unlimited invoices</div>
 						    <hr>
 						    <ul>
 						      <li>
 						        <strong>Unlimited</strong>
-						        team members
+						        invoices
 						      </li>
 						      <li>
-						        <strong>Unlimited</strong>
-						        team playlists
+						        <strong>business hours</strong>
+						        support
 						      </li>
 						      <li>
 						        <strong>Unlimited</strong>
 						        public playlists
 						      </li>
 						      <li>
-						        Team analytics
+						        Invoice analytics
 						      </li>
 						      <li>
-						        Send files
+						        Default gateway(stripe)
 						      </li>
 						    </ul>
+						    <button type="submit" class="btn btn-default">Sign Up</button>
  						</div>
  						<div class='package'>
-						    <div class='name'>Basic</div>
-						    <div class='price'>€0</div>
-						    <div class='trial'>Totally free</div>
+						    <div class='name'>Gold</div>
+						    <div class='price'>$20</div>
+						    <div class='trial'>24*7 support</div>
 						    <hr>
 						    <ul>
 						      <li>
-						        <strong>5</strong>
-						        team members
+						        <strong>unlimited</strong>
+						        invoices
 						      </li>
 						      <li>
-						        <strong>3</strong>
-						        team playlists
+						        <strong>Hastle free</strong>
+						        renewals
 						      </li>
-						      <li>
-						        <strong>Unlimited</strong>
-						        public playlists
-						      </li>
+						      <li>Multiple payment gateway</li>
+						      <li>Full Analytics</li>
 						    </ul>
+						    <button type="submit" class="btn btn-default">Sign Up</button>
 						  </div>
 						</div>
 					</div>
@@ -156,21 +158,20 @@
 				
 			</div>
 			<!-- END container -->
-<!-- 
+
 			<div class="animate-box fh5co-product-2">
-				<div class="fh5co-half img" style="background-image: url({{url('/')}}/public/bootstrap/images/img_large_6.jpg);">
+				<div class="fh5co-half img" style="background-image: url({{url('/')}}/public/bootstrap/images/Client.jpg);">
 					
 				</div>
-				<div class="fh5co-half">
-					<h3>This is Symbol</h3>
-					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. </p>
-					<p><a href="#" class="btn btn-outline btn-md">Get Started</a></p>
+				<div class="fh5co-half" id="about">
+					<h3>About invoicingyou.com</h3>
+					<p>Invoicingyou platform is the open source custom invoicing platform made by <a href="https://tier5.us" target="_blank">Tier5 LLC</a> for business purposes. The different membership level is here. According to memebership level a user can get features like analytics, pi chart payment gateway selection option and much more. </p>
+					<p><a href="#" class="btn btn-outline btn-md" id="get_started">Get Started</a></p>
 				</div>
-			</div> -->
+			</div>
 
 			<div id="fh5co-testimonial">
-
-					<div class="container">
+				<div class="container">
 				<div class="row">
 					<!-- Start Slider Testimonial -->
 	            <h2 class="fh5co-uppercase-heading-sm text-center animate-box">Customer Says...</h2>

@@ -79,7 +79,7 @@ li {
   font-family: "FontAwesome";
   content: "\f00c";
 }
-li::before {
+.package li::before {
   font-family: "FontAwesome";
   content: "\f00c";
   font-size: 1.3rem;

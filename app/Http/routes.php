@@ -40,6 +40,8 @@ Route::post('/payment-details', ['uses' => 'PaymentController@postPaymentDetails
 Route::post('/delete', ['uses' => 'PaymentController@DeleteAccount', 'as' => 'delete-account' ]);
 Route::post('/update-keys', ['uses' => 'PaymentController@UpdateKeys', 'as' => 'update-keys']);
 
-
+/*register routes*/
 
 Route::get('/',['uses' => 'HomeController@getIndex', 'as' => 'front-page']);
+Route::get('/register' , ['uses' => 'HomeController@getRegister' , 'as' => 'register']);
+Route::post('/register', ['uses' => 'HomeController@postRegister', 'as' => 'postRegister']);

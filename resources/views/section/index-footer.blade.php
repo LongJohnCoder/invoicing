@@ -18,8 +18,8 @@
 							<li><a href="#">Terms &amp; Conditions</a></li>
 							<li><a href="#">Our Careers</a></li>
 							<li><a href="#">Support &amp; FAQ's</a></li>
-							<li><a href="#">Sign up</a></li>
-							<li><a href="#">Log in</a></li>
+							<li><a href="#" id="footer_signup">Sign up</a></li>
+							<li><a href="{{ route('admin-login') }}">Log in</a></li>
 						</ul>
 					</div>
 					<div class="col-md-4 col-sm-12 footer-box">
@@ -35,7 +35,7 @@
 					</div>
 					<div class="col-md-12 footer-box text-center">
 						<div class="fh5co-copyright">
-						<p>&copy; 2015 Free Valet. All Rights Reserved. <br>Designed by <a href="https://www.tier5.us/" target="_blank">Tier5 LLC</a> Images by: <a href="http://unsplash.com" target="_blank">Unsplash</a></p>
+						<p>&copy; All Rights Reserved to Tier5 LLC. <br>Designed by <a href="https://www.tier5.us/" target="_blank">Tier5 LLC</a> Images by: <a href="http://unsplash.com" target="_blank">Unsplash</a></p>
 						</div>
 					</div>
 					
@@ -67,19 +67,26 @@
 		<!-- Main JS -->
 		<script src="{{url('/')}}/public/bootstrap/js/main.js"></script>
 		<script type="text/javascript">
-			/*$(document).ready(function(){
-				//Check to see if the window is top if not then display button
-				$(window).scroll(function(){
-					if ($(this).scrollTop() > 100) {
-						$('.scrollToTop').fadeIn();
-					} else {
-						$('.scrollToTop').fadeOut();
-					}
+			$(document).ready(function(){
+				$('#get_started').click(function(){
+					$('html, body').animate({
+        				scrollTop: $("#fh5co-main").offset().top
+    				}, 2000);
 				});
-				//Click event to scroll to top
-				$('.scrollToTop').click(function(){
-					$('html, body').animate({scrollTop : 0},800);
-					return false;
+				$('#first_signUp').click(function(){
+					$('html, body').animate({
+        				scrollTop: $("#fh5co-main").offset().top
+    				}, 2000);
 				});
-			});*/
+				$('#nav-abt').click(function(){
+					$('html, body').animate({
+        				scrollTop: $("#about").offset().top
+    				}, 2000);
+				});
+				$('#footer_signup').click(function(){
+					$('html, body').animate({
+        				scrollTop: $("#fh5co-main").offset().top
+    				}, 2000);
+				});
+			});
 		</script>

@@ -221,4 +221,15 @@ class HomeController extends Controller
   public function getIndex() {
     return view('index');
   }
+  public function getRegister() {
+    return view('register');
+  }
+  public function postRegister(Request $request) {
+    $name = $request->usr_name;
+    $email = $request->usr_email;
+    $gender = $request->usr_gender;
+    $password = $request->conf_pass;
+    $membership_status = $request->select_membership;
+    dd('later');
+  }
 }
