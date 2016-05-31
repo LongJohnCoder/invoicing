@@ -168,7 +168,7 @@
 					
 				</div>
 				<div class="fh5co-half" id="about">
-					<h3>About invoicingyou.com</h3>
+					<h3>About Invoicingyou</h3>
 					<p>Invoicingyou platform is the open source custom invoicing platform made by <a href="https://tier5.us" target="_blank">Tier5 LLC</a> for business purposes. The different membership level is here. According to memebership level a user can get features like analytics, pi chart payment gateway selection option and much more. </p>
 					<p><a href="#" class="btn btn-outline btn-md" id="get_started">Get Started</a></p>
 				</div>
