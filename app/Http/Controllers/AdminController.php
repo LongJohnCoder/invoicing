@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Admin;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use App\Model\AdminDetail;
 class AdminController extends Controller
 {
 	public function getIndex()
@@ -22,7 +23,9 @@ class AdminController extends Controller
 		$password = $request->password;
 		$remember = ($request->remember) == 'on'? true : false;
 		if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
-            return redirect()->route('dashboard');
+			
+			return redirect()->route('dashboard');
+            
         }
         else
         {

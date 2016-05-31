@@ -18,8 +18,10 @@
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
-              @if($Invoice->admin_details != null)
+              @if($Invoice->admin_details->image != null)
                 <img src="{{url('/')}}/public/admin_new/{{ $Invoice->admin_details->image }}" class="" alt="User Image">
+              @elseif($Invoice->admin_details->image == null)
+                <img src="{{url('/')}}/public/imgx/logo.png" class="" alt="User Image">
               @else
                 <img src="{{url('/')}}/public/imgx/logo.png" class="" alt="User Image">
               @endif

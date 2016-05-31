@@ -12,4 +12,7 @@ class Admin extends Model implements \Illuminate\Contracts\Auth\Authenticatable
     {
     	return $this->hasMany('App\Model\Invoice', 'id');
     }
+    public function admin_details() {
+    	return $this->hasOne('App\Model\AdminDetail', 'admin_id');
+    }
 }

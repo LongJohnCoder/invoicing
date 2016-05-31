@@ -23,83 +23,308 @@ class HomeController extends Controller
       $admin_id = Session::get('admin_id.id');
       $payment_ac_details = AdminPaymentMap::where('admin_id', '=', $admin_id)->with('PaymentKeys')->first();
       //dd($payment_ac_details->payment_type);
-      return view('home.index',array('title'=>'Invoice System || Create Invoice'), compact('payment_ac_details'));
+      $admin = Admin::find($admin_id);
+      if ($admin) {
+        $admin_type = $admin->admin_type;
+        $member = AdminDetail::where('admin_id', $admin_id)->first();
+        $membership_status = $member->membership;
+        return view('home.index',array('title'=>'Invoice System || Create Invoice'), compact('payment_ac_details', 'admin_type', 'membership_status'));
+
       }
       else
       {
-        return redirect()->route('admin-login');
-      }      
+        echo "Fatal error! please contact system adminstrator";
+      }
+      
+    }
+    else
+    {
+      return redirect()->route('admin-login');
+    }      
   }
   public function addItems(Request $request) {
       $i = $request->i;
       return view('home.newitem',array('title'=>'Invoice System || Create Invoice'), compact('i'));
   }
   public function Invoice(Request $request){
-    //dd($request);
-      $name = $request->name; //user name
-      $user_id = time().substr($name,0,5); //user id
-      $email = $request->email; //user email
-      $memo = $request->memo; //user memo
-      $user = new User;
-      $user->user_id = $user_id;
-      $user->name = $name;
-      $user->email =$email;
-      $user->memo = $memo;
-      $user->save(); //stored in user table
-      $invoice_id = date('ymd').rand('000','999');
-      $user_id_invoice = $user->id; //last inserted id
-      $tax_rate = $request->tax_rate;
-      $count = $request->counter; //counter for loop
-      $price_ex_tax = '';
-      $items = '';
-      for ($i=0; $i <= $count; $i++) { 
-        if ($price_ex_tax == '') {
-          $price_ex_tax = $request->Quantity[$i] * $request->Price[$i];
-        }
-        else
-        {
-          $price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
-        }
-        $InvoiceItem = new InvoiceItem;
-        $InvoiceItem->invoice_id = $invoice_id;
-        $InvoiceItem->name = $request->Item[$i];
-        $InvoiceItem->qty =$request->Quantity[$i];
-        $InvoiceItem->price = $request->Price[$i];
-        if(isset($request->tax[$i])) {
-          $InvoiceItem->tax_status = 1;
-          $InvoiceItem->tax_rate = $tax_rate;
-          $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]+($request->Quantity[$i] * $request->Price[$i] * ($tax_rate/100)));
-        }
-        else
-        {
-          $InvoiceItem->tax_status = 0;
-          $InvoiceItem->tax_rate = 0.00;
-          $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]);
-        }
-        $InvoiceItem->save(); //stored in user table
-        
-      }
-      $invoice = new Invoice;
+    //work
       $admin_id = Session::get('admin_id.id');
-      $invoice->user_id = $user_id_invoice;
-      $invoice->invoice_id = $invoice_id;
-      $invoice->tax_rate = $tax_rate;
-      $invoice->total = $price_ex_tax;
-      $invoice->memo = $memo;
-      $invoice->admin_id = $admin_id;
-      $invoice->save();
-        $user_name = $name;
-        $user_email = $email;
-        $admin_users_email="hello@tier5.us";
-        $activateLink = url('/').'/client/invoice/'.base64_encode($invoice_id);
-        $sent = Mail::send('email.invoice_link', array('name'=>$user_name,'email'=>$user_email,'activate_link'=>$activateLink), 
-        function($message) use ($admin_users_email, $user_email,$user_name)
+      $admin_details = Admin::where('id', $admin_id)->with('admin_details')->first();
+      //dd($admin_details);
+      if ($admin_details->admin_type == 0 && $admin_details->admin_details->membership == 1) {
+        // count how many invoices made 
+        $invoice_count = Invoice::where('admin_id', $admin_id)->get()->count();
+        $invoice_count = $invoice_count+1;
+        if ($invoice_count <= 35) {
+          $name = $request->name; //user name
+          $user_id = time().substr($name,0,5); //user id
+          $email = $request->email; //user email
+          $memo = $request->memo; //user memo
+          $user = new User;
+          $user->user_id = $user_id;
+          $user->name = $name;
+          $user->email =$email;
+          $user->memo = $memo;
+          $user->save(); //stored in user table
+          $invoice_id = date('ymd').rand('000','999');
+          $user_id_invoice = $user->id; //last inserted id
+          $tax_rate = $request->tax_rate;
+          $count = $request->counter; //counter for loop
+          $price_ex_tax = '';
+          $items = '';
+          for ($i=0; $i <= $count; $i++) { 
+            if ($price_ex_tax == '') {
+              $price_ex_tax = $request->Quantity[$i] * $request->Price[$i];
+            }
+            else
+            {
+              $price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem = new InvoiceItem;
+            $InvoiceItem->invoice_id = $invoice_id;
+            $InvoiceItem->name = $request->Item[$i];
+            $InvoiceItem->qty =$request->Quantity[$i];
+            $InvoiceItem->price = $request->Price[$i];
+            if(isset($request->tax[$i])) {
+              $InvoiceItem->tax_status = 1;
+              $InvoiceItem->tax_rate = $tax_rate;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]+($request->Quantity[$i] * $request->Price[$i] * ($tax_rate/100)));
+            }
+            else
+            {
+              $InvoiceItem->tax_status = 0;
+              $InvoiceItem->tax_rate = 0.00;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem->save(); //stored in user table
+            
+          }
+          $invoice = new Invoice;
+          $admin_id = Session::get('admin_id.id');
+          $invoice->user_id = $user_id_invoice;
+          $invoice->invoice_id = $invoice_id;
+          $invoice->tax_rate = $tax_rate;
+          $invoice->total = $price_ex_tax;
+          $invoice->memo = $memo;
+          $invoice->admin_id = $admin_id;
+          $invoice->save();
+            $user_name = $name;
+            $user_email = $email;
+            $admin_users_email="hello@tier5.us";
+            $activateLink = url('/').'/client/invoice/'.base64_encode($invoice_id);
+            $sent = Mail::send('email.invoice_link', array('name'=>$user_name,'email'=>$user_email,'activate_link'=>$activateLink), 
+            function($message) use ($admin_users_email, $user_email,$user_name)
+            {
+            $message->from($admin_users_email);
+            $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
+            });
+          return redirect('/invoice-created/'.base64_encode($invoice_id));
+              
+        }
+        else
         {
-        $message->from($admin_users_email);
-        $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
-        });
-      return redirect('/invoice-created/'.base64_encode($invoice_id));
+          return redirect()->route('index')->with('upgrade',"You can't create more invoices upgrade now to create more");
+        }
+      }
+      
+      else if ($admin_details->admin_type == 0 && $admin_details->admin_details->membership == 2) {
+        $name = $request->name; //user name
+          $user_id = time().substr($name,0,5); //user id
+          $email = $request->email; //user email
+          $memo = $request->memo; //user memo
+          $user = new User;
+          $user->user_id = $user_id;
+          $user->name = $name;
+          $user->email =$email;
+          $user->memo = $memo;
+          $user->save(); //stored in user table
+          $invoice_id = date('ymd').rand('000','999');
+          $user_id_invoice = $user->id; //last inserted id
+          $tax_rate = $request->tax_rate;
+          $count = $request->counter; //counter for loop
+          $price_ex_tax = '';
+          $items = '';
+          for ($i=0; $i <= $count; $i++) { 
+            if ($price_ex_tax == '') {
+              $price_ex_tax = $request->Quantity[$i] * $request->Price[$i];
+            }
+            else
+            {
+              $price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem = new InvoiceItem;
+            $InvoiceItem->invoice_id = $invoice_id;
+            $InvoiceItem->name = $request->Item[$i];
+            $InvoiceItem->qty =$request->Quantity[$i];
+            $InvoiceItem->price = $request->Price[$i];
+            if(isset($request->tax[$i])) {
+              $InvoiceItem->tax_status = 1;
+              $InvoiceItem->tax_rate = $tax_rate;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]+($request->Quantity[$i] * $request->Price[$i] * ($tax_rate/100)));
+            }
+            else
+            {
+              $InvoiceItem->tax_status = 0;
+              $InvoiceItem->tax_rate = 0.00;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem->save(); //stored in user table
+            
+          }
+          $invoice = new Invoice;
+          $admin_id = Session::get('admin_id.id');
+          $invoice->user_id = $user_id_invoice;
+          $invoice->invoice_id = $invoice_id;
+          $invoice->tax_rate = $tax_rate;
+          $invoice->total = $price_ex_tax;
+          $invoice->memo = $memo;
+          $invoice->admin_id = $admin_id;
+          $invoice->save();
+            $user_name = $name;
+            $user_email = $email;
+            $admin_users_email="hello@tier5.us";
+            $activateLink = url('/').'/client/invoice/'.base64_encode($invoice_id);
+            $sent = Mail::send('email.invoice_link', array('name'=>$user_name,'email'=>$user_email,'activate_link'=>$activateLink), 
+            function($message) use ($admin_users_email, $user_email,$user_name)
+            {
+            $message->from($admin_users_email);
+            $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
+            });
+          return redirect('/invoice-created/'.base64_encode($invoice_id));
+      }
+      else if ($admin_details->admin_type == 0 && $admin_details->admin_details->membership == 3) {
+        $name = $request->name; //user name
+          $user_id = time().substr($name,0,5); //user id
+          $email = $request->email; //user email
+          $memo = $request->memo; //user memo
+          $user = new User;
+          $user->user_id = $user_id;
+          $user->name = $name;
+          $user->email =$email;
+          $user->memo = $memo;
+          $user->save(); //stored in user table
+          $invoice_id = date('ymd').rand('000','999');
+          $user_id_invoice = $user->id; //last inserted id
+          $tax_rate = $request->tax_rate;
+          $count = $request->counter; //counter for loop
+          $price_ex_tax = '';
+          $items = '';
+          for ($i=0; $i <= $count; $i++) { 
+            if ($price_ex_tax == '') {
+              $price_ex_tax = $request->Quantity[$i] * $request->Price[$i];
+            }
+            else
+            {
+              $price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem = new InvoiceItem;
+            $InvoiceItem->invoice_id = $invoice_id;
+            $InvoiceItem->name = $request->Item[$i];
+            $InvoiceItem->qty =$request->Quantity[$i];
+            $InvoiceItem->price = $request->Price[$i];
+            if(isset($request->tax[$i])) {
+              $InvoiceItem->tax_status = 1;
+              $InvoiceItem->tax_rate = $tax_rate;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]+($request->Quantity[$i] * $request->Price[$i] * ($tax_rate/100)));
+            }
+            else
+            {
+              $InvoiceItem->tax_status = 0;
+              $InvoiceItem->tax_rate = 0.00;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem->save(); //stored in user table
+            
+          }
+          $invoice = new Invoice;
+          $admin_id = Session::get('admin_id.id');
+          $invoice->user_id = $user_id_invoice;
+          $invoice->invoice_id = $invoice_id;
+          $invoice->tax_rate = $tax_rate;
+          $invoice->total = $price_ex_tax;
+          $invoice->memo = $memo;
+          $invoice->admin_id = $admin_id;
+          $invoice->save();
+            $user_name = $name;
+            $user_email = $email;
+            $admin_users_email="hello@tier5.us";
+            $activateLink = url('/').'/client/invoice/'.base64_encode($invoice_id);
+            $sent = Mail::send('email.invoice_link', array('name'=>$user_name,'email'=>$user_email,'activate_link'=>$activateLink), 
+            function($message) use ($admin_users_email, $user_email,$user_name)
+            {
+            $message->from($admin_users_email);
+            $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
+            });
+          return redirect('/invoice-created/'.base64_encode($invoice_id));
+      }
+
+      else {
+        $name = $request->name; //user name
+          $user_id = time().substr($name,0,5); //user id
+          $email = $request->email; //user email
+          $memo = $request->memo; //user memo
+          $user = new User;
+          $user->user_id = $user_id;
+          $user->name = $name;
+          $user->email =$email;
+          $user->memo = $memo;
+          $user->save(); //stored in user table
+          $invoice_id = date('ymd').rand('000','999');
+          $user_id_invoice = $user->id; //last inserted id
+          $tax_rate = $request->tax_rate;
+          $count = $request->counter; //counter for loop
+          $price_ex_tax = '';
+          $items = '';
+          for ($i=0; $i <= $count; $i++) { 
+            if ($price_ex_tax == '') {
+              $price_ex_tax = $request->Quantity[$i] * $request->Price[$i];
+            }
+            else
+            {
+              $price_ex_tax = $price_ex_tax+ ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem = new InvoiceItem;
+            $InvoiceItem->invoice_id = $invoice_id;
+            $InvoiceItem->name = $request->Item[$i];
+            $InvoiceItem->qty =$request->Quantity[$i];
+            $InvoiceItem->price = $request->Price[$i];
+            if(isset($request->tax[$i])) {
+              $InvoiceItem->tax_status = 1;
+              $InvoiceItem->tax_rate = $tax_rate;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]+($request->Quantity[$i] * $request->Price[$i] * ($tax_rate/100)));
+            }
+            else
+            {
+              $InvoiceItem->tax_status = 0;
+              $InvoiceItem->tax_rate = 0.00;
+              $InvoiceItem->price_in_tax = ($request->Quantity[$i] * $request->Price[$i]);
+            }
+            $InvoiceItem->save(); //stored in user table
+            
+          }
+          $invoice = new Invoice;
+          $admin_id = Session::get('admin_id.id');
+          $invoice->user_id = $user_id_invoice;
+          $invoice->invoice_id = $invoice_id;
+          $invoice->tax_rate = $tax_rate;
+          $invoice->total = $price_ex_tax;
+          $invoice->memo = $memo;
+          $invoice->admin_id = $admin_id;
+          $invoice->save();
+            $user_name = $name;
+            $user_email = $email;
+            $admin_users_email="hello@tier5.us";
+            $activateLink = url('/').'/client/invoice/'.base64_encode($invoice_id);
+            $sent = Mail::send('email.invoice_link', array('name'=>$user_name,'email'=>$user_email,'activate_link'=>$activateLink), 
+            function($message) use ($admin_users_email, $user_email,$user_name)
+            {
+            $message->from($admin_users_email);
+            $message->to($user_email, $user_name)->subject('Invoice From INVOICINGYOU.COM');
+            });
+          return redirect('/invoice-created/'.base64_encode($invoice_id));
+      }
   }
+
   public function allRecords(){
       $admin_id = Session::get('admin_id.id');
       $user_details = Invoice::where('invoice_id', '!=',0)
@@ -119,8 +344,8 @@ class HomeController extends Controller
     else {
       Session::put('image', $adminImage->image);
     }
-    
     return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
+    //geting admin type and membership level
   }
   public function getProfile(){
     $gets=Session::get('admin_id.id');
@@ -237,6 +462,7 @@ class HomeController extends Controller
       $admin = new Admin();
       $admin->email = $email;
       $admin->password = bcrypt($password);
+      $admin->admin_type = 0;
       if ($admin->save()) {
         $admin_details = new AdminDetail();
         $admin_details->admin_id =$admin->id;

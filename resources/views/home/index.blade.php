@@ -19,6 +19,9 @@
             <div class="alert alert-danger" align="center"><strong>Error!</strong> {{ Session::get('del_fail') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
           @endif
           {{ Session::forget('del_fail') }}
+          @if(Session::has('upgrade'))
+           <div class="alert alert-danger" align="center"><strong>Error!</strong> {{ Session::get('upgrade') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+          @endif
         </section>
         <form action="{{ route('create-invoice') }}" method="POST">
         <!-- Main content -->
@@ -144,12 +147,16 @@
                           </div><!--/.col (right) -->
                           </div><!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_2">
-                            @if($payment_ac_details == null)
-                              <label><strong>Select Any of the Payment Option which You wana recieve ?  </strong></label><br>
+                            @if($payment_ac_details == null && $membership_status > 1)
+                              <label><strong>Select Any of the Payment Option which You wana recieve ? </strong></label><br>
                               <input type="radio" value="Stripe" id="stripe" />
                               <label for="stripe">Stripe</label><br>
                               <input type="radio" value="Authorize.net" id="authorize" />
                               <label for="authorize">Authorize.net</label>
+                            @elseif ($payment_ac_details == null && $membership_status == 1)
+                             <label><strong>Select Stripe as your payment account ? </strong></label><br>
+                              <input type="radio" value="Stripe" id="stripe" />
+                              <label for="stripe">Stripe</label><br>
                             @else
                               <label class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You Have Already choose your payment account to change delete that account and save a new one ! </label>
                             @endif
