@@ -10,10 +10,16 @@
         <a href="#"><b>Admin</b>LTE</a>
       </div><!-- /.login-logo -->
       @if(Session::has('fail'))
-		<div class="alert alert-danger">{{ Session::get('fail') }}
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    </div>
-	@endif
+    		<div class="alert alert-danger">{{ Session::get('fail') }}
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+	    @endif
+      @if(Session::has('success_registration'))
+        <div class="alert alert-success">
+        <strong>Success!</strong> {{ Session::get('success_registration') }}
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+      @endif
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
         <form action="{{ route('admin-dashboard') }}" method="post">

@@ -72,7 +72,9 @@
 						        Default gateway(stripe)
 						      </li>
 						    </ul>
-						    <button type="submit" class="btn btn-default">Sign Up</button>
+						    <a href="{{ route('register') }}">
+						    	<button type="submit" class="btn btn-default">Sign Up</button>
+						    </a>
  						</div>
  						<div class='package'>
 						    <div class='name'>Gold</div>
@@ -91,7 +93,9 @@
 						      <li>Multiple payment gateway</li>
 						      <li>Full Analytics</li>
 						    </ul>
-						    <button type="submit" class="btn btn-default">Sign Up</button>
+						   <a href="{{ route('register') }}">
+						    	<button type="submit" class="btn btn-default">Sign Up</button>
+						    </a>
 						  </div>
 						</div>
 					</div>

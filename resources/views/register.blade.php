@@ -9,6 +9,12 @@
         <a href="#"><b>Admin</b>LTE</a>
       </div>
       <div class="alert alert-danger" id="error_div" style="display: none;"></div>
+      @if(Session::has('custom_err'))
+        <div class="alert alert-danger">
+          <strong>Sorry!</strong> {{Session::get('custom_err')}}
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+      @endif
       <div class="register-box-body">
         <p class="login-box-msg">Register a new membership</p>
         <form action="{{ route('postRegister') }}" method="post">

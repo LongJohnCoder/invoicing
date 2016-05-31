@@ -230,6 +230,27 @@ class HomeController extends Controller
     $gender = $request->usr_gender;
     $password = $request->conf_pass;
     $membership_status = $request->select_membership;
-    dd('later');
+    $search_email = Admin::where('email', $email)->first();
+    if ($search_email) {
+      return redirect()->route('register')->with('custom_err', 'Email Already exists try another one');
+    } else {
+      $admin = new Admin();
+      $admin->email = $email;
+      $admin->password = bcrypt($password);
+      if ($admin->save()) {
+        $admin_details = new AdminDetail();
+        $admin_details->admin_id =$admin->id;
+        $admin_details->name = $name;
+        $admin_details->detail = 'Please write something about you';
+        $admin_details->gender = $gender;
+        $admin_details->membership = $membership_status;
+        if ($admin_details->save()) {
+          return redirect()->route('admin-login')->with('success_registration', 'You have successfully registerted.');
+        }
+      } else {
+        return redirect()->route('register')->with('custom_err', 'Some Error occured please contact system adminstrator');
+      }
+    }
+
   }
 }

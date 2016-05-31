@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateAdminTable extends Migration
+class UpdateAdminDetails extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class UpdateAdminTable extends Migration
      */
     public function up()
     {
-        Schema::table('admins', function ($table) {
+        Schema::table('admin_details', function ($table) {
             $table->string('gender');
-            $table->tinyInteger('member_level');
+            $table->integer('membership');
         });
     }
 
@@ -25,6 +25,9 @@ class UpdateAdminTable extends Migration
      */
     public function down()
     {
-        Schema::drop('admins');
+        Schema::table('admin_details', function ($table) {
+            $table->dropColumn('gender');
+            $table->dropColumn('membership');
+        });
     }
 }
