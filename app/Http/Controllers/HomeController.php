@@ -333,6 +333,8 @@ class HomeController extends Controller
       ->get();
       return view('home.invoiceDetails',array('title'=>'Invoice System || Create Invoice'), compact('user_details'));
   }
+  
+
   public function Dashboard(){
     $cax=[100, 25, 80, 81, 56, 55, 40];
     $admin_id = Session::get('admin_id.id');
@@ -345,15 +347,22 @@ class HomeController extends Controller
       Session::put('image', $adminImage->image);
     }
     //check admin or super admin 
-    $admin_type = Admin::where('id', $admin_id)->first();
-    if ($admin_type->admin_type == 1) {
-     return view('super-admin.dashboard');
+    $admin_info = Admin::where('id', $admin_id)->with('admin_details')->first();
+    if ($admin_info->admin_type == 1) {
+      $all_invoice_details = Invoice::all();
+      $all_admin_details = Admin::where('admin_type', 0)->get();
+      //dd($all_admin_details);
+      return view('super-admin.dashboard', compact('admin_info', 'all_admin_details', 'all_invoice_details'));
     }
     else
     {
       return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
     }
   }
+
+
+
+
   public function getProfile(){
     $gets=Session::get('admin_id.id');
     //print_r($gets->id);
@@ -485,5 +494,26 @@ class HomeController extends Controller
       }
     }
 
+  }
+  public function BanUser($id) {
+    $id_ban = base64_decode($id);
+    $block = Admin::find($id_ban);
+    if ($block->block_status == 0) {
+      $block->block_status = 1;
+      if ($block->save()) {
+        return redirect()->route('dashboard')->with('block_status', 'User has been blocked');
+      }
+
+    }
+    elseif ($block->block_status == 1) {
+      $block->block_status = 0;
+      if ($block->save()) {
+        return redirect()->route('dashboard')->with('block_status', 'User has been unblocked');
+      }
+    }
+    else
+    {
+      return redirect()->route('dashboard')->with('block_status_er', 'Failed to block the user');
+    }
   }
 }

@@ -45,3 +45,6 @@ Route::post('/update-keys', ['uses' => 'PaymentController@UpdateKeys', 'as' => '
 Route::get('/',['uses' => 'HomeController@getIndex', 'as' => 'front-page']);
 Route::get('/register' , ['uses' => 'HomeController@getRegister' , 'as' => 'register']);
 Route::post('/register', ['uses' => 'HomeController@postRegister', 'as' => 'postRegister']);
+
+/*super admin routes */
+Route::post('/block-admin/{id}', ['uses' => 'HomeController@BanUser', 'as' => 'block-admin']);

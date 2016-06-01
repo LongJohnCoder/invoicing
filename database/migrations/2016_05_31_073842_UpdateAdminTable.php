@@ -14,6 +14,7 @@ class UpdateAdminTable extends Migration
     {
         Schema::table('admins', function ($table) {
             $table->string('admin_type');
+            $table->integer('block_status');
         });
     }
 
@@ -25,6 +26,7 @@ class UpdateAdminTable extends Migration
     public function down()
     {
         Schema::table('admins', function ($table) {
+            $table->dropColumn('block_status')
             $table->dropColumn('admin_type');
         });
        
