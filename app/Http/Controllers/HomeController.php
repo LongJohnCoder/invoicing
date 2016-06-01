@@ -344,8 +344,15 @@ class HomeController extends Controller
     else {
       Session::put('image', $adminImage->image);
     }
-    return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
-    //geting admin type and membership level
+    //check admin or super admin 
+    $admin_type = Admin::where('id', $admin_id)->first();
+    if ($admin_type->admin_type == 1) {
+     return view('super-admin.dashboard');
+    }
+    else
+    {
+      return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
+    }
   }
   public function getProfile(){
     $gets=Session::get('admin_id.id');

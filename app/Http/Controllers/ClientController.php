@@ -1,16 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
-
 use App\Http\Requests;
-use App\Model\Invoice;                                         /* Model name*/
-use App\Model\InvoiceItem;                                       /* Model name*/
-use App\Model\User;                                /* Model name*/
-
+use App\Model\Invoice;                                          
+use App\Model\InvoiceItem;                                       
+use App\Model\User;                              
 use Illuminate\Support\Facades\Request;
-use Input; /* For input */
+use Input;
 use Validator;
 use Session;
 use DB;
