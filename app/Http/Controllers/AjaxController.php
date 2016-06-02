@@ -22,7 +22,7 @@ class AjaxController extends Controller
 
     	$sevendayearly=date("Y-m-d", strtotime('-7 days'));
     	$todaysdate=date("Y-m-d");
-        $admin_id = Session::get('admin_id.id');
+        $admin_id = Session::get('admin_id');
     	$user_details = Invoice::where('created_at','>=',$sevendayearly)->where('created_at','<=',$todaysdate)->where('admin_id', $admin_id)->with('invoice_items', 'user_details')->orderBy('created_at', 'desc')->get();
     	//dd($user_details);
     	$inc='1 days';

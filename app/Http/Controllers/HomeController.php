@@ -20,7 +20,7 @@ class HomeController extends Controller
 {
   public function index(){
     if (Auth::check()) {
-      $admin_id = Session::get('admin_id.id');
+      $admin_id = Session::get('admin_id');
       $payment_ac_details = AdminPaymentMap::where('admin_id', '=', $admin_id)->with('PaymentKeys')->first();
       //dd($payment_ac_details->payment_type);
       $admin = Admin::find($admin_id);
@@ -48,7 +48,7 @@ class HomeController extends Controller
   }
   public function Invoice(Request $request){
     //work
-      $admin_id = Session::get('admin_id.id');
+      $admin_id = Session::get('admin_id');
       $admin_details = Admin::where('id', $admin_id)->with('admin_details')->first();
       //dd($admin_details);
       if ($admin_details->admin_type == 0 && $admin_details->admin_details->membership == 1) {
@@ -100,7 +100,7 @@ class HomeController extends Controller
             
           }
           $invoice = new Invoice;
-          $admin_id = Session::get('admin_id.id');
+          $admin_id = Session::get('admin_id');
           $invoice->user_id = $user_id_invoice;
           $invoice->invoice_id = $invoice_id;
           $invoice->tax_rate = $tax_rate;
@@ -172,7 +172,7 @@ class HomeController extends Controller
             
           }
           $invoice = new Invoice;
-          $admin_id = Session::get('admin_id.id');
+          $admin_id = Session::get('admin_id');
           $invoice->user_id = $user_id_invoice;
           $invoice->invoice_id = $invoice_id;
           $invoice->tax_rate = $tax_rate;
@@ -237,7 +237,7 @@ class HomeController extends Controller
             
           }
           $invoice = new Invoice;
-          $admin_id = Session::get('admin_id.id');
+          $admin_id = Session::get('admin_id');
           $invoice->user_id = $user_id_invoice;
           $invoice->invoice_id = $invoice_id;
           $invoice->tax_rate = $tax_rate;
@@ -303,7 +303,7 @@ class HomeController extends Controller
             
           }
           $invoice = new Invoice;
-          $admin_id = Session::get('admin_id.id');
+          $admin_id = Session::get('admin_id');
           $invoice->user_id = $user_id_invoice;
           $invoice->invoice_id = $invoice_id;
           $invoice->tax_rate = $tax_rate;
@@ -326,7 +326,7 @@ class HomeController extends Controller
   }
 
   public function allRecords(){
-      $admin_id = Session::get('admin_id.id');
+      $admin_id = Session::get('admin_id');
       $user_details = Invoice::where('invoice_id', '!=',0)
       ->where('admin_id', $admin_id)
       ->with('invoice_items', 'user_details')
@@ -337,7 +337,7 @@ class HomeController extends Controller
 
   public function Dashboard(){
     $cax=[100, 25, 80, 81, 56, 55, 40];
-    $admin_id = Session::get('admin_id.id');
+    $admin_id = Session::get('admin_id');
     $adminImage = AdminDetail::where('admin_id', '=', $admin_id)->first(['image']);
     $adminImagecount = AdminDetail::where('admin_id', '=', $admin_id)->count();
     if ($adminImagecount == 0) {
@@ -348,6 +348,7 @@ class HomeController extends Controller
     }
     //check admin or super admin 
     $admin_info = Admin::where('id', $admin_id)->with('admin_details')->first();
+    //dd($admin_info);
     if ($admin_info->admin_type == 1) {
       $all_invoice_details = Invoice::all();
       $all_admin_details = Admin::where('admin_type', 0)->get();
@@ -364,7 +365,7 @@ class HomeController extends Controller
 
 
   public function getProfile(){
-    $gets=Session::get('admin_id.id');
+    $gets=Session::get('admin_id');
     //print_r($gets->id);
     $Admin=AdminDetail::where('admin_id',$gets)->first();
     $Admincount=AdminDetail::where('admin_id',$gets)->count();
@@ -405,7 +406,7 @@ class HomeController extends Controller
             $fileName = '';
           }
       }
-      $AdminDetail->admin_id = Session::get('admin_id.id');
+      $AdminDetail->admin_id = Session::get('admin_id');
       $AdminDetail->name = $request->name;
       $AdminDetail->detail =$request->details;
       $AdminDetail->image =$fileName;

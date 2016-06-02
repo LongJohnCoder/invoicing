@@ -23,7 +23,7 @@ class ClientController extends Controller
     	return view('client.invoice',compact('Invoice'),array('title'=>'Invoice System || Invoice'));
     }
     public function payment(){
-        $admin_id = Session::get('admin_id.id');
+        $admin_id = Session::get('admin_id');
         $keys = PaymentKeys::where('admin_id', '=' , $admin_id)->first();
     	// echo gettype(Request::input('tot'));
     	$invouce_id=base64_decode(Request::input('inv'));

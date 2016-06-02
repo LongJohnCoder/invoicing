@@ -56,7 +56,7 @@ class PaymentController extends Controller
             dd($post_response);
     }
     public function AuthorizedPayment(){
-        $admin_id = Session::get('admin_id.id');
+        $admin_id = Session::get('admin_id');
         $keys = PaymentKeys::where('admin_id', '=' , $admin_id)->first();
     	//dd(Request::input("cardexpdate"));
         $invouce_id=base64_decode(Request::input('inv'));
@@ -125,13 +125,13 @@ class PaymentController extends Controller
         $admin =Session::get('admin_id');
         if (Request::input('stripe') == 1) {
             $payment_keys = new PaymentKeys();
-            $payment_keys->admin_id = $admin->id;
+            $payment_keys->admin_id = $admin;
             $payment_keys->payment_id = 1;
             $payment_keys->key_first = Request::input('public_key');
             $payment_keys->key_second = Request::input('private_key');
             if ($payment_keys->save()) {
                 $admin_payment_map = new AdminPaymentMap();
-                $admin_payment_map->admin_id = $admin->id;
+                $admin_payment_map->admin_id = $admin;
                 $admin_payment_map->payment_type = 1;
                 $admin_payment_map->gateway_status =1;
                 $admin_payment_map->save();
@@ -142,13 +142,13 @@ class PaymentController extends Controller
         else
         {
             $payment_keys =new PaymentKeys();
-            $payment_keys->admin_id = $admin->id;
+            $payment_keys->admin_id = $admin;
             $payment_keys->payment_id = 2;
             $payment_keys->key_first = Request::input('login_id');
             $payment_keys->key_second = Request::input('t_key');
             if ($payment_keys->save()) {
                 $admin_payment_map = new AdminPaymentMap();
-                $admin_payment_map->admin_id = $admin->id;
+                $admin_payment_map->admin_id = $admin;
                 $admin_payment_map->payment_type = 2;
                 $admin_payment_map->gateway_status =1;
                 $admin_payment_map->save();
@@ -158,7 +158,7 @@ class PaymentController extends Controller
         }
     }
     public function DeleteAccount() {
-       $admin_id = Session::get('admin_id.id');
+       $admin_id = Session::get('admin_id');
        $status = AdminPaymentMap::where('admin_id', '=', $admin_id)->delete();
       if ($status) {
           $delete_keys = PaymentKeys::where('admin_id', '=', $admin_id)->delete();
@@ -178,7 +178,7 @@ class PaymentController extends Controller
 
     }
     public function UpdateKeys() {
-       $admin_id = Session::get('admin_id.id');
+       $admin_id = Session::get('admin_id');
        $key1 = Request::input('key1');
        $key2 = Request::input('key2');
        $update_row = PaymentKeys::where('admin_id', '=', $admin_id)->first();

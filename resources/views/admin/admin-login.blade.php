@@ -14,6 +14,12 @@
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         </div>
 	    @endif
+      @if(Session::has('block'))
+        <div class="alert alert-danger">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{Session::get('block')}}
+        </div>
+      @endif
       @if(Session::has('success_registration'))
         <div class="alert alert-success">
         <strong>Success!</strong> {{ Session::get('success_registration') }}
