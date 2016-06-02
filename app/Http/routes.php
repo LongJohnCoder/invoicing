@@ -48,3 +48,5 @@ Route::post('/register', ['uses' => 'HomeController@postRegister', 'as' => 'post
 
 /*super admin routes */
 Route::post('/block-admin/{id}', ['uses' => 'HomeController@BanUser', 'as' => 'block-admin']);
+Route::get('/admin-profile', ['uses' => 'SuperAdmin@getProfile' , 'as' => 'admin-profile']);
+Route::post('/post-admin-profile', ['uses' => 'SuperAdmin@postAdminDetails', 'as' => 'postAdminDetails']);
