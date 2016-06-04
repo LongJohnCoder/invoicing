@@ -98,4 +98,9 @@ class SuperAdmin extends Controller
             return redirect()->route('change-password')->with('pass_fail', 'Please enter your previous password correctly!');
         }
     }
+    public function getPaymentManage() {
+        $obj = new navbarhelper();
+        $admin_info = $obj->DynamicDataMasterBlade();
+        return view('super-admin.manage-payment', compact('admin_info'));
+    }
 }

@@ -58,6 +58,18 @@
                 });
             });
         </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#stripe_super').click(function(){
+                    $('#payment_div').hide();
+                    $('#show_stripe').show();
+                });
+                $('#auth_super').click(function(){
+                    $('#payment_div').hide();
+                    $('#show_auth').show();
+                });
+            });
+        </script>
         <script>
             $('#noti-box').slimScroll({
                 height: '400px',

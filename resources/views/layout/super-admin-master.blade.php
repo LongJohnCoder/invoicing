@@ -37,14 +37,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="general.html">
+                            <a href="{{ route('managePaymentAccount') }}">
                                 <i class="fa fa-credit-card"></i> <span>Manage Accounts</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="basic_form.html">
-                                <i class="fa fa-user"></i> <span>Manage Admins</span>
                             </a>
                         </li>
 
