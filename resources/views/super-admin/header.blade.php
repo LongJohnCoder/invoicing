@@ -29,8 +29,6 @@
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                                 <li class="dropdown-header text-center">Account</li>
-                                <li class="divider"></li>
-
                                     <li>
                                         <a href="{{ route('admin-profile') }}">
                                         <i class="fa fa-user fa-fw pull-right"></i>
@@ -38,7 +36,7 @@
                                         </a>
                                         <a data-toggle="modal" href="#modal-user-settings">
                                         <i class="fa fa-cog fa-fw pull-right"></i>
-                                            Settings
+                                            change password
                                         </a>
                                         </li>
 
