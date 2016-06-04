@@ -5,6 +5,7 @@ use Session;
 use DB;
 use App\Admin;
 use App\Model\AdminDetail;
+
 class navbarhelper
 {
 	//use this function DynamicDataMaster blade if you want to use master blade for some dynamic datas

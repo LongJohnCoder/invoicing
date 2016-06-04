@@ -49,6 +49,9 @@
 	                 	<label for="image">Profile picture</label>
 	                 	<input type="file" name="image" class="form-control"></input>
 	                 </div>
+	                 <div class="form-group">
+	                 	<img src="{{url('/')}}/public/admin_new/{{$admin_info->admin_details->image}}" height="200px" width="200px">
+	                 </div>
 	                  <button type="submit" class="btn btn-info">Submit</button>
 	                  <input type="hidden" name="_token" value="{{Session::token()}}"></input>
 	              </form>
@@ -74,6 +77,9 @@
 	                 <div class="form-group">
 	                 	<label for="image">Profile picture</label>
 	                 	<input type="file" name="image" class="form-control"></input>
+	                 </div>
+	                 <div class="form-group">
+	                 	<img src="{{url('/')}}/public/imgx/logo.png" height="200px" width="200px">
 	                 </div>
 	                  <button type="submit" class="btn btn-info">Submit</button>
 	                  <input type="hidden" name="_token" value="{{Session::token()}}"></input>

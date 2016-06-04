@@ -22,7 +22,8 @@
                     		<span>{{count($all_invoice_details)}}</span>
                         	Total Invoices
                     	@else
-                    		<span>There is no record in our database</span>
+                    		<span>0</span>
+                          Total Invoices
                     	@endif
                     </div>
                 </div>
@@ -35,7 +36,8 @@
                     		<span>{{count($all_admin_details)}}</span>
                         	Total Admins
                     	@else
-                    		<span>There is no record in our database</span>
+                    		<span>0</span>
+                          Total Admins
                     	@endif
                     </div>
                 </div>

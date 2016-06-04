@@ -7,6 +7,7 @@ use Session;
 use App\Admin;
 use App\Model\AdminDetail;
 use App\Helper\navbarhelper;
+use Hash;
 
 class SuperAdmin extends Controller
 {
@@ -74,5 +75,27 @@ class SuperAdmin extends Controller
             }
         }     
     }
-
+    public function getChangePassword() {
+        $obj = new navbarhelper();
+        $admin_info = $obj->DynamicDataMasterBlade();
+        return view('super-admin.change-password',compact('admin_info'));
+    }
+    public function postChangePassword(Request $request) {
+        $admin_id = Session::get('admin_id');
+        $search_admin = Admin::find($admin_id);
+        if (Hash::check($request->p_pas, $search_admin->password)) {
+            $search_admin->password = Hash::make($request->conf_new_pass);
+            if ($search_admin->save()) {
+                return redirect()->route('change-password')->with('pass_succ', 'Password Updated Successfully!');
+            }
+            else
+            {
+               return redirect()->route('change-password')->with('pass_fail', 'Some error occured please contact site adminstrator!');
+            }
+        }
+        else
+        {
+            return redirect()->route('change-password')->with('pass_fail', 'Please enter your previous password correctly!');
+        }
+    }
 }

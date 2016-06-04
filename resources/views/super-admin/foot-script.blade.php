@@ -39,6 +39,25 @@
             });
 
         </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#submit_passChange').click(function(){
+                    var pass = $('#new_pass').val();
+                    var conf_pass = $('#conf_new_pass').val();
+                    // console.log(pass+conf_pass);
+                    // return false;
+                    if (pass == conf_pass) 
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        $('#confPassMismatch').show();
+                        return false;
+                    }
+                });
+            });
+        </script>
         <script>
             $('#noti-box').slimScroll({
                 height: '400px',
