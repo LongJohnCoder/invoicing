@@ -161,4 +161,39 @@ class SuperAdmin extends Controller
             }
         }
     }
+    public function AccOperations(Request $request) {
+        $admin_id = Session::get('admin_id');
+        if ($request->btn == 'update') {
+            $search_admin = PaymentKeys::where('admin_id', $admin_id)->first();
+            if($search_admin) {
+                $search_admin->key_first = $request->key_one;
+                $search_admin->key_second = $request->key_two;
+                if ($search_admin->save()) {
+                    return redirect()->route('managePaymentAccount')->with('saved_details', 'Your account details has successfully updated.');
+                }
+            }
+            else
+            {
+                return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not update your details please try again later');
+            }
+        }
+        else
+        {
+            $delete_keys = PaymentKeys::where('admin_id', $admin_id)->delete();
+            if ($delete_keys) {
+                $delete_map = AdminPaymentMap::where('admin_id', $admin_id)->delete();
+                if ($delete_map) {
+                    return redirect()->route('managePaymentAccount')->with('saved_details', 'Your account details has successfully deleted.');
+                }
+                else
+                {
+                    return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not delete your details please try again later');
+                }
+            }
+            else
+            {
+                return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not delete your details please try again later');
+            }
+        }
+    }
 }

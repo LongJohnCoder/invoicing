@@ -34,21 +34,22 @@
 		              Account Details
 		          </header>
 		          <div class="panel-body">
-		              <form role="form">
+		              <form role="form" action="{{ route('acc_operations') }}" method="post">
 		                  <div class="form-group">
 		                      <label for="acc_name">Account Name</label>
 		                      <input type="text" class="form-control" id="acc_name" name="acc_name" value="{{ $payment_status->payment_id == 1 ? 'Stripe' : 'Authorize.net' }}" readonly>
 		                  </div>
 		                  <div class="form-group">
 		                      <label for="key_one">{{$payment_status->payment_id == 1 ? 'Public Key of Stripe' : 'Login ID'}}</label>
-		                      <input type="text" class="form-control" id="key_one" name="key_one" value="{{ $payment_status->key_first }}">
+		                      <input type="text" class="form-control" id="key_one" name="key_one" value="{{ $payment_status->key_first }}" required>
 		                  </div>
 		                  <div class="form-group">
 		                      <label for="key_two">{{$payment_status->payment_id == 1 ? 'Secret Key of Stripe' : 'Transaction Key'}}</label>
-		                      <input type="text" class="form-control" id="key_two" name="key_two" value="{{ $payment_status->key_second }}">
+		                      <input type="text" class="form-control" id="key_two" name="key_two" value="{{ $payment_status->key_second }}" required>
 		                  </div>
-		                  <button type="submit" class="btn btn-info">Update</button>
-		                  <button type="submit" class="btn btn-danger">Delete</button>
+		                  <button type="submit" class="btn btn-info" name="btn" value="update">Update</button>
+		                  <button type="submit" class="btn btn-danger" name="btn" value="delete">Delete</button>
+		                  <input type="hidden" name="_token" value="{{ Session::token() }}" />
 		              </form>
 		          </div>
 		      </section>
