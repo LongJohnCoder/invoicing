@@ -53,3 +53,4 @@ Route::post('/post-admin-profile', ['uses' => 'SuperAdmin@postAdminDetails', 'as
 Route::get('/change-password', ['uses' => 'SuperAdmin@getChangePassword', 'as' => 'change-password']);
 Route::post('/change-password', ['uses' => 'SuperAdmin@postChangePassword' , 'as' => 'postChangePassword']);
 Route::get('/manage-payment-account', ['uses' => 'SuperAdmin@getPaymentManage', 'as' => 'managePaymentAccount']);
+Route::post('/manage-payment-account', ['uses' => 'SuperAdmin@postAccountSuper' , 'as' => 'postAccountSuper']);

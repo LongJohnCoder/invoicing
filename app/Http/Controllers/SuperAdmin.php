@@ -8,6 +8,9 @@ use App\Admin;
 use App\Model\AdminDetail;
 use App\Helper\navbarhelper;
 use Hash;
+use App\Model\PaymentKeys;
+use App\Model\PaymentTypes;
+use App\Model\AdminPaymentMap;
 
 class SuperAdmin extends Controller
 {
@@ -102,5 +105,58 @@ class SuperAdmin extends Controller
         $obj = new navbarhelper();
         $admin_info = $obj->DynamicDataMasterBlade();
         return view('super-admin.manage-payment', compact('admin_info'));
+    }
+    public function postAccountSuper(Request $request) {
+        $admin_id = Session::get('admin_id');
+        if ($request->btn == 'stripe') {
+            $payment_keys = new PaymentKeys();
+            $payment_keys->admin_id = $admin_id;
+            $payment_keys->payment_id = 1; //1 for stripe 2 for authorize
+            $payment_keys->key_first = $request->pub_key;
+            $payment_keys->key_second = $request->sec_key;
+            if ($payment_keys->save()) {
+                $admin_payment_map = new AdminPaymentMap();
+                $admin_payment_map->admin_id = $admin_id;
+                $admin_payment_map->payment_type = 1; //1 for stripe 2 for authorize
+                $admin_payment_map->gateway_status =1; //1 for active or not
+                if ($admin_payment_map->save()) {
+                    return redirect()->route('managePaymentAccount')->with('saved_details', 'Your account details has successfully saved.');
+                }
+                else
+                {
+                   return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not save your details please try again later');
+                }
+                
+            }
+            else 
+            {
+                return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not save your details please try again later');
+            }
+        } 
+        else 
+        {
+            $payment_keys = new PaymentKeys();
+            $payment_keys->admin_id = $admin_id;
+            $payment_keys->payment_id = 2; //1 for stripe 2 for authorize
+            $payment_keys->key_first = $request->l_id;
+            $payment_keys->key_second = $request->t_key;
+            if ($payment_keys->save()) {
+                $admin_payment_map = new AdminPaymentMap();
+                $admin_payment_map->admin_id = $admin_id;
+                $admin_payment_map->payment_type = 2; //1 for stripe 2 for authorize
+                $admin_payment_map->gateway_status =1; //1 for active or not
+                if ($admin_payment_map->save()) {
+                    return redirect()->route('managePaymentAccount')->with('saved_details', 'Your account details has successfully saved.');
+                }
+                else
+                {
+                    return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not save your details please try again later');
+                }
+            }
+            else
+            {
+                return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not save your details please try again later');
+            }
+        }
     }
 }

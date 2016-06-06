@@ -70,6 +70,15 @@
                 });
             });
         </script>
+<!--         <script type="text/javascript">
+            $(document).ready(function(){
+                $('#submit_stripe').click(function(){
+                    $('#payment_div').hide();
+                    $('#show_details').show();
+                    return false;
+                });
+            });
+        </script> -->
         <script>
             $('#noti-box').slimScroll({
                 height: '400px',
