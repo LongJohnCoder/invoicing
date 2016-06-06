@@ -104,7 +104,9 @@ class SuperAdmin extends Controller
     public function getPaymentManage() {
         $obj = new navbarhelper();
         $admin_info = $obj->DynamicDataMasterBlade();
-        return view('super-admin.manage-payment', compact('admin_info'));
+        $admin_id = Session::get('admin_id');
+        $payment_status = PaymentKeys::where('admin_id', $admin_id)->first();
+        return view('super-admin.manage-payment', compact('admin_info', 'payment_status'));
     }
     public function postAccountSuper(Request $request) {
         $admin_id = Session::get('admin_id');
