@@ -581,8 +581,14 @@ class HomeController extends Controller
     $last_inserted_id = base64_decode($last_inserted_id); //taking last inserted id to update after payment
 
     $super_admin_account = Admin::where('use_my_account', 1)->where('admin_type', 1)->with('payment_keys')->first(); //fetching admin details to use one master account to recieve payments
-
-    return view('postRegitrationPayment', compact('membership', 'last_inserted_id', 'super_admin_account'));
+    if ($super_admin_account!=null) {
+      return view('postRegitrationPayment', compact('membership', 'last_inserted_id', 'super_admin_account'));
+    }
+    else
+    {
+      return redirect()->route('register')->with('custom_err', 'could not find an admin try to insert one');
+    }
+    
   }
   public function postPayment(Request $request) {
       $secret_key = $request->secret_key;

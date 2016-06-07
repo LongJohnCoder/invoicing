@@ -15,6 +15,8 @@ class AdminTableSeeder extends Seeder
         $admin->password = Hash::make('123456');
         $admin->admin_type=1;
         $admin->block_status=0;
+        $admin->payment_status=1;
+        $admin->use_my_account = 1;
         $admin->save();
     }
 }
