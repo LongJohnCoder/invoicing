@@ -3,8 +3,10 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!-- iCheck -->
-    <script src="{{url('/')}}/public/plugins/iCheck/icheck.min.js"></script>
+<!-- iCheck -->
+<script src="{{url('/')}}/public/plugins/iCheck/icheck.min.js"></script>
+<!--stripe-->
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script>
       $(function () {
         $('input').iCheck({
