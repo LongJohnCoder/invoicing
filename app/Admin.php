@@ -15,4 +15,7 @@ class Admin extends Model implements \Illuminate\Contracts\Auth\Authenticatable
     public function admin_details() {
     	return $this->hasOne('App\Model\AdminDetail', 'admin_id');
     }
+    public function payment_keys() {
+    	return $this->hasOne('App\Model\PaymentKeys', 'admin_id');
+    }
 }

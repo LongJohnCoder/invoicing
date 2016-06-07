@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AdminTablePaymentStatusUpdate extends Migration
+class UseMyAccountAdmin extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AdminTablePaymentStatusUpdate extends Migration
     public function up()
     {
         Schema::table('admins', function ($table) {
-            $table->integer('payment_status');
+            $table->integer('use_my_account');
         });
     }
 
@@ -25,7 +25,7 @@ class AdminTablePaymentStatusUpdate extends Migration
     public function down()
     {
         Schema::table('admins', function ($table) {
-            $table->dropColumn('payment_status');
+            $table->dropColumn('use_my_account');
         });
     }
 }

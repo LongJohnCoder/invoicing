@@ -15,6 +15,7 @@ use Imagine\Image\Box;
 use App\Model\AdminPaymentMap;
 use App\Model\PaymentKeys;
 use App\Model\PaymentTypes;
+use Stripe;
 
 class HomeController extends Controller
 {
@@ -577,7 +578,38 @@ class HomeController extends Controller
       }
   }
   public function postMembershipPayment($membership, $last_inserted_id) {
-    $last_inserted_id = base64_decode($last_inserted_id);
-    return view('postRegitrationPayment', compact('membership', 'last_inserted_id'));
+    $last_inserted_id = base64_decode($last_inserted_id); //taking last inserted id to update after payment
+
+    $super_admin_account = Admin::where('use_my_account', 1)->where('admin_type', 1)->with('payment_keys')->first(); //fetching admin details to use one master account to recieve payments
+
+    return view('postRegitrationPayment', compact('membership', 'last_inserted_id', 'super_admin_account'));
+  }
+  public function postPayment(Request $request) {
+      $secret_key = $request->secret_key;
+      $charge_amount = $request->stripeAmount;
+      $admin_id = $request->last_inserted_id;
+      $stripe = Stripe::make($secret_key);
+      $charge = $stripe->charges()->create([
+        'source' => $request->stripeToken,
+        'currency' => 'USD',
+        'amount'   => $charge_amount,
+      ]);
+      if($charge['status']=="succeeded")
+      {
+        $search_admin = Admin::find($admin_id);
+        if ($search_admin) {
+          $search_admin->payment_status = 1;
+          $search_admin->save();
+          return redirect()->route('admin-login')->with('success_registration', 'Hey! you have successfully registered as premium member');
+        }
+        else
+        {
+          return redirect()->route('admin-login')->with('fail', 'Failed to search an admin to update please check database');
+        }
+      } 
+      else
+      {
+        return redirect()->route('register')->with('fail', 'Payment Failed please close the browser and open then try it again.');
+      }
   }
 }
