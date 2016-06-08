@@ -457,80 +457,114 @@ class HomeController extends Controller
     return view('index');
   }
   public function getRegister() {
-    return view('register');
+    $super_admin_account = Admin::where('use_my_account', 1)->where('admin_type', 1)->with('payment_keys')->first();
+      return view('register', compact('super_admin_account'));
   }
   public function postRegister(Request $request) {
-    //dd($request);
     $name = $request->usr_name;
     $email = $request->usr_email;
-    //$gender = $request->usr_gender;
     $password = $request->conf_pass;
     $membership_status = $request->select_membership;
-    if ($membership_status == 1) {
-      $return_lastInserted_id = $this->RegisterUser($name, $email, $password, $membership_status);
-      if ($return_lastInserted_id) {
-        //dd($return_lastInserted_id);
-        if ($return_lastInserted_id == 302) {
-          return redirect()->route('register')->with('custom_err', 'Email Already exists try another one');
-        }
-        else
-        {
-          //for basic membership no payment needed so make it 1
-          $search = Admin::where('id' ,$return_lastInserted_id)->first();
-          if ($search) {
-             $search->payment_status = 1;
-             $search->save();
-             return redirect()->route('admin-login')->with('success_registration', 'You have successfully registerted.');
-           } 
-           else
-           {
-            return redirect()->route('register')->with('custom_err', 'could not find the username in our database');
-           }
-        }
+    $stripeToken = $request->stripeToken;
+    if ($stripeToken) 
+    {
+      //premium member here
+      $return = $this->RegisterUser($name, $email, $password, $membership_status, $stripeToken);
+      if ($return == 302) {
+        return redirect()->route('register')->with('custom_err', 'Email Already exists try another one');
       }
       else
       {
-        return redirect()->route('register')->with('custom_err', 'Some Error occured please contact system adminstrator');
-      }
-    } 
-
-    //pro membership
-    elseif ($membership_status == 2) {
-      $return_lastInserted_id = $this->RegisterUser($name, $email, $gender, $password, $membership_status);
-      if ($return_lastInserted_id) {
-        if ($return_lastInserted_id == 302) {
-          return redirect()->route('register')->with('custom_err', 'Email Already exists try another one');
+        $last_inserted_id = $return;
+        //now if last inserted id here proceed to payment
+        if ($last_inserted_id) {
+          $complete_register = $this->doPayment($last_inserted_id, $membership_status, $stripeToken);
+          return $complete_register;
         }
         else
         {
-          return redirect()->route('post-registration-payment', ['membership' => 'pro', 'last_inserted_id' => base64_encode($return_lastInserted_id)]);
+          return redirect()->route('register')->with('custom_err', 'some error occured please try again later');
         }
       }
-      else
-      {
-        return redirect()->route('register')->with('custom_err', 'Some Error occured please contact system adminstrator');
-      }
-
     }
-
-    //gold membership
     else
     {
-      $return_lastInserted_id = $this->RegisterUser($name, $email, $gender, $password, $membership_status);
-      if ($return_lastInserted_id) {
-        if ($return_lastInserted_id == 302) {
-          return redirect()->route('register')->with('custom_err', 'Email Already exists try another one');
-        }
-        else
-        {
-          return redirect()->route('post-registration-payment', ['membership' => 'gold', 'last_inserted_id' => base64_encode($return_lastInserted_id)]);
-        }
+      //basic member here
+      $return = $this->RegisterUser($name, $email, $password, $membership_status, 0);
+      if ($return == 302) 
+      {
+        return redirect()->route('register')->with('custom_err', 'Email Already exists try another one');
       }
       else
       {
-        return redirect()->route('register')->with('custom_err', 'Some Error occured please contact system adminstrator');
+        $last_inserted_id = $return;
+        //now if last inserted id here proceed to login
+        if ($last_inserted_id) {
+          return redirect()->route('admin-login')->with('success_registration', 'You have successfully registerted.');
+        }
+        else
+        {
+         return redirect()->route('register')->with('custom_err', 'some error occured please try again later'); 
+        }
+
       }
     }
+  }
+
+  private function RegisterUser($name, $email, $password, $membership_status, $stripeToken) {
+      $search_email = Admin::where('email', $email)->first();
+      if ($search_email) {
+        return 302;
+      } else {
+        $admin = new Admin();
+        $admin->email = $email;
+        $admin->password = bcrypt($password);
+        $admin->admin_type = 0;
+        $admin->block_status = 0;
+        $admin->payment_status = 0;
+        $admin->use_my_account = 0;
+        if ($admin->save()) {
+          $admin_details = new AdminDetail();
+          $admin_details->admin_id =$admin->id;
+          $admin_details->name = $name;
+          $admin_details->detail = 'Please write something about you';
+          $admin_details->membership = $membership_status;
+          if ($admin_details->save()) {
+            return $admin_details->admin_id;
+          }
+        } else {
+            return false;
+        }
+      }
+  }
+  private function doPayment($admin_id, $membership_status, $stripeToken) {
+    $keys = Admin::where('use_my_account', 1)->where('admin_type', 1)->with('payment_keys')->first();
+    $secret_key = $keys->payment_keys->key_second;
+    $charge_amount = ($membership_status == 2 ? 10 : 20) ;
+    $stripe = Stripe::make($secret_key);
+    $charge = $stripe->charges()->create([
+      'source' => $stripeToken,
+      'currency' => 'USD',
+      'amount'   => $charge_amount,
+    ]);
+    if($charge['status']=="succeeded")
+    {
+      $search_admin = Admin::find($admin_id);
+      if ($search_admin) {
+        $search_admin->payment_status = 1;
+        $search_admin->save();
+        return redirect()->route('admin-login')->with('success_registration', 'Hey! you have successfully registered as premium member');
+      }
+      else
+      {
+        return redirect()->route('admin-login')->with('fail', 'Failed to search an admin to update please check database');
+      }
+    } 
+    else
+    {
+      return redirect()->route('register')->with('fail', 'Payment Failed please close the browser and open then try it again.');
+    }
+
   }
   public function BanUser($id) {
     $id_ban = base64_decode($id);
@@ -552,30 +586,6 @@ class HomeController extends Controller
     {
       return redirect()->route('dashboard')->with('block_status_er', 'Failed to block the user');
     }
-  }
-  private function RegisterUser($name, $email, $password, $membership_status) {
-      $search_email = Admin::where('email', $email)->first();
-      if ($search_email) {
-        return 302;
-      } else {
-        $admin = new Admin();
-        $admin->email = $email;
-        $admin->password = bcrypt($password);
-        $admin->admin_type = 0;
-        if ($admin->save()) {
-          $admin_details = new AdminDetail();
-          $admin_details->admin_id =$admin->id;
-          $admin_details->name = $name;
-          $admin_details->detail = 'Please write something about you';
-          //$admin_details->gender = $gender;
-          $admin_details->membership = $membership_status;
-          if ($admin_details->save()) {
-            return $admin_details->admin_id;
-          }
-        } else {
-            return false;
-        }
-      }
   }
   public function postMembershipPayment($membership, $last_inserted_id) {
     //dd('err');
