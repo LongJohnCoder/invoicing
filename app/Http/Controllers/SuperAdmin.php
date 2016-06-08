@@ -21,7 +21,7 @@ class SuperAdmin extends Controller
     }
     public function postAdminDetails(Request $request) {
         $name = $request->name;
-        $gender = $request->gender;
+       // $gender = $request->gender;
         $details = $request->details;
         $membership = 3;
         $admin_id = Session::get('admin_id');
@@ -48,7 +48,7 @@ class SuperAdmin extends Controller
         $UpdateDetails = AdminDetail::where('admin_id' , $admin_id)->first();
         if ($UpdateDetails) {
             $UpdateDetails->name = $name;
-            $UpdateDetails->gender = $gender;
+            //$UpdateDetails->gender = $gender;
             $UpdateDetails->detail = $details;
             $UpdateDetails->image = $image;
             $UpdateDetails->membership = $membership;
@@ -67,7 +67,7 @@ class SuperAdmin extends Controller
             $insert_details->name = $name;
             $insert_details->detail = $details;
             $insert_details->image = $image;
-            $insert_details->gender = $gender;
+            //$insert_details->gender = $gender;
             $insert_details->membership = $membership;
             if ($insert_details->save()) {
                 return redirect()->route('admin-profile')->with('update_succ', 'Your information has successfully updated!');
