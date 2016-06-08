@@ -49,6 +49,7 @@
               <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
             </div><!-- /.col -->
           </div>
+          <a href="{{route('register')}}" class="text-center">Register a new membership</a>
           <input type="hidden" name="_token" value="{{ Session::token() }}" />
         </form>
         <!-- /.login-box-body -->

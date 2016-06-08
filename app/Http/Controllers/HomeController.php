@@ -578,6 +578,7 @@ class HomeController extends Controller
       }
   }
   public function postMembershipPayment($membership, $last_inserted_id) {
+    //dd('err');
     $last_inserted_id = base64_decode($last_inserted_id); //taking last inserted id to update after payment
 
     $super_admin_account = Admin::where('use_my_account', 1)->where('admin_type', 1)->with('payment_keys')->first(); //fetching admin details to use one master account to recieve payments
