@@ -56,11 +56,6 @@
 	                      <label for="exampleInputname1">Name</label>
 	                      <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter name" name="name" value="Name yourself">
 	                  </div>
-	                  <div class="form-group">
-	                      <label for="gender">Gender</label><br>
-	                      <input type="radio" name="gender" value="male" required> Male </input>
-            			  <input type="radio" name="gender" value="female"> Female</input>
-	                  </div>
 	                 <div class="form-group">
 	                      <label for="details">Details</label>
 	                      <textarea name="details" class="form-control" placeholder="details">I want to know more about you. please tell me who you are?</textarea>
