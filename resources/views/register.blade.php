@@ -45,8 +45,8 @@
           @if($super_admin_account!=null)
             @if($super_admin_account->payment_keys != null)
             <div class="form-group has-feedback" id="payment_div" style="display: none;">
-              <span class="payment-errors"></span>
-              <!-- work payment form ---------------->
+              <span class="payment-errors" style="color: red;"></span>
+              <span style="color: red;" id="pay_value"></span>
               <input type="text" size="20" data-stripe="number" class="form-control" placeholder="card number"/><br/>
               <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
               <div class="col-xs-4">
@@ -93,8 +93,17 @@
       $('#select_membership').click(function(){
         var value = $('#select_membership').val();
         if($.trim(value) > 1) {
+          if(value==2) 
+          {
+            $('#pay_value').html('You will be charged $10 for your professional membership');
+            $('#payment_div').slideDown();
+          }
+          else
+          {
+            $('#pay_value').html('You will be charged $20 for your gold membership');
+            $('#payment_div').slideDown();
+          }
           
-          $('#payment_div').slideDown();
         }
         else
         {
