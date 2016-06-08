@@ -13,7 +13,7 @@ class UpdateAdminDetails extends Migration
     public function up()
     {
         Schema::table('admin_details', function ($table) {
-            $table->string('gender');
+            //$table->string('gender');
             $table->integer('membership');
         });
     }
@@ -26,7 +26,7 @@ class UpdateAdminDetails extends Migration
     public function down()
     {
         Schema::table('admin_details', function ($table) {
-            $table->dropColumn('gender');
+            //$table->dropColumn('gender');
             $table->dropColumn('membership');
         });
     }

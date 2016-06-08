@@ -463,11 +463,11 @@ class HomeController extends Controller
     //dd($request);
     $name = $request->usr_name;
     $email = $request->usr_email;
-    $gender = $request->usr_gender;
+    //$gender = $request->usr_gender;
     $password = $request->conf_pass;
     $membership_status = $request->select_membership;
     if ($membership_status == 1) {
-      $return_lastInserted_id = $this->RegisterUser($name, $email, $gender, $password, $membership_status);
+      $return_lastInserted_id = $this->RegisterUser($name, $email, $password, $membership_status);
       if ($return_lastInserted_id) {
         //dd($return_lastInserted_id);
         if ($return_lastInserted_id == 302) {
@@ -553,7 +553,7 @@ class HomeController extends Controller
       return redirect()->route('dashboard')->with('block_status_er', 'Failed to block the user');
     }
   }
-  private function RegisterUser($name, $email, $gender, $password, $membership_status) {
+  private function RegisterUser($name, $email, $password, $membership_status) {
       $search_email = Admin::where('email', $email)->first();
       if ($search_email) {
         return 302;
@@ -567,7 +567,7 @@ class HomeController extends Controller
           $admin_details->admin_id =$admin->id;
           $admin_details->name = $name;
           $admin_details->detail = 'Please write something about you';
-          $admin_details->gender = $gender;
+          //$admin_details->gender = $gender;
           $admin_details->membership = $membership_status;
           if ($admin_details->save()) {
             return $admin_details->admin_id;

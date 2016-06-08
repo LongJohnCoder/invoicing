@@ -27,10 +27,6 @@
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="radio" class="form-control radio" name="usr_gender" value="male" required> Male </input>
-            <input type="radio" class="form-control radio" name="usr_gender" value="female"> Female</input>
-          </div>
-          <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="Password" id="pass" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>

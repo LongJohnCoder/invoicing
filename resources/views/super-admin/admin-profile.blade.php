@@ -26,11 +26,6 @@
 	                      <label for="exampleInputname1">Name</label>
 	                      <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter name" name="name" value="{{$admin_info->admin_details->name}}">
 	                  </div>
-	                  <div class="form-group">
-	                      <label for="gender">Gender</label><br>
-	                      <input type="radio" name="gender" value="male" required> Male </input>
-            			  <input type="radio" name="gender" value="female"> Female</input>
-	                  </div>
 	                 <div class="form-group">
 	                      <label for="details">Details</label>
 	                      <textarea name="details" class="form-control" placeholder="details">{{$admin_info->admin_details->detail}}</textarea>
