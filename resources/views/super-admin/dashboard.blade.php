@@ -134,20 +134,21 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                             <div class="panel">
                                 <header class="panel-heading">
                                     Graph
                                 </header>
 
                                 <ul class="list-group teammates">
-                                	graph should be here
+                                	<div id="pop_div"></div>
+                                  @areachart('Population', 'pop_div');
                                 </ul>
                                 <div class="panel-footer bg-white">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-12">
                           <section class="panel tasks-widget">
                               <header class="panel-heading">
                                   Create Notice

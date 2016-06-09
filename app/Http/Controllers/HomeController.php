@@ -16,6 +16,7 @@ use App\Model\AdminPaymentMap;
 use App\Model\PaymentKeys;
 use App\Model\PaymentTypes;
 use Stripe;
+use Lava;
 
 class HomeController extends Controller
 {
@@ -351,6 +352,25 @@ class HomeController extends Controller
       $all_invoice_details = Invoice::all();
       $all_admin_details = Admin::where('admin_type', 0)->get();
       //dd($all_admin_details);
+      //graph data
+      $population = Lava::DataTable();
+      $population->addDateColumn('Year')
+           ->addNumberColumn('Number of People')
+           ->addRow(['2006', 623452])
+           ->addRow(['2007', 685034])
+           ->addRow(['2008', 716845])
+           ->addRow(['2009', 757254])
+           ->addRow(['2010', 778034])
+           ->addRow(['2011', 792353])
+           ->addRow(['2012', 839657])
+           ->addRow(['2013', 842367])
+           ->addRow(['2014', 0]);
+      Lava::AreaChart('Population', $population, [
+      'title' => 'Population Growth',
+      'legend' => [
+        'position' => 'in'
+      ]
+    ]);
       return view('super-admin.dashboard', compact('admin_info', 'all_admin_details', 'all_invoice_details'));
     }
     else
@@ -638,4 +658,5 @@ class HomeController extends Controller
         return redirect()->route('register')->with('fail', 'Payment Failed please close the browser and open then try it again.');
       }
   }
+
 }
