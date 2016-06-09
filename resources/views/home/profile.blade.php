@@ -43,6 +43,20 @@
                     	@endif
                     </div>
                     <div class="form-group">
+                      <label for="membership">Membership</label>
+                        @if($Admin != null)
+                          @if($Admin->membership == 1)
+                            {{ Form::text('membership_status','Basic Membership',['class' => 'form-control profile_control', 'readonly' => 'readonly']) }}
+                          @elseif($Admin->membership == 2)
+                            {{ Form::text('membership_status','Professional membership',['class' => 'form-control profile_control', 'readonly' => 'readonly']) }}
+                          @else
+                            {{ Form::text('membership_status','Gold Membership',['class' => 'form-control profile_control', 'readonly' => 'readonly']) }}
+                          @endif
+                        @else
+                          {{ Form::text('membership_status','Not Sure',['class' => 'form-control profile_control', 'readonly' => 'readonly']) }}
+                        @endif
+                    </div>
+                    <div class="form-group">
                       <label for="exampleInputEmail1">Details</label>
                       @if($Admincount!=0)
                       {{ Form::textarea('details',$Admin->detail,['class' => 'form-control profile_control', 'required' => 'required']) }}

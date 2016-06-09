@@ -9,8 +9,11 @@
             <small>Version 2.0</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            @if($admin_info->admin_details != null)
+              Welcome, {{$admin_info->admin_details->name}}
+            @else
+              Welcome, admin
+            @endif
           </ol>
         </section>
 
@@ -23,7 +26,17 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">Weekly Invoice Report</h3>
-                  
+                    @if($admin_info->admin_details != null)
+                      @if($admin_info->admin_details->membership == 1)
+                        <div style="float: right;">You are a basic member <a href="#">Upgrade now</a></div>
+                      @elseif($admin_info->admin_details->membership == 2)
+                        <div style="float: right;">You are a pro member <a href="#">Upgrade now</a></div>
+                      @else
+                        <div style="float: right;">You are the gold member</div>
+                      @endif
+                    @else
+                      <div style="float: right;">Not sure about your memebership</div>
+                    @endif
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div class="row">

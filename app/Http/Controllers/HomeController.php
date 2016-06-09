@@ -355,7 +355,7 @@ class HomeController extends Controller
     }
     else
     {
-      return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax'));
+      return view('home.dashboard',array('title'=>'Invoice System || Dashboard'), compact('cax', 'admin_info'));
     }
   }
   public function getProfile(){
