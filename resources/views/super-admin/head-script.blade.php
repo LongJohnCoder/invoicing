@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
         <title>INVOICINGYOU</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <meta name="description" content="Developed By M Abdur Rokib Promy">
+        <meta name="description" content="Developed and Managed By Tier5 LLC">
         <meta name="keywords" content="Admin, Bootstrap 3, Template, Theme, Responsive">
         <!-- bootstrap 3.0.2 -->
         <link href="{{url('/')}}/public/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
         <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
         <!-- Theme style -->
         <link href="{{url('/')}}/public/bootstrap/css/style_super.css" rel="stylesheet" type="text/css" />
-
+        <link rel="shortcut icon" href="{{url('/')}}/public/bootstrap/images/favicon.ico">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
             <!--[if lt IE 9]>

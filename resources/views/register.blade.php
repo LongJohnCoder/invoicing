@@ -6,7 +6,7 @@
   <body class="hold-transition register-page">
     <div class="register-box">
       <div class="register-logo">
-        <a href="#"><b>Admin</b>LTE</a>
+        <a href="#"><b>Invoicingyou</b> Register</a>
       </div>
       <div class="alert alert-danger" id="error_div" style="display: none;"></div>
       @if(Session::has('custom_err'))
