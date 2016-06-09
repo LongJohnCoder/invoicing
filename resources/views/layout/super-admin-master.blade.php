@@ -43,7 +43,7 @@
                         </li>
 
                         <li>
-                            <a href="simple.html">
+                            <a href="{{ route('manageAllInvoices') }}">
                                 <i class="fa fa-list"></i> <span>Manage All Invoices</span>
                             </a>
                         </li>

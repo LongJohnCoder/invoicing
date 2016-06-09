@@ -11,6 +11,7 @@ use Hash;
 use App\Model\PaymentKeys;
 use App\Model\PaymentTypes;
 use App\Model\AdminPaymentMap;
+use App\Model\Invoice;
 use Stripe;
 
 class SuperAdmin extends Controller
@@ -196,5 +197,11 @@ class SuperAdmin extends Controller
                 return redirect()->route('managePaymentAccount')->with('failed_details', 'Could not delete your details please try again later');
             }
         }
+    }
+    public function getManageAllInvoices() {
+        $all_invoice = Invoice::with('admin', 'admin_details', 'user_details')->paginate(15);
+        $obj = new navbarhelper();
+        $admin_info = $obj->DynamicDataMasterBlade();
+        return view('super-admin.manage-all-invoice', compact('all_invoice', 'admin_info'));
     }
 }

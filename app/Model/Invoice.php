@@ -18,7 +18,7 @@ class Invoice extends Model
     }
     public function admin()
     {
-        return $this->belongsTo('App\Admin', 'id');
+        return $this->hasOne('App\Admin', 'id', 'admin_id');
     }
     public function admin_details()
     {
