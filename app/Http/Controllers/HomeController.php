@@ -542,12 +542,21 @@ class HomeController extends Controller
     $secret_key = $keys->payment_keys->key_second;
     $charge_amount = ($membership_status == 2 ? 10 : 20) ;
     $stripe = Stripe::make($secret_key);
-    $charge = $stripe->charges()->create([
+    $search_admin = Admin::find($admin_id);
+    $admin_email = $search_admin->email;
+    $customer = $stripe->customers()->create([
+      "source" => $stripeToken, // obtained from Stripe.js
+      "plan" => $charge_amount == 10 ? 'pro10' : 'gold20',
+      'email' => $admin_email,
+    ]);
+    //dd($customer['subscriptions']['data'][0]['status']);
+    //charging a customer
+    /*$charge = $stripe->charges()->create([
       'source' => $stripeToken,
       'currency' => 'USD',
       'amount'   => $charge_amount,
-    ]);
-    if($charge['status']=="succeeded")
+    ]);*/
+    if($customer['subscriptions']['data'][0]['status']=="active")
     {
       $search_admin = Admin::find($admin_id);
       if ($search_admin) {
