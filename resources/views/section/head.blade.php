@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{url('/')}}/public/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
+    <link rel="shortcut icon" href="{{url('/')}}/public/bootstrap/images/favicon.ico">
     <link rel="stylesheet" href="{{url('/')}}/public/dist/css/skins/_all-skins.min.css">
     <style type="text/css">
         .nav-tabs-custom {

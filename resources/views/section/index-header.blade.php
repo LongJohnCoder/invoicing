@@ -32,7 +32,7 @@
 	<meta name="twitter:card" content="" />
 
   	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  	<link rel="shortcut icon" href="favicon.ico">
+  	<link rel="shortcut icon" href="{{url('/')}}/public/bootstrap/images/favicon.ico">
 
   	<!-- Google Webfont -->
 	<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'> -->
