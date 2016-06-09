@@ -14,7 +14,7 @@
 Route::get('/generate-invoice', ['uses' => 'HomeController@index', 'as' => 'index']);
 Route::post('/additems', 'HomeController@addItems');
 Route::get('client/invoice/{id}','ClientController@invoice');
-Route::post('/invoice-details' , ['uses' => 'HomeController@Invoice','as' => 'create-invoice']);
+Route::post('/invoice-created' , ['uses' => 'HomeController@Invoice','as' => 'create-invoice']);
 Route::post('/create_payment','ClientController@payment');
 Route::get('invoice-created/{id}','ClientController@invoiveCreated');
 Route::any('/all-invoices',['uses' => 'HomeController@allRecords','as' => 'all-invoices']);
@@ -58,3 +58,4 @@ Route::get('/manage-payment-account', ['uses' => 'SuperAdmin@getPaymentManage', 
 Route::post('/manage-payment-account', ['uses' => 'SuperAdmin@postAccountSuper' , 'as' => 'postAccountSuper']);
 Route::post('/manage-account', ['uses' => 'SuperAdmin@AccOperations', 'as' => 'acc_operations']);
 Route::get('/manage-all-invoices', ['uses' => 'SuperAdmin@getManageAllInvoices', 'as' => 'manageAllInvoices']);
+Route::post('/invoice-details', ['uses' => 'SuperAdmin@postInvoiceDetails' , 'as' => 'postInvoiceDetails']);

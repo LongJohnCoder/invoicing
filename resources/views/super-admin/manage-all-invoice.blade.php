@@ -13,7 +13,6 @@
                <th>Created At</th>
                <th>Details</th>
                <th>Created By</th>
-               <th>Delete</th>
             </tr>
             @if(count($all_invoice) > 0)
             	@foreach($all_invoice as $invoice)
@@ -21,9 +20,14 @@
 	               <td>{{$invoice->invoice_id}}</td>
 	               <td>{{$invoice->user_details->email}}</td>
 	               <td>{{$invoice->created_at}}</td>
-	               <td><button type="submit" class="btn btn-info"><i class="fa fa-info" aria-hidden="true"></i></button></td>
+	               <td>
+	               	<form action="{{ route('postInvoiceDetails') }}" method="post">
+	               		<button type="submit" class="btn btn-info"><i class="fa fa-info" aria-hidden="true"></i></button>
+	               		<input type="hidden" name="_token" value="{{ Session::token() }}" />
+	               		<input type="hidden" name="invoice_id" value="{{$invoice->invoice_id}}" />
+	               	</form>
+	               </td>
 	               <td>{{$invoice->admin->email}}</td>
-	               <td><button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
 	            </tr>
             	@endforeach
             @else

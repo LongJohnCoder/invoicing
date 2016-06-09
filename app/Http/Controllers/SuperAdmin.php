@@ -204,4 +204,9 @@ class SuperAdmin extends Controller
         $admin_info = $obj->DynamicDataMasterBlade();
         return view('super-admin.manage-all-invoice', compact('all_invoice', 'admin_info'));
     }
+    public function postInvoiceDetails(Request $request) {
+        $invoice_id = $request->invoice_id;
+        $invoice = Invoice::where('invoice_id', $invoice_id)->with('invoice_items', 'user_details', 'admin', 'admin_details')->first();
+        return view('super-admin.invoice-show', compact('invoice'));
+    }
 }
