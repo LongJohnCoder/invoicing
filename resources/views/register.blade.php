@@ -117,7 +117,7 @@
     <script type="text/javascript">
       $(document).ready(function(){
       //set dyanmic publishable key here
-        $('#select_membership').click(function(){
+        $('#select_membership').bind("keydown change",function(){
           var value = $('#select_membership').val();
           if ($.trim(value) > 1) 
           {
