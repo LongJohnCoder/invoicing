@@ -1,15 +1,24 @@
 <br><br>
+<style type="text/css">
+    .t_btn {
+    background: transparent;
+    border: none;
+    }
+</style>
 <div class="col-xs-1">
-    <input type="checkbox" name="tax[{{$i}}]" class="flat-red"/>
+    <input type="checkbox" name="tax[{{$i}}]" class="flat-red" id="tax_{{$i}}" />
 </div>
 <div class="col-xs-3">
-	<input type="text" class="form-control" placeholder="Item" id="Item[{{$i}}]" name="Item[{{$i}}]"/>
+	<input type="text" class="form-control" placeholder="Item" id="Item_{{$i}}" name="Item[{{$i}}]"/>
 </div>
 <div class="col-xs-3">
 	<input type="number" class="form-control qtycal" placeholder="Quantity" id="Quantity_{{$i}}" name="Quantity[{{$i}}]" />
 </div>
-<div class="col-xs-5">
+<div class="col-xs-4">
 	<input type="text" class="form-control prical" placeholder="Price" id="Price_{{$i}}" name="Price[{{$i}}]"/>
+</div>
+<div class="col-xs-1">
+    <button type="button" id="del_{{$i}}" class="t_btn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 </div>
 <script src="{{url('/')}}/public/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
@@ -60,8 +69,16 @@
                     }
                 }
                 $('#total_price').val(callprice);
-            })
-
+            });
+            var value = {{$i}};
+            console.log(value);
+            $('#'+'del_'+$.trim(value)).click(function(){
+                $('#'+'Item_'+$.trim(value)).hide();
+                $('#'+'Quantity_'+$.trim(value)).hide();
+                $('#'+'Price_'+$.trim(value)).hide();
+                $('#'+'del_'+$.trim(value)).hide();
+                $('#'+'tax_'+$.trim(value)).hide();
+            });
 
     	});
 
