@@ -137,7 +137,7 @@
                         <div class="col-md-12">
                             <div class="panel">
                                 <header class="panel-heading">
-                                    Graph
+                                    Invoice Analytics
                                 </header>
 
                                 <ul class="list-group teammates">

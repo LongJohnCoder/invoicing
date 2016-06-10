@@ -237,19 +237,80 @@ class HomeController extends Controller
       //dd($all_admin_details);
       //graph data
       $population = Lava::DataTable();
-      $population->addDateColumn('Year')
-           ->addNumberColumn('Number of People')
-           ->addRow(['2006', 623452])
-           ->addRow(['2007', 685034])
-           ->addRow(['2008', 716845])
-           ->addRow(['2009', 757254])
-           ->addRow(['2010', 778034])
-           ->addRow(['2011', 792353])
-           ->addRow(['2012', 839657])
-           ->addRow(['2013', 842367])
-           ->addRow(['2014', 0]);
+      //$dynamic_graph_data = $all_invoice_details;
+      //dd($dynamic_graph_data);
+      $population->addDateColumn('Day of Month')
+                ->addNumberColumn('Number of Invoices');
+        $January=0;
+        $February=0;
+        $March=0;
+        $April=0;
+        $May=0;
+        $June=0;
+        $July=0;
+        $August=0;
+        $September=0;
+        $October=0;
+        $November=0;
+        $December=0;
+      foreach ($all_invoice_details as $dynamic_graph_data) {
+       $month = $dynamic_graph_data->created_at->month;
+       switch ($month) {
+         case '1':
+           $January++;
+           break;
+         case '2':
+           $February++;
+           break;
+           case '3':
+           $March++;
+           break;
+           case '4':
+           $April++;
+           break;
+           case '5':
+           $May++;
+           break;
+           case '6':
+           $June++;
+           break;
+           case '7':
+           $July++;
+           break;
+           case '8':
+           $August++;
+           break;
+           case '9':
+           $September++;
+           break;
+           case '10':
+           $October++;
+           break;
+           case '11':
+           $November++;
+           break;
+           case '12':
+           $December++;
+           break;
+         default:
+           echo "Bad Input";
+           break;
+       }
+      }
+      $population->addRow(['January',  $January])
+                ->addRow(['February',  $February])
+                ->addRow(['March',  $March])
+                ->addRow(['April',  $April])
+                ->addRow(['May',  $May])
+                ->addRow(['June',  $June])
+                ->addRow(['July',  $July])
+                ->addRow(['August',  $August])
+                ->addRow(['September',  $September])
+                ->addRow(['October',  $October])
+                ->addRow(['November',  $November])
+                ->addRow(['December',  $December]);
       Lava::AreaChart('Population', $population, [
-      'title' => 'Population Growth',
+      'title' => 'No of Invoices',
       'legend' => [
         'position' => 'in'
       ]
