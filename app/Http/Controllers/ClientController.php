@@ -20,10 +20,13 @@ class ClientController extends Controller
     public function invoice($id=null){
     	$id=base64_decode($id);
     	$Invoice=Invoice::where('invoice_id', $id)->with('invoice_items','user_details', 'admin_payment_maps', 'admin_details', 'payment_keys')->first();
+        Session::put('admin_id_outside', $Invoice->admin_details->admin_id);
+        Session::save();
+        //dd(Session::all());
     	return view('client.invoice',compact('Invoice'),array('title'=>'Invoice System || Invoice'));
     }
     public function payment(){
-        $admin_id = Session::get('admin_id');
+        $admin_id = Session::get('admin_id_outside');
         $keys = PaymentKeys::where('admin_id', '=' , $admin_id)->first();
     	// echo gettype(Request::input('tot'));
     	$invouce_id=base64_decode(Request::input('inv'));
@@ -43,6 +46,8 @@ class ClientController extends Controller
 			$Invoice->payment_feedback=json_encode($charge);
 			$Invoice->save();
     	}
+        Session::forget('admin_id_outside');
+        Session::save();
     }
     public function invoiveCreated($id=null){
     	return view('home.invoice',compact('id'),array('title'=>'Invoice System || Saved Invoice'));
