@@ -35,7 +35,7 @@
 					</div>
 					<div class="col-md-12 footer-box text-center">
 						<div class="fh5co-copyright">
-						<p>&copy; All Rights Reserved to Tier5 LLC. <br>Designed by <a href="https://www.tier5.us/" target="_blank">Tier5 LLC</a> Images by: <a href="http://unsplash.com" target="_blank">Unsplash</a></p>
+						<p>&copy; All Rights Reserved to Tier5 LLC. <br>Designed and Developed by <a href="https://www.tier5.us/" target="_blank">Tier5 LLC</a></p>
 						</div>
 					</div>
 					
