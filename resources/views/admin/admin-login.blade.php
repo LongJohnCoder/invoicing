@@ -7,8 +7,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="#"><b>Invoicingyou</b> Admin</a>
-      </div><!-- /.login-logo -->
+        <a href="#"><b>INVOICINGYOU.COM</div><!-- /.login-logo -->
       @if(Session::has('fail'))
     		<div class="alert alert-danger">{{ Session::get('fail') }}
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

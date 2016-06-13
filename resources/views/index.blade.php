@@ -21,7 +21,7 @@
 			<div class="fh5co-cards">
 				<div class="container-fluid">
 					<div class="row animate-box">
-						<div class="col-md-12 heading text-center"><h2>Outstanding Products</h2></div>
+						<div class="col-md-12 heading text-center"><h2>Our Service Packages</h2></div>
 					</div>
 					<div class="container">
 						<div class='package'>
@@ -105,7 +105,7 @@
 			<div class="container">
 				
 				<div class="row text-center" id="fh5co-features">
-					<div class="col-md-12 heading animate-box"><h2>Awesome Features</h2></div>
+					<div class="col-md-12 heading animate-box"><h2>Our Features</h2></div>
 					<div class="col-md-4 col-sm-6 text-center fh5co-feature feature-box">
 						<div class="fh5co-feature-icon">
 							<i class="ti-mobile"></i>
@@ -168,8 +168,8 @@
 					
 				</div>
 				<div class="fh5co-half" id="about">
-					<h3>About Invoicingyou</h3>
-					<p>Invoicingyou platform is the open source custom invoicing platform made by <a href="https://tier5.us" target="_blank">Tier5 LLC</a> for business purposes. The different membership level is here. According to memebership level a user can get features like analytics, pi chart payment gateway selection option and much more. </p>
+					<h3>About INVOICINGYOU.COM</h3>
+					<p>The INVOICINGYOU.COM platform is an open source custom invoicing platform made by <a href="https://tier5.us" target="_blank">Tier5 LLC</a> for business purposes. On our platform you can send customized invoices to your clients over a generic INVOICINGYOU.COM domain. Invoices can be moved to your own domain with GOLD membership plans. Integrate your favorite payment gateway or use ours if you like. Have your clients pay directly to your bank account or paypal with a very easy to use interface.</p>
 					<p><a href="#" class="btn btn-outline btn-md" id="get_started">Get Started</a></p>
 				</div>
 			</div>
