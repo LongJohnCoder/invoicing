@@ -1,4 +1,4 @@
-@extends('layout.master-index')
+﻿@extends('layout.master-index')
 @section('content')
 			<div id="fh5co-hero" style="background-image: url({{url('/')}}/public/bootstrap/images/slide_2.jpg);">
 			<div class="overlay"></div>
@@ -8,7 +8,7 @@
 				<div class="col-md-12">
 					<div class="fh5co-hero-wrap">
 						<div class="fh5co-hero-intro">
-							<h1 class="to-animate hero-animate-1">A Custom Invoice Generator Platform For Your Clients. Simple - Smooth - Dynamic.</h1>
+							<h1 class="to-animate hero-animate-1">A Custom Invoice Generator Platform For Your Clients. <br />Simple - Smooth - Dynamic.</h1>
 							<h2 class="to-animate hero-animate-2">Created by <a href="https://www.tier5.us/" target="_blank">Tier5 LLC</a></h2>
 							<p class="to-animate hero-animate-3"><a href="#" class="btn btn-outline btn-md" id="first_signUp">Sign Up Now</a></p>
 						</div>
@@ -178,7 +178,7 @@
 				<div class="container">
 				<div class="row">
 					<!-- Start Slider Testimonial -->
-	            <h2 class="fh5co-uppercase-heading-sm text-center animate-box">Customer Says...</h2>
+	            <h2 class="fh5co-uppercase-heading-sm text-center animate-box">User Testimonials...</h2>
 	            <div class="fh5co-spacer fh5co-spacer-xs"></div>
 	            <div class="owl-carousel-fullwidth animate-box">
 	            <div class="item">
