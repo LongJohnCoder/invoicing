@@ -21,15 +21,19 @@
 	 -->
 
   	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content="Invoicingyou.com"/>
-	<meta property="og:image" content=""/>
+	<meta property="og:title" content="INVOICINGYOU:Tier5 Invoicing"/>
+	<meta property="og:image" content="http://tier5.us/images/facebook_og.jpg"/>
 	<meta property="og:url" content="www.invoicingyou.com"/>
 	<meta property="og:site_name" content="invoicingyou"/>
 	<meta property="og:description" content="An invoicing platform by Tier5 LLC"/>
-	<meta name="twitter:title" content="Invoicingyou.com" />
-	<meta name="twitter:image" content="" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@invoicingyou">
+	<meta name="twitter:title" content="INVOICINGYOU:Tier5 Invoicing" />
+	<meta name="twitter:description" content="An invoicing platform by Tier5 LLC" />
+	<meta name="twitter:image" content="http://tier5.us/images/facebook_og.jpg" />
 	<meta name="twitter:url" content="www.invoicingyou.com" />
-	<meta name="twitter:card" content="" />
+	
 
   	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   	<link rel="shortcut icon" href="{{url('/')}}/public/bootstrap/images/favicon.ico">
