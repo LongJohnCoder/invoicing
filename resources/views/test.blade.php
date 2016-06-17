@@ -36,7 +36,7 @@
 
 
 				<div class="animate-box col-md-5 abt-pic">
-				<img src="../invoicing/public/bootstrap/images/Client.jpg" alt="img">
+				<img src="{{url('/')}}/public/bootstrap/images/Client.jpg" alt="img">
 				</div>
 
 				<div class="col-md-7" id="about">
