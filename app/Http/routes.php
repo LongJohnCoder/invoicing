@@ -59,3 +59,8 @@ Route::post('/manage-payment-account', ['uses' => 'SuperAdmin@postAccountSuper' 
 Route::post('/manage-account', ['uses' => 'SuperAdmin@AccOperations', 'as' => 'acc_operations']);
 Route::get('/manage-all-invoices', ['uses' => 'SuperAdmin@getManageAllInvoices', 'as' => 'manageAllInvoices']);
 Route::post('/invoice-details', ['uses' => 'SuperAdmin@postInvoiceDetails' , 'as' => 'postInvoiceDetails']);
+
+/*landing page routes*/
+Route::get('/about-us', ['uses' => 'HomeController@getAboutUs', 'as' => 'getAboutUs']);
+Route::get('/faq', ['uses' => 'HomeController@getfaq', 'as' => 'getfaq']);
+Route::get('/terms-conditions', ['uses' => 'HomeController@getTermsConditions', 'as' => 'getterms-conditions']);

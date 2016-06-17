@@ -422,6 +422,7 @@ class HomeController extends Controller
   }
   public function getRegister() {
     $super_admin_account = Admin::where('use_my_account', 1)->where('admin_type', 1)->with('payment_keys')->first();
+    //dd($super_admin_account);
       return view('register', compact('super_admin_account'));
   }
   public function postRegister(Request $request) {
@@ -602,5 +603,15 @@ class HomeController extends Controller
         return redirect()->route('register')->with('fail', 'Payment Failed please close the browser and open then try it again.');
       }
   }
+  public function getAboutUs() {
+    return view('test');
+  }
+  public function getfaq() {
+    return view('faq');
+  }
+  public function getTermsConditions() {
+    return view('terms-conditions');
+  }
 
 }
+

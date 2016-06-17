@@ -1332,7 +1332,7 @@ Components
 
 /* Features*/
 #fh5co-features {
-  padding: 7em 0;
+  padding: 7em 0 4em;
 }
 #fh5co-features .fh5co-feature {
   margin-bottom: 30px;
@@ -1440,7 +1440,7 @@ Components
 }
 
 #fh5co-testimonial {
-  padding: 7em 0;
+  padding: 0 0 7em;
   background-size: cover;
 }
 #fh5co-testimonial.border-top {
@@ -1866,3 +1866,25 @@ a > img.fh5co-align-center {
   margin-right: auto;
 }
 /*# sourceMappingURL=style.css.map */
+
+
+
+
+#fh5co-features{clear: both;}
+.about-page {clear: both;padding: 100px 0; background: #fff;}
+.abt-pic img{max-width: 100%; height: auto;}
+.faq-page{clear: both;padding: 100px 0; background: #fff;}
+
+.faq-page p{line-height: 19px; font-size: 14px; font-weight: normal;}
+.faq-page h4{margin-bottom: 5px;}
+
+.single-terms{padding-bottom: 15px;}
+.single-terms h3{margin-bottom: 5px;}
+
+
+
+
+
+
+
+

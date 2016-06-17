@@ -15,9 +15,9 @@
 					<div class="col-md-4 col-sm-6 footer-box">
 						<h3 class="fh5co-footer-heading">More Links</h3>
 						<ul class="fh5co-footer-links">
-							<li><a href="#">Terms &amp; Conditions</a></li>
+							<li><a href="{{route('getterms-conditions')}}">Terms &amp; Conditions</a></li>
 							<li><a href="#">Our Careers</a></li>
-							<li><a href="#">Support &amp; FAQ's</a></li>
+							<li><a href="{{route('getfaq')}}">Support &amp; FAQ's</a></li>
 							<li><a href="#" id="footer_signup">Sign up</a></li>
 							<li><a href="{{ route('admin-login') }}">Log in</a></li>
 						</ul>
