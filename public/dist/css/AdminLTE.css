@@ -4729,3 +4729,4 @@ table.text-center th {
 }
 
 
+#payment_div span#pay_value{position: absolute; top: 33px;}

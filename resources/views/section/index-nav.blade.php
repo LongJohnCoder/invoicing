@@ -8,13 +8,13 @@
 						
 						
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li class="active">
+							<li class="active" dt_nav="Home">
 								<a href="{{ route('front-page') }}">Home</a>
 							</li>
-							<li><a href="{{route('getAboutUs')}}" id="nav-abt">About</a></li>
-							<li><a href="https://tier5.us#contact" target="_blank">Contact</a></li>
-							<li><a href="{{route('getfaq')}}">FAQ</a></li>
-							<li><a href="{{ route('admin-login') }}">Sign in</a></li>
+							<li dt_nav="About"><a href="{{route('getAboutUs')}}" id="nav-abt">About</a></li>
+							<li dt_nav="Contact"><a href="https://tier5.us#contact" target="_blank">Contact</a></li>
+							<li dt_nav="FAQ"><a href="{{route('getfaq')}}">FAQ</a></li>
+							<li dt_nav="sign_in"><a href="{{ route('admin-login') }}">Sign in</a></li>
 						</ul>
 					</nav>
 				<!-- </div> -->

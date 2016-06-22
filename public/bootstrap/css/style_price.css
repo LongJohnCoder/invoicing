@@ -111,3 +111,11 @@ li {
   text-shadow: 0 0 2px #37c5b6;
   font-size: 1.4rem;
 }
+
+
+@media screen and (max-width: 800px) {
+
+  .trial{margin-bottom: 5px; font-size: 1.9rem}
+
+
+}

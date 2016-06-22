@@ -42,7 +42,7 @@
 				<div class="col-md-7" id="about">
 					<h3>About INVOICINGYOU.COM</h3>
 					<p>The INVOICINGYOU.COM platform is an open source custom invoicing platform made by <a href="https://tier5.us" target="_blank">Tier5 LLC</a> for business purposes. On our platform you can send customized invoices to your clients over a generic INVOICINGYOU.COM domain. Invoices can be moved to your own domain with GOLD membership plans. Integrate your favorite payment gateway or use ours if you like. Have your clients pay directly to your bank account or paypal with a very easy to use interface.</p>
-					<p><a href="invoicing/" class="btn btn-outline btn-md" id="get_started">Get Started</a></p>
+					<!-- <p><a href="invoicing/" class="btn btn-outline btn-md" id="get_started">Get Started</a></p> -->
 				</div>
 
 				</div>

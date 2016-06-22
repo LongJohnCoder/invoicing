@@ -4,20 +4,16 @@
 					<div class="col-md-4 col-sm-6 footer-box">
 						<h3 class="fh5co-footer-heading">Company</h3>
 						<ul class="fh5co-footer-links">
-							<li><a href="#">About</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Our Products</a></li>
-							<li><a href="#">Our Culture</a></li>
-							<li><a href="#">Team</a></li>
+							<li><a href="{{route('getAboutUs')}}">About</a></li>
+							<li><a href="{{route('getterms-conditions')}}">Terms &amp; Conditions</a></li>
+							<li><a href="{{route('getfaq')}}">Support &amp; FAQ's</a></li>
 						</ul>
 
 					</div>
 					<div class="col-md-4 col-sm-6 footer-box">
 						<h3 class="fh5co-footer-heading">More Links</h3>
 						<ul class="fh5co-footer-links">
-							<li><a href="{{route('getterms-conditions')}}">Terms &amp; Conditions</a></li>
-							<li><a href="#">Our Careers</a></li>
-							<li><a href="{{route('getfaq')}}">Support &amp; FAQ's</a></li>
+							
 							<li><a href="#" id="footer_signup">Sign up</a></li>
 							<li><a href="{{ route('admin-login') }}">Log in</a></li>
 						</ul>

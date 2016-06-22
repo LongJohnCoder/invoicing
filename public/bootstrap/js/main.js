@@ -421,3 +421,20 @@
 
 
 }());
+
+
+$(document).ready(function(){
+	$('#fh5co-primary-menu li').removeClass("active");
+	$('#fh5co-primary-menu li').each(function(){
+		if( $(this).attr("dt_nav") == sessionStorage.navdata )
+		{
+			$(this).addClass("active");
+		}
+	});
+	
+	$('#fh5co-primary-menu li').click(function(e){
+		sessionStorage.navdata = $(this).attr("dt_nav");
+		
+		console.log(sessionStorage.navdata);
+	});
+});
