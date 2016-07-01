@@ -513,6 +513,7 @@ class HomeController extends Controller
       "plan" => $charge_amount == 10 ? 'pro10' : 'gold20',
       'email' => $admin_email,
     ]);
+    //dd($customer);
     //dd($customer['subscriptions']['data'][0]['status']);
     //charging a customer
     /*$charge = $stripe->charges()->create([
@@ -533,6 +534,19 @@ class HomeController extends Controller
         return redirect()->route('admin-login')->with('fail', 'Failed to search an admin to update please check database');
       }
     } 
+    else if($customer['subscriptions']['data'][0]['status']=="trialing")
+    {
+      $search_admin = Admin::find($admin_id);
+      if ($search_admin) {
+        $search_admin->payment_status = 1;
+        $search_admin->save();
+        return redirect()->route('admin-login')->with('success_registration', 'Hey! you have successfully registered as premium member');
+      }
+      else
+      {
+        return redirect()->route('admin-login')->with('fail', 'Failed to search an admin to update please check database');
+      }
+    }
     else
     {
       return redirect()->route('register')->with('fail', 'Payment Failed please close the browser and open then try it again.');
