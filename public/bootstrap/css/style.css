@@ -1448,7 +1448,7 @@ Components
 }
 @media screen and (max-width: 768px) {
   #fh5co-testimonial {
-    padding: 7em 0;
+    padding: 0em 0 6em;
   }
 }
 #fh5co-testimonial blockquote {
@@ -1897,8 +1897,16 @@ a > img.fh5co-align-center {
 .fh5co-social-icons{text-align: center;}
 
 
+
+
 }
 
+@media screen and (max-width: 600px) {
+
+#fh5co-footer .fh5co-footer-links{text-align: center;}
+.footer-box{text-align: center;}
+
+}
 
 @media screen and (max-width: 400px) {
 

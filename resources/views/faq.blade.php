@@ -20,8 +20,8 @@
 
 <div class=" faq-page"><!-- fh5co-cards -->
 		<div class="container">
-			<div class="row">
-			<div class="col-md-12 text-center">
+			<div class="">
+			<div class=" text-center">
 			<h2>FAQ</h2>
 			</div>
 			<div class="row">
