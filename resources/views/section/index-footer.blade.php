@@ -1,7 +1,7 @@
 <a href="#" class="fh5co-arrow fh5co-gotop footer-box"><i class="ti-angle-up"></i></a>
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 col-sm-6 footer-box">
+					<div class="col-md-4 col-sm-4 footer-box">
 						<h3 class="fh5co-footer-heading">Company</h3>
 						<ul class="fh5co-footer-links">
 							<li><a href="{{route('getAboutUs')}}">About</a></li>
@@ -10,7 +10,7 @@
 						</ul>
 
 					</div>
-					<div class="col-md-4 col-sm-6 footer-box">
+					<div class="col-md-4 col-sm-4 footer-box">
 						<h3 class="fh5co-footer-heading">More Links</h3>
 						<ul class="fh5co-footer-links">
 							
@@ -18,18 +18,20 @@
 							<li><a href="{{ route('admin-login') }}">Log in</a></li>
 						</ul>
 					</div>
-					<div class="col-md-4 col-sm-12 footer-box">
+					<div class="col-md-4 col-sm-4 footer-box">
 						<h3 class="fh5co-footer-heading">Get in touch</h3>
 						<ul class="fh5co-social-icons">
 							
-							<li><a href="#"><i class="ti-google"></i></a></li>
-							<li><a href="#"><i class="ti-twitter-alt"></i></a></li>
-							<li><a href="#"><i class="ti-facebook"></i></a></li>	
-							<li><a href="#"><i class="ti-instagram"></i></a></li>
-							<li><a href="#"><i class="ti-dribbble"></i></a></li>
+							<li><a target="_blank" href="https://plus.google.com/101130350759200850750"><i class="ti-google"></i></a></li>
+							<li><a target="_blank" href="https://twitter.com/invoicingyou"><i class="ti-twitter-alt"></i></a></li>
+							<li><a target="_blank" href="https://www.facebook.com/invoicingyou"><i class="ti-facebook"></i></a></li>	
+							<!-- <li><a href="#"><i class="ti-instagram"></i></a></li> -->
+							<li><a target="_blank" href="https://dribbble.com/invocingyou"><i class="ti-dribbble"></i></a></li>
 						</ul>
 					</div>
-					<div class="col-md-12 footer-box text-center">
+					</div>
+					<div class="row">
+					<div class="col-md-12 col-sm-12 footer-box text-center">
 						<div class="fh5co-copyright">
 						<p>&copy; All Rights Reserved to Tier5 LLC. <br>Designed and Developed by <a href="https://www.tier5.us/" target="_blank">Tier5 LLC</a></p>
 						</div>

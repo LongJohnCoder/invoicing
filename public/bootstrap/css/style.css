@@ -1885,13 +1885,25 @@ a > img.fh5co-align-center {
 .package a .btn{border: 1px solid #ccc !important;}
 .fh5co-cards .container{width: 968px; margin: 0 auto;}
 
+.no-margin-right{margin-right: 0 !important;}
+.pack-wrap{max-width: 927px; margin: 0 auto;}
+
 
 @media screen and (max-width: 800px) {
 
   .fh5co-cards .container{width: auto; }
   .package{width: 100% !important; float: none; margin-bottom: 30px !important;}
 
-  
+.fh5co-social-icons{text-align: center;}
+
 
 }
 
+
+@media screen and (max-width: 400px) {
+
+#fh5co-logo-mobile-wrap h1 img{width: 200px; height: auto;}
+
+
+
+}
